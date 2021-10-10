@@ -1,0 +1,277 @@
+body {
+	background-color: lightgray;
+}
+
+table {
+	border-spacing: 1vw;
+}
+
+button {
+	min-width: 13vw;
+}
+
+button.button--normal-size {
+	min-width: initial;
+}
+
+button a {
+	display: inline-block;
+	width: 100%;
+}
+
+br.narrow+* {
+	margin-top: 1vh;
+}
+
+br.wide+* {
+	margin-top: 2vh;
+}
+
+input[type='number'] {
+	width: 15vw;
+}
+
+#main {
+	display: flex;
+	justify-content: center;
+}
+
+#header {
+	background-color: white;
+	border-radius: 4px;
+	margin: 0.5vw;
+	padding: 1vw 1.5vw 1vw 1.5vw;
+	overflow: hidden;
+}
+
+#header__caption {
+	position: relative;
+	float: right;
+	padding: 4px;
+	color: #06b;
+	font-weight: bold;
+	padding-left: 2em;
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+}
+
+#header__caption img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+}
+
+#main-container {
+	max-width: 100%;
+}
+
+#workarea-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#toolbar {
+	flex-grow: 1;
+	flex-basis: 10%;
+	background-color: white;
+	border-radius: 4px;
+	margin: 0.5vw;
+	padding-top: 0.5vw;
+	padding-bottom: 0.5vw;
+}
+
+.toolbar-group {
+	display: inline-block;
+	margin: 0.5vw;
+	padding: 1vw;
+	border-bottom: 1px solid #ccd;
+}
+
+.toolbar-group__section {
+	display: inline-block;
+	min-width: 10vw;
+	margin-left: 1vw;
+	margin-top: 0.5vw;
+}
+
+.toolbar-group select {
+	min-width: 13vw;
+	max-width: 10em;
+	text-overflow: ellipsis;
+}
+
+#editor-container {
+	flex-grow: 7;
+	overflow-x: hidden;
+}
+
+#gamepad-container {
+	background-color: white;
+	border-radius: 4px;
+	margin: 0.5vw;
+	text-align: center;
+	overflow-x: auto;
+}
+
+#gamepad-container__scroll-frame {
+	display: inline-block;
+	padding: 1vw;
+}
+
+#screenpad {
+	background-color: #999;
+	position: relative;
+	width: 854px;
+	height: 480px;
+	padding: 0;
+	background-size: 100% 100%;
+}
+
+.hide-offscreen {
+	overflow: hidden;
+}
+
+.show-offscreen {
+	overflow: visible;
+	margin: 5vw;
+}
+
+.rect {
+	position: absolute;
+	background-size: 100% 100%;
+	text-align: center;
+	cursor: pointer;
+	text-shadow: 1px 1px #aac;
+}
+
+.show-borders .rect:after {
+	content: '';
+	border: 1px solid black;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	box-sizing: border-box;
+	background-color: rgba(1, 0, 0, 0.1);
+}
+
+.show-borders .rect.radial:after {
+	border-radius: 50%;
+}
+
+.hide-names .rect {
+	color: transparent;
+	font-size: 1px;
+}
+
+#game-screenshot {
+	position: absolute;
+	background-color: #aac;
+	width: 640px;
+	height: 480px;
+	top: 0;
+	left: 107px;
+	background-size: 100% 100%;
+}
+
+#editor {
+	background-color: white;
+	border-radius: 4px;
+	padding: 1vw;
+	margin: 0.5vw;
+}
+
+#editor table {
+	width: 100%;
+}
+
+.column-for-ranges {
+	width: 75%;
+}
+
+#editor table input[type='range'] {
+	width: 100%;
+}
+
+#editor table button {
+	min-width: 0;
+	max-width: 8vw;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.dialog-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal-dialog {
+	background-color: white;
+	border: 2px solid #06b;
+	padding: 3%;
+	border-radius: 4px;
+	max-height: 100vh;
+	overflow-y: auto;
+}
+
+#button-properties-table td {
+	white-space: nowrap;
+}
+
+#button-properties-table input, #button-properties-table select {
+	width: 85%;
+	box-sizing: border-box;
+}
+
+#button-properties-table select.miniselect {
+	width: 2em;
+	overflow: hidden;
+	min-width: 2em;
+	color: transparent;
+}
+
+#button-properties-table textarea {
+	width: 85%;
+	box-sizing: border-box;
+	margin-top: 6px;
+}
+
+#button-properties-table .vertical-align-top {
+	vertical-align: top;
+	padding-top: 6px;
+}
+
+.hidden {
+	display: none;
+}
+
+.header {
+	display: inline-block;
+	min-width: 9vw;
+	color: #06b;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+
+.text-align-center {
+	text-align: center;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+.zero-margin {
+	margin: 0;
+}

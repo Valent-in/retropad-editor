@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Retropad-editor</title>
+	<meta charset='UTF-8'>
+	<meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1'>
+	<meta name='description' content='Edit onscreen gamepads for RetroArch'>
+
+	<link rel='stylesheet' href='css/reset.css'>
+	<link rel='stylesheet' href='css/elements.css'>
+	<link rel='stylesheet' href='css/style.css'>
+
+	<script defer src='js/defaults.js'></script>
+	<script defer src='js/config-handler.js'></script>
+	<script defer src='js/editor.js'></script>
+	<script defer src='js/file-input-helper.js'></script>
+</head>
+
+<body>
+	<div id='main'>
+		<div id='main-container'>
+
+			<div id='header'>
+				<button class='important' onclick='showFileDialog()'>Import/Export</button>
+				<button class='danger button--normal-size' onclick='resetPad()'>Reset</button>
+				<span id='header__caption'><img src='img/retroarch-icon.svg'>Retropad Editor</span>
+			</div>
+
+			<div id='workarea-container'>
+				<div id='toolbar'>
+
+					<div class='toolbar-group'>
+						<span class='header'>TOOLS</span>
+						<button onclick='showScreenSizeDialog()'>Set screen size</button>
+						<br class='narrow'>
+
+						<div class='toolbar-group__section'>
+							<input type='checkbox' id='chk-show-shapes' onchange='toggleShapes(event)'
+								autocomplete='off'>
+							<label for='chk-show-shapes'>Show shapes</label>
+						</div>
+
+						<div class='toolbar-group__section'>
+							<input type='checkbox' id='chk-show-names' onchange='toggleNames(event)' autocomplete='off'
+								checked>
+							<label for='chk-show-names'>Show names</label>
+						</div>
+
+						<div class='toolbar-group__section'>
+
+							<input type='checkbox' id='chk-show-portrait' onchange='toggleOrientation(event)'
+								autocomplete='off'>
+							<label for='chk-show-portrait'>Portrait</label>
+						</div>
+
+						<div class='toolbar-group__section'>
+
+							<input type='checkbox' id='chk-show-offscreen' onchange='toggleOffscreen(event)'
+								autocomplete='off'>
+							<label for='chk-show-offscreen'>Show offscreen</label>
+						</div>
+					</div>
+
+					<div class='toolbar-group'>
+						<span class='header'>OVERLAY</span>
+						<select id='overlay-selector'></select>
+						<br class='narrow'>
+						<button onclick='showOverlayEditor()'>New overlay</button>
+						<button onclick='delCurrentOverlay()'>Delete overlay</button>
+						<button onclick='showAspectFixer()'>Fix aspect ratio</button>
+					</div>
+
+					<div class='toolbar-group'>
+						<span class='header'>BUTTON</span>
+						<br class='narrow'>
+						<button onclick='showButtonCreator()'>New button</button>
+						<button id='del-current-button' onclick='delCurrentButton()'>Delete
+							button</button>
+						<button id='show-button-editor' onclick='showButtonEditor()'>Edit
+							button</button>
+					</div>
+				</div>
+
+				<div id='editor-container'>
+					<div id='gamepad-container'>
+						<div id='gamepad-container__scroll-frame'>
+							<div id='screenpad' class='hide-offscreen'>
+								<div id='game-screenshot'></div>
+							</div>
+						</div>
+					</div>
+
+					<div id='editor'>
+						<table>
+							<colgroup>
+								<col>
+								<col class='column-for-ranges'>
+								<col>
+							</colgroup>
+							<tr>
+								<td>
+									<span>X</span>
+								</td>
+
+								<td>
+									<input type='range' max=1 step=0.00001 id='x-range'>
+								</td>
+
+								<td>
+									<input type='number' step=0.00001 id='x-number'>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>Y</span>
+								</td>
+
+								<td>
+									<input type='range' max=1 step=0.00001 id='y-range'>
+								</td>
+
+								<td>
+									<input type='number' step=0.00001 id='y-number'>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>W</span>
+								</td>
+
+								<td>
+									<input type='range' max=1 step=0.00001 id='w-range'>
+								</td>
+
+								<td>
+									<div class='nowrap'>
+										<input type='number' step=0.00001 id='w-number'>
+										<button id='norm-width' onclick='normalizeWidth()'>Quad</button>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<span>H</span>
+								</td>
+
+								<td>
+									<input type='range' max=1 step=0.00001 id='h-range'>
+								</td>
+
+								<td>
+									<div class='nowrap'>
+										<input type='number' step=0.00001 id='h-number'>
+										<button id='norm-height' onclick='normalizeHeight()'>Quad</button>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- Dialogs (hidden by default) -->
+			<div id='button-create-dialog' class='dialog-container hidden'>
+				<div class='modal-dialog'>
+					<table id='button-properties-table'>
+						<tr>
+							<td>
+								<label for='command-name'>Command</label>
+							</td>
+
+							<td>
+								<input type='text' id='command-name' class='js-dialog__focus'>
+								<select class='miniselect' id='command-select'
+									onchange='fillCommandField(event)'></select>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<label for='image-name'>Image</label>
+							</td>
+
+							<td>
+								<input type='text' id='image-name'>
+								<select class='miniselect' id='image-select'
+									onchange='fillImageNameField(event)'></select>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<label for='button-shape'>Shape</label>
+							</td>
+
+							<td>
+								<select id='button-shape'>
+									<option>rect</option>
+									<option>radial</option>
+								</select>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<button class='empty button--normal-size'
+									onclick='toggleAdditionalProperties()'>Additional</button>
+							</td>
+						</tr>
+
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='next_target_property'>next_target</label>
+							</td>
+
+							<td>
+								<select id='next_target_property'></select>
+							</td>
+						</tr>
+
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='range_mod_property'>range_mod</label>
+							</td>
+
+							<td>
+								<input type='number' step=0.01 id='range_mod_property'>
+							</td>
+						</tr>
+
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='alpha_mod_property'>alpha_mod</label>
+							</td>
+
+							<td>
+								<input type='number' step=0.01 id='alpha_mod_property'>
+							</td>
+						</tr>
+
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='pct_property'>pct</label>
+							</td>
+
+							<td>
+								<input type='number' step=0.01 id='pct_property'>
+							</td>
+						</tr>
+
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='movable_property'>movable</label>
+							</td>
+
+							<td>
+								<select id='movable_property'>
+									<option></option>
+									<option>false</option>
+									<option>true</option>
+								</select>
+							</td>
+						</tr>
+
+						<tr class='js-additional-button-property hidden'>
+							<td class='vertical-align-top'>
+								<span>Raw data:</span>
+							</td>
+
+							<td>
+								<textarea id='addLines'></textarea>
+							</td>
+						</tr>
+
+					</table>
+
+					<br class='wide'>
+					<button class='important' id='button-create-button' onclick='addButton()'>Create
+						button</button>
+					<button class='important' id='button-edit-button' onclick='editButton()'>Edit
+						button</button>
+					<button onclick='hideButtonEditor()'>Cancel</button>
+				</div>
+			</div>
+
+
+			<div id='overlay-create-dialog' class='dialog-container hidden'>
+				<div class='modal-dialog'>
+					<label for='overlay-name'>Name</label>
+					<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
+					<br class='wide'>
+					<button class='important' onclick='addOverlay()'>Create overlay</button>
+					<button onclick='hideOverlayEditor()'>Cancel</button>
+				</div>
+			</div>
+
+
+			<div id='aspect-fixer-dialog' class='dialog-container hidden'>
+				<div class='modal-dialog'>
+					<div>
+						<span class='header'>Initial aspect ratio</span>
+						<br class='wide'>
+						<input type='number' id='initial-aspect-width' value=16>
+						<span>:</span>
+						<input type='number' id='initial-aspect-height' value=9>
+						<br class='wide'>
+					</div>
+					<br class='wide'>
+					<div>
+						<span class='header'>Target screen dimensions</span>
+						<br class='wide'>
+						<input type='number' id='target-display-width'>
+						<span>:</span>
+						<input type='number' id='target-display-height'>
+						<br class='wide'>
+						<input type='checkbox' id='keep-relative'>
+						<label for='keep-relative'>Keep relative positions</label>
+					</div>
+					<br class='wide'>
+
+					<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
+					<button onclick='hideAspectFixer()'>Close</button>
+				</div>
+			</div>
+
+
+			<div id='screen-size-dialog' class='dialog-container hidden'>
+				<div class='modal-dialog'>
+					<div>
+						<span class='header'>Screen dimensions</span>
+						<br class='wide'>
+						<input type='number' id='display-width' class='js-dialog__focus'>
+						<span>x</span>
+						<input type='number' id='display-height'>
+					</div>
+					<br class='narrow'>
+
+					<button class='empty button--normal-size' onclick='toggleScreenshotSettings()'>Screenshot
+						area</button>
+					<br class='wide'>
+					<div id='screenshot-area-settings' class='hidden'>
+						<input type='number' id='screenshot-width'>
+						<span>x</span>
+						<input type='number' id='screenshot-height'>
+						<br class='wide'>
+						<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
+						<label for='int-fit'>Fit screen</label>
+						<br class='zero-margin'>
+						<input type='radio' id='radio-screenshot-match' name='screenshot-mode'>
+						<label for='int-match'>Exact screenshot size</label>
+						<br class='zero-margin'>
+						<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
+						<label for='int-set'>Set size</label>
+					</div>
+					<br class='narrow'>
+
+					<button class='important' onclick='applyScreenDimensions()'>Set size</button>
+					<button onclick='hideScreenSizeDialog()'>Close</button>
+				</div>
+			</div>
+
+
+			<div id='import-export-dialog' class='dialog-container hidden'>
+				<div class='modal-dialog'>
+					<table>
+						<tr>
+							<td>
+								<span>Import config</span>
+							</td>
+							<td>
+								<span class='input_file'>
+									<input type='file' accept='.cfg' id='load-config' class='js-dialog__focus'
+										onchange='loadConfigFromFile(event)'>
+									<label id='load-config-filename' for='load-config'></label>
+								</span>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<span>Import images</span>
+							</td>
+							<td>
+								<span class='input_file'>
+									<input type='file' accept='.png,.jpg' multiple id='load-button-images'
+										onchange='loadImageFiles(event)'>
+									<label id='load-button-images-filename' for='load-button-images'></label>
+								</span>
+							</td>
+						</tr>
+
+						<tr>
+							<td>
+								<input type='checkbox' id='chk-show-screenshot' onchange='toggleScreenshot(event)'>
+
+								<label for='chk-show-screenshot'>Game screenshot</label>
+							</td>
+							<td>
+								<span class='input_file'>
+									<input type='file' accept='.png,.jpg' id='load-screenshot'
+										onchange='loadScreenshotFile(event)'>
+									<label id='load-screenshot-filename' for='load-screenshot'></label>
+								</span>
+							</td>
+						</tr>
+
+					</table>
+					<button class='empty' id='export-button' onclick='createDownloadLink()'><a id='export-link'
+							download='new-retropad.cfg' href=''>Export data</a></button>
+					<br class='wide'>
+					<button onclick='hideFileDialog()'>Close</button>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</body>
+
+</html>

@@ -1,0 +1,395 @@
+button {
+	background-color: #08d;
+	border: 1px solid #06b;
+	border-radius: 3px;
+	color: white;
+	padding: 2px 4px 2px 4px;
+	margin: 1px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+button:hover {
+	background-color: #19e;
+}
+
+button:active {
+	background-color: #06b;
+}
+
+button.danger {
+	background-color: #d03;
+	border: 1px solid #b01;
+}
+
+button.danger:hover {
+	background-color: #e14;
+}
+
+button.danger:active {
+	background-color: #b01;
+}
+
+button.important {
+	background-color: #0a1;
+	border: 1px solid #080;
+}
+
+button.important:hover {
+	background-color: #1b2;
+}
+
+button.important:active {
+	background-color: #080;
+}
+
+button.empty {
+	background-color: rgba(0, 0, 0, 0);
+	color: #06b;
+}
+
+button.empty:hover {
+	background-color: rgba(0, 0, 255, 0.1);
+}
+
+button.empty:active {
+	background-color: rgba(0, 0, 255, 0.2);
+}
+
+button:focus {
+	box-shadow: 0 0 0 2px #bce;
+	outline: none;
+}
+
+select {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border: 1px solid #ccd;
+	background-color: #e9e9f1;
+	color: #777;
+	box-shadow: none;
+	padding: 4px;
+	padding-right: 1em;
+	border-radius: 3px;
+	position: relative;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='70' width='120'><path d='M 10,10 60,60 110,10' style='fill:none;stroke:rgb(128,128,128);stroke-width:20;stroke-linecap:round; stroke-linejoin:round'/></svg>");
+	background-position: center right 0.5em;
+	background-repeat: no-repeat;
+	background-size: auto 25%;
+	cursor: pointer;
+}
+
+select:focus {
+	box-shadow: 0 0 0 2px #bce;
+	outline: none;
+}
+
+input[type=checkbox] {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border: 1px solid #ccd;
+	border-radius: 3px;
+	background-color: #e9e9f1;
+	box-shadow: none;
+	width: 1em;
+	height: 1em;
+	margin-bottom: -2px;
+	box-sizing: content-box;
+	cursor: pointer;
+}
+
+input[type=checkbox]:checked {
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='100' width='100'><path d='M 10,55 35,80 90,20' style='fill:none;stroke:rgb(102,136,153);stroke-width:15;stroke-linecap:round; stroke-linejoin:round'/></svg>");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 90% 90%;
+}
+
+input[type=radio] {
+	appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	border: 1px solid #ccd;
+	border-radius: 50%;
+	background-color: #e9e9f1;
+	box-shadow: none;
+	width: 1em;
+	height: 1em;
+	margin-bottom: -2px;
+	box-sizing: content-box;
+	cursor: pointer;
+}
+
+input[type=radio]:checked {
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='100' width='100'><circle cx='50' cy='50' r='27' style='fill:rgb(102,136,153);'/></svg>");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
+input[type=radio]:focus, input[type=checkbox]:focus {
+	box-shadow: 0 0 0 2px #bce;
+	outline: none;
+}
+
+input[type=number] {
+	-webkit-appearance: none;
+	-moz-appearance: textfield;
+	appearance: textfield;
+	border: 1px solid #ccd;
+	background-color: #f7f7fa;
+	color: #777;
+	/*box-shadow: none;*/
+	padding: 4px;
+	border-radius: 3px;
+}
+
+input[type=text] {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	border: 1px solid #ccd;
+	background-color: #f7f7fa;
+	color: #777;
+	box-shadow: none;
+	padding: 4px;
+	border-radius: 3px;
+}
+
+input[type=number]::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+input[type=number]:hover, input[type=text]:hover {
+	border-color: #aab;
+}
+
+input[type=number]:invalid, input[type=text]:invalid {
+	background-color: #f7d7da;
+	box-shadow: none;
+}
+
+input[type=number]:focus, input[type=text]:focus {
+	box-shadow: 0 0 0 2px #bce;
+	outline: none;
+}
+
+input[type=range] {
+	-webkit-appearance: none;
+	background: transparent;
+	height: 22px;
+	padding: 0;
+	cursor: pointer;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+}
+
+input[type=range]:focus {
+	outline: none;
+}
+
+input[type=range]::-ms-track {
+	cursor: pointer;
+	background: transparent;
+	border-color: transparent;
+	color: transparent;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	border: 6px solid #08d;
+	height: 10px;
+	width: 5px;
+	border-radius: 3px;
+	background: #e9e9f1;
+	cursor: pointer;
+	margin-top: -8px;
+	box-shadow: none;
+	box-sizing: content-box;
+}
+
+input[type=range]:active::-webkit-slider-thumb {
+	background: #ffffff;
+}
+
+input[type=range]::-moz-range-thumb {
+	box-shadow: none;
+	border: 6px solid #08d;
+	height: 10px;
+	width: 5px;
+	border-radius: 3px;
+	background: #e9e9f1;
+	cursor: pointer;
+}
+
+input[type=range]:active::-moz-range-thumb {
+	background: #ffffff;
+}
+
+input[type=range]::-ms-thumb {
+	box-shadow: none;
+	border: 6px solid #08d;
+	height: 10px;
+	width: 5px;
+	border-radius: 3px;
+	background: #e9e9f1;
+	cursor: pointer;
+	margin-bottom: -8px;
+	margin-top: -8px;
+	box-sizing: content-box;
+}
+
+input[type=range]:active::-ms-thumb {
+	background: #ffffff;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+	width: 100%;
+	height: 8px;
+	cursor: pointer;
+	border: 1px solid #ccd;
+	background-color: #e9e9f1;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+	box-shadow: 0 0 0 2px #bce;
+}
+
+input[type=range]::-moz-range-track {
+	width: 100%;
+	height: 8px;
+	cursor: pointer;
+	border: 1px solid #ccd;
+	background-color: #e9e9f1;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=range]:focus::-moz-range-track {
+	box-shadow: 0 0 0 2px #bce;
+}
+
+input[type=range]::-ms-track {
+	width: 100%;
+	height: 8px;
+	cursor: pointer;
+	border: 1px solid #ccd;
+	background-color: #e9e9f1;
+	border-radius: 4px;
+	box-sizing: border-box;
+	box-shadow: none;
+}
+
+input[type=range]:focus::-ms-track {
+	box-shadow: 0 0 0 2px #bce;
+}
+
+input[type=range]::-ms-fill-lower {
+	width: 100%;
+	height: 8px;
+	cursor: pointer;
+	border: 1px solid #ccd;
+	background-color: #e9e9f1;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=range]:focus::-ms-fill-lower {
+	background: #e9e9f1;
+}
+
+input[type=range]::-ms-fill-upper {
+	width: 100%;
+	height: 8px;
+	cursor: pointer;
+	border: 1px solid #ccd;
+	background-color: #e9e9f1;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+input[type=range]:focus::-ms-fill-upper {
+	background: #e9e9f1;
+}
+
+.input_file {
+	display: inline-bolock;
+	position: relative;
+	white-space: nowrap;
+}
+
+.input_file input[type=file] {
+	opacity: 0;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.input_file label {
+	background-color: rgba(0, 0, 0, 0);
+	color: #06b;
+	border: 1px solid #06b;
+	border-radius: 3px;
+	padding: 2px 4px 2px 4px;
+	margin: 1px;
+	width: 100%;
+	text-align: center;
+	display: inline-block;
+	cursor: pointer;
+}
+
+.input_file input[type=file]:hover+label {
+	background-color: rgba(0, 0, 255, 0.1);
+}
+
+.input_file input[type=file]:active+label {
+	background-color: rgba(0, 0, 255, 0.2);
+}
+
+.input_file input[type=file]:focus+label {
+	box-shadow: 0 0 0 2px #bce;
+}
+
+.input_file label:empty::before {
+	content: 'Browse...';
+	display: inline-block;
+	text-align: center;
+	width: 100%;
+}
+
+textarea {
+	border: 1px solid #ccd;
+	background-color: #f7f7fa;
+	color: #777;
+	box-shadow: none;
+	padding: 4px;
+	border-radius: 3px;
+}
+
+textarea:hover {
+	border-color: #aab;
+}
+
+textarea:invalid {
+	background-color: #f7d7da;
+	box-shadow: none;
+}
+
+textarea:focus {
+	box-shadow: 0 0 0 2px #bce;
+	outline: none;
+}
+
+select:disabled, input:disabled, button:disabled, textarea:disabled, .input_file input[type=file]:disabled+label {
+	opacity: 0.4;
+}
