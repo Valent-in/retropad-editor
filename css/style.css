@@ -31,9 +31,8 @@ input[type='number'] {
 	width: 15vw;
 }
 
-#main {
-	display: flex;
-	justify-content: center;
+#main-container {
+	max-width: 100%;
 }
 
 #header {
@@ -60,10 +59,6 @@ input[type='number'] {
 	top: 0;
 	left: 0;
 	height: 100%;
-}
-
-#main-container {
-	max-width: 100%;
 }
 
 #workarea-container {
