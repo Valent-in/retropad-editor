@@ -246,6 +246,13 @@ input[type='number'] {
 	padding-top: 6px;
 }
 
+#download-help {
+	display: inline-block;
+	color: #777;
+	font-size: 0.7em;
+	padding-top: 3vh;
+}
+
 #footer {
 	display: flex;
 	justify-content: center;

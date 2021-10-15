@@ -411,11 +411,35 @@
 						</td>
 					</tr>
 
+					<tr>
+						<td colspan='2'>
+							<span id='download-help'>Config file and image files must be stored in same folder.</span>
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							<button class='empty' id='export-button' onclick='createDownloadLink()'><a id='export-link'
+									download='new-retropad.cfg' href=''>Export config</a></button>
+
+						</td>
+						<td>
+							<a
+								href='https://github.com/Valent-in/retropad-editor/releases/download/v0.6/overlay-images.zip'>Image
+								pack</a>
+
+						</td>
+					</tr>
+
+					<tr>
+						<td>
+							<button onclick='hideFileDialog()'>Close</button>
+						</td>
+					</tr>
+
 				</table>
-				<button class='empty' id='export-button' onclick='createDownloadLink()'><a id='export-link'
-						download='new-retropad.cfg' href=''>Export data</a></button>
-				<br class='wide'>
-				<button onclick='hideFileDialog()'>Close</button>
+
+
 			</div>
 		</div>
 
