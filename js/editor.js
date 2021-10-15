@@ -145,7 +145,7 @@ function loadImageFiles(e) {
 
 		let ext = e.target.files[i].name.substr(-4);
 
-		if (!file || (ext != ".png" && ext != ".jpg"))
+		if (!file || (ext != '.png' && ext != '.jpg'))
 			continue;
 
 		imgCounter++;
@@ -522,7 +522,7 @@ function fillAdditionalPropsFields(data) {
 				break;
 
 			default:
-				console.log("More than one ui element found!");
+				console.log('More than one ui element found!');
 		}
 
 	});
@@ -594,7 +594,7 @@ function showDialog(elementId, isShow) {
 // Inline event listeners
 
 function resetPad() {
-	if (!confirm("Do you want to reset? All unsaved editions will be lost!"))
+	if (!confirm('Do you want to reset? All unsaved editions will be lost!'))
 		return;
 
 	renderConfig(configStr);
