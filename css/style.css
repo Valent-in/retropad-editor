@@ -246,6 +246,19 @@ input[type='number'] {
 	padding-top: 6px;
 }
 
+#footer {
+	display: flex;
+	justify-content: center;
+	border-radius: 4px;
+	background-color: white;
+	margin: 0.5vw;
+}
+
+#footer a {
+	font-size: 0.7em;
+	padding: 1vw;
+}
+
 .hidden {
 	display: none;
 }
