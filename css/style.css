@@ -219,6 +219,10 @@ input[type='number'] {
 	box-sizing: border-box;
 }
 
+.modal-dialog table {
+	margin: -1vw;
+}
+
 #button-properties-table td {
 	white-space: nowrap;
 }

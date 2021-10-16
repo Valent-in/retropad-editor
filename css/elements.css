@@ -343,9 +343,13 @@ input[type=range]:focus::-ms-fill-upper {
 	padding: 2px 4px 2px 4px;
 	margin: 1px;
 	width: 100%;
+	max-width: min(35vw, 35vh);
 	text-align: center;
 	display: inline-block;
 	cursor: pointer;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+	box-sizing: border-box;
 }
 
 .input_file input[type=file]:hover+label {
