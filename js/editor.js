@@ -400,6 +400,8 @@ function fillButtonEditor(command, shape, image, addLines) {
 	else
 		document.getElementById('image-name').value = '';
 
+	showImagePreview(image);
+
 	setImageSelectorOption(image);
 	setCommandSelectorOption(command);
 
@@ -565,6 +567,7 @@ function resetButtonDialog() {
 
 	document.getElementById('command-name').value = 'a';
 	document.getElementById('image-name').value = 'A.png';
+	showImagePreview('A.png');
 
 	document.getElementById('button-shape').value = 'radial';
 
@@ -588,6 +591,18 @@ function showDialog(elementId, isShow) {
 	let focusCandidates = document.querySelectorAll('#' + elementId + ' .js-dialog__focus');
 	if (focusCandidates.length > 0)
 		focusCandidates[0].focus();
+}
+
+
+function showImagePreview(imgName) {
+	let image = images[imgName];
+	let gradient = 'linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 80%, #aac 90%)';
+	let box = document.getElementById('image-name');
+
+	if (image)
+		box.style['background-image'] = 'url(' + image + '), ' + gradient;
+	else
+		box.style['background-image'] = 'none';
 }
 
 
@@ -802,6 +817,7 @@ function hideFileDialog() {
 
 function fillImageNameField(event) {
 	document.getElementById('image-name').value = event.target.value;
+	showImagePreview(event.target.value);
 }
 
 

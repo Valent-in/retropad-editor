@@ -237,6 +237,7 @@ input[type='number'] {
 	overflow: hidden;
 	min-width: 2em;
 	color: transparent;
+	background-position: center center;
 }
 
 #button-properties-table textarea {
@@ -255,6 +256,13 @@ input[type='number'] {
 	color: #777;
 	font-size: 0.7em;
 	padding-top: 3vh;
+}
+
+#image-name {
+	padding-right: 1em;
+	background-size: auto 150%;
+	background-repeat: no-repeat;
+	background-position: right center;
 }
 
 #footer {
