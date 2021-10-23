@@ -233,6 +233,8 @@ function ConfigHandler() {
 			}
 		}
 
+		this.setOverlayAspectRatio(portrait ? 1 / target : target);
+
 
 		function __scaleSnapped(index, coef, ax) {
 			let c = _getParamSectionValue(_strings[index], ax);
@@ -351,6 +353,23 @@ function ConfigHandler() {
 	}
 
 
+	this.getOverlayAspectRatio = function () {
+		// overlayXX_aspect_ratio = <ratio>
+		let ratio = _getParamValue('overlay' + _currentOverlay + '_aspect_ratio');
+
+		if (ratio)
+			return calculateAspect(ratio);
+		else
+			return;
+	}
+
+
+	this.setOverlayAspectRatio = function (coef) {
+		if (coef && !isNaN(coef))
+			_setParamValue('overlay' + _currentOverlay + '_aspect_ratio', +Number(coef).toFixed(7));
+	}
+
+
 	//PRIVATE
 
 	function _cleanUp() {
@@ -401,9 +420,29 @@ function ConfigHandler() {
 
 	function _setParamValue(param, value) {
 		let index = _getParamIndex(param);
-		let blocks = _strings[index].split('=');
-		blocks[1] = ' ' + value;
-		_strings[index] = blocks.join('=');
+
+		if (index == -1)
+			_insertParam(param, value)
+		else
+			_strings[index] = param + ' = ' + value;
+	}
+
+
+	function _insertParam(param, value) {
+		// insert near similar parameters
+		let prefix = param.substr(0, param.indexOf('_'));
+
+		if (prefix) {
+			for (let i = 0; i < _strings.length; i++) {
+				if (_strings[i].indexOf(prefix) == 0) {
+					_strings.splice(i + 1, 0, param + ' = ' + value);
+					return;
+				}
+			}
+		}
+
+		// append if no similar params found 
+		_strings.push(param + ' = ' + value)
 	}
 
 
@@ -495,6 +534,22 @@ function ConfigHandler() {
 			case 'h':
 				return 5;
 		}
+	}
+
+
+	function calculateAspect(coef) {
+		coef = Number(coef)
+		if (isNaN(coef)) {
+			console.log('Wrong aspect ratio in config');
+			return { w: 1, h: 1 }
+		}
+
+		for (let i = 1; i <= 24; i++)
+			for (let j = 1; j <= 24; j++)
+				if (coef.toFixed(5) == (i / j).toFixed(5))
+					return { w: i, h: j }
+
+		return { w: +coef.toFixed(5), h: 1 }
 	}
 
 }
