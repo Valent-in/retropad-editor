@@ -153,6 +153,25 @@ function ConfigHandler() {
 	}
 
 
+	this.duplicateCurrentOverlay = function (name) {
+		let overlayXX = 'overlay' + _currentOverlay;
+		let current = _getParamStrings(overlayXX);
+		let reg = new RegExp('^' + overlayXX + '([^0-9]|$)');
+
+		// last overlay index is count-1
+		let count = Number(_getParamValue('overlays'));
+		_setParamValue('overlays', count + 1);
+
+		for (let i = 0; i < current.length; i++) {
+			current[i] = current[i].replace(overlayXX, 'overlay' + count)
+			if (current[i].search('overlay' + count + '_name') == 0)
+				current[i] = 'overlay' + count + '_name = "' + name + '"';
+		}
+
+		_strings = _strings.concat(current);
+	}
+
+
 	this.createButton = function (command, shape, image, addLines) {
 		let overlayXX = 'overlay' + _currentOverlay;
 		let buttCount = Number(_getParamValue(`${overlayXX}_descs`));
@@ -464,7 +483,7 @@ function ConfigHandler() {
 	function _getParamStrings(param) {
 		let ret = [];
 		let reg = new RegExp('^' + param + '([^0-9]|$)');
-		for (let i = _strings.length - 1; i >= 0; i--)
+		for (let i = 0; i < _strings.length; i++)
 			if (_strings[i].trim().search(reg) != -1)
 				ret.push(_strings[i])
 

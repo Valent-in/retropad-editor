@@ -705,7 +705,11 @@ function editButton() {
 
 function addOverlay() {
 	hideOverlayEditor();
-	conf.createOverlay(document.getElementById('overlay-name').value);
+	if (document.getElementById('duplicate-overlay').checked)
+		conf.duplicateCurrentOverlay(document.getElementById('overlay-name').value);
+	else
+		conf.createOverlay(document.getElementById('overlay-name').value);
+
 	buildOverlaySelectors();
 	redrawPad();
 }
@@ -756,6 +760,7 @@ function hideButtonEditor() {
 
 
 function showOverlayEditor() {
+	document.getElementById('duplicate-overlay').checked = false;
 	showDialog('overlay-create-dialog', true);
 }
 
