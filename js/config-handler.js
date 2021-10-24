@@ -84,6 +84,9 @@ function ConfigHandler() {
 
 
 	this.createOverlay = function (name) {
+		if (this.isOverlayNameExist(name))
+			return;
+
 		let count = Number(_getParamValue('overlays'));
 		if (!name)
 			name = 'overlay' + (count + 1);
@@ -154,6 +157,9 @@ function ConfigHandler() {
 
 
 	this.duplicateCurrentOverlay = function (name) {
+		if (this.isOverlayNameExist(name))
+			return;
+
 		let overlayXX = 'overlay' + _currentOverlay;
 		let current = _getParamStrings(overlayXX);
 		let reg = new RegExp('^' + overlayXX + '([^0-9]|$)');
@@ -169,6 +175,18 @@ function ConfigHandler() {
 		}
 
 		_strings = _strings.concat(current);
+	}
+
+
+	this.isOverlayNameExist = function (name) {
+		let list = this.getOverlayList();
+		for (let i = 0; i < list.length; i++) {
+			if (name == list[i] || '"' + name + '"' == list[i]) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 

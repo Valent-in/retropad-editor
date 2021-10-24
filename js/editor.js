@@ -704,12 +704,19 @@ function editButton() {
 
 
 function addOverlay() {
-	hideOverlayEditor();
-	if (document.getElementById('duplicate-overlay').checked)
-		conf.duplicateCurrentOverlay(document.getElementById('overlay-name').value);
-	else
-		conf.createOverlay(document.getElementById('overlay-name').value);
+	let name = document.getElementById('overlay-name').value;
 
+	if (conf.isOverlayNameExist(name)) {
+		alert('Overlay with this name already exist.');
+		return;
+	}
+
+	if (document.getElementById('duplicate-overlay').checked)
+		conf.duplicateCurrentOverlay(name);
+	else
+		conf.createOverlay(name);
+
+	hideOverlayEditor();
 	buildOverlaySelectors();
 	redrawPad();
 }
@@ -761,6 +768,7 @@ function hideButtonEditor() {
 
 function showOverlayEditor() {
 	document.getElementById('duplicate-overlay').checked = false;
+	document.getElementById('overlay-name').value = '';
 	showDialog('overlay-create-dialog', true);
 }
 
