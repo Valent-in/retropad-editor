@@ -259,6 +259,7 @@ input[type='number'] {
 	min-width: 2em;
 	color: transparent;
 	background-position: center center;
+	padding-right: 2em;
 }
 
 #button-properties-table textarea {
