@@ -91,75 +91,33 @@
 				</div>
 
 				<div id='editor'>
-					<table>
-						<colgroup>
-							<col>
-							<col class='column-for-ranges'>
-							<col>
-						</colgroup>
-						<tr>
-							<td>
-								<span>X</span>
-							</td>
+					<div>
+						<span>X</span>
+						<input type='range' max=1 step=0.00001 id='x-range'>
+						<input type='number' step=0.00001 id='x-number'>
+					</div>
 
-							<td>
-								<input type='range' max=1 step=0.00001 id='x-range'>
-							</td>
+					<div>
+						<span>Y</span>
+						<input type='range' max=1 step=0.00001 id='y-range'>
+						<input type='number' step=0.00001 id='y-number'>
+					</div>
 
-							<td>
-								<input type='number' step=0.00001 id='x-number'>
-							</td>
-						</tr>
+					<div>
+						<span>W</span>
+						<input type='range' max=1 step=0.00001 id='w-range'>
+						<input type='number' step=0.00001 id='w-number'>
+						<button id='norm-width' onclick='normalizeWidth()'>Quad</button>
+					</div>
 
-						<tr>
-							<td>
-								<span>Y</span>
-							</td>
-
-							<td>
-								<input type='range' max=1 step=0.00001 id='y-range'>
-							</td>
-
-							<td>
-								<input type='number' step=0.00001 id='y-number'>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<span>W</span>
-							</td>
-
-							<td>
-								<input type='range' max=1 step=0.00001 id='w-range'>
-							</td>
-
-							<td>
-								<div class='nowrap'>
-									<input type='number' step=0.00001 id='w-number'>
-									<button id='norm-width' onclick='normalizeWidth()'>Quad</button>
-								</div>
-							</td>
-						</tr>
-
-						<tr>
-							<td>
-								<span>H</span>
-							</td>
-
-							<td>
-								<input type='range' max=1 step=0.00001 id='h-range'>
-							</td>
-
-							<td>
-								<div class='nowrap'>
-									<input type='number' step=0.00001 id='h-number'>
-									<button id='norm-height' onclick='normalizeHeight()'>Quad</button>
-								</div>
-							</td>
-						</tr>
-					</table>
+					<div>
+						<span>H</span>
+						<input type='range' max=1 step=0.00001 id='h-range'>
+						<input type='number' step=0.00001 id='h-number'>
+						<button id='norm-height' onclick='normalizeHeight()'>Quad</button>
+					</div>
 				</div>
+
 			</div>
 		</div>
 

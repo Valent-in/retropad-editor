@@ -176,23 +176,44 @@ input[type='number'] {
 	border-radius: 4px;
 	padding: 1vw;
 	margin: 0.5vw;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
-#editor table {
-	width: 100%;
+#editor * {
+	box-sizing: border-box;
 }
 
-.column-for-ranges {
-	width: 75%;
+#editor>div {
+	padding-top: 2px;
+	padding-bottom: 2px;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
 }
 
-#editor table input[type='range'] {
-	width: 100%;
+#editor span {
+	width: 4%;
+	text-align: center;
+	overflow-x: hidden;
+	padding-top: 0.6vw;
+	padding-bottom: 0.6vw;
+	margin: 0;
 }
 
-#editor table button {
+#editor input[type='range'] {
+	width: 70%;
+}
+
+#editor input[type='number'] {
+	width: 16%;
+	margin-left: 1%;
+	margin-right: 1%;
+}
+
+#editor button {
 	min-width: 0;
-	max-width: 8vw;
+	max-width: 8%;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
