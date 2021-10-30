@@ -31,7 +31,7 @@
 			<div id='toolbar'>
 
 				<div class='toolbar-group'>
-					<span class='header'>TOOLS</span>
+					<span class='group-header'>TOOLS</span>
 					<button onclick='showScreenSizeDialog()'>Set screen size</button>
 					<br class='narrow'>
 
@@ -62,7 +62,7 @@
 				</div>
 
 				<div class='toolbar-group'>
-					<span class='header'>OVERLAY</span>
+					<span class='group-header'>OVERLAY</span>
 					<select id='overlay-selector'></select>
 					<br class='narrow'>
 					<button onclick='showOverlayEditor()'>New overlay</button>
@@ -71,7 +71,7 @@
 				</div>
 
 				<div class='toolbar-group'>
-					<span class='header'>BUTTON</span>
+					<span class='group-header'>BUTTON</span>
 					<br class='narrow'>
 					<button onclick='showButtonCreator()'>New button</button>
 					<button id='del-current-button' onclick='delCurrentButton()'>Delete
@@ -275,7 +275,7 @@
 		<div id='aspect-fixer-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
 				<div>
-					<span class='header'>Initial aspect ratio</span>
+					<span class='group-header'>Initial aspect ratio</span>
 					<br class='wide'>
 					<input type='number' step=0.00001 id='initial-aspect-width' value=16>
 					<span>:</span>
@@ -284,7 +284,7 @@
 				</div>
 				<br class='wide'>
 				<div>
-					<span class='header'>Target screen dimensions</span>
+					<span class='group-header'>Target screen dimensions</span>
 					<br class='wide'>
 					<input type='number' id='target-display-width'>
 					<span>:</span>
@@ -304,7 +304,7 @@
 		<div id='screen-size-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
 				<div>
-					<span class='header'>Screen dimensions</span>
+					<span class='group-header'>Screen dimensions</span>
 					<br class='wide'>
 					<input type='number' id='display-width' class='js-dialog__focus'>
 					<span>x</span>
@@ -322,10 +322,10 @@
 					<br class='wide'>
 					<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
 					<label for='int-fit'>Fit screen</label>
-					<br class='zero-margin'>
+					<br>
 					<input type='radio' id='radio-screenshot-match' name='screenshot-mode'>
 					<label for='int-match'>Exact screenshot size</label>
-					<br class='zero-margin'>
+					<br>
 					<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
 					<label for='int-set'>Set size</label>
 				</div>
