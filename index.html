@@ -130,286 +130,314 @@
 		<!-- Dialogs (hidden by default) -->
 		<div id='button-create-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
-				<table id='button-properties-table'>
-					<tr>
-						<td>
-							<label for='command-name'>Command</label>
-						</td>
+				<div class='modal-dialog__header-box'>
+					<span>Button properties</span>
+				</div>
+				<div class='modal-dialog__content-box'>
+					<table id='button-properties-table'>
+						<tr>
+							<td>
+								<label for='command-name'>Command</label>
+							</td>
 
-						<td>
-							<input type='text' id='command-name' class='js-dialog__focus'>
-							<select class='miniselect' id='command-select' onchange='fillCommandField(event)'></select>
-						</td>
-					</tr>
+							<td>
+								<input type='text' id='command-name' class='js-dialog__focus'>
+								<select class='miniselect' id='command-select'
+									onchange='fillCommandField(event)'></select>
+							</td>
+						</tr>
 
-					<tr>
-						<td>
-							<label for='image-name'>Image</label>
-						</td>
+						<tr>
+							<td>
+								<label for='image-name'>Image</label>
+							</td>
 
-						<td>
-							<input type='text' id='image-name' oninput='showImagePreview(event.target.value)'>
-							<select class='miniselect' id='image-select' onchange='fillImageNameField(event)'></select>
-						</td>
-					</tr>
+							<td>
+								<input type='text' id='image-name' oninput='showImagePreview(event.target.value)'>
+								<select class='miniselect' id='image-select'
+									onchange='fillImageNameField(event)'></select>
+							</td>
+						</tr>
 
-					<tr>
-						<td>
-							<label for='button-shape'>Shape</label>
-						</td>
+						<tr>
+							<td>
+								<label for='button-shape'>Shape</label>
+							</td>
 
-						<td>
-							<select id='button-shape'>
-								<option>rect</option>
-								<option>radial</option>
-							</select>
-						</td>
-					</tr>
+							<td>
+								<select id='button-shape'>
+									<option>rect</option>
+									<option>radial</option>
+								</select>
+							</td>
+						</tr>
 
-					<tr>
-						<td>
-							<button class='empty expander button--normal-size'
-								onclick='toggleAdditionalButtonProperties()'>Additional</button>
-						</td>
-					</tr>
+						<tr>
+							<td>
+								<button class='empty expander button--normal-size'
+									onclick='toggleAdditionalButtonProperties()'>Additional</button>
+							</td>
+						</tr>
 
-					<tr class='js-additional-button-property hidden'>
-						<td>
-							<label for='next_target_property'>next_target</label>
-						</td>
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='next_target_property'>next_target</label>
+							</td>
 
-						<td>
-							<select id='next_target_property'></select>
-						</td>
-					</tr>
+							<td>
+								<select id='next_target_property'></select>
+							</td>
+						</tr>
 
-					<tr class='js-additional-button-property hidden'>
-						<td>
-							<label for='range_mod_property'>range_mod</label>
-						</td>
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='range_mod_property'>range_mod</label>
+							</td>
 
-						<td>
-							<input type='number' step=0.01 id='range_mod_property'>
-						</td>
-					</tr>
+							<td>
+								<input type='number' step=0.01 id='range_mod_property'>
+							</td>
+						</tr>
 
-					<tr class='js-additional-button-property hidden'>
-						<td>
-							<label for='alpha_mod_property'>alpha_mod</label>
-						</td>
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='alpha_mod_property'>alpha_mod</label>
+							</td>
 
-						<td>
-							<input type='number' step=0.01 id='alpha_mod_property'>
-						</td>
-					</tr>
+							<td>
+								<input type='number' step=0.01 id='alpha_mod_property'>
+							</td>
+						</tr>
 
-					<tr class='js-additional-button-property hidden'>
-						<td>
-							<label for='pct_property'>pct</label>
-						</td>
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='pct_property'>pct</label>
+							</td>
 
-						<td>
-							<input type='number' step=0.01 id='pct_property'>
-						</td>
-					</tr>
+							<td>
+								<input type='number' step=0.01 id='pct_property'>
+							</td>
+						</tr>
 
-					<tr class='js-additional-button-property hidden'>
-						<td>
-							<label for='movable_property'>movable</label>
-						</td>
+						<tr class='js-additional-button-property hidden'>
+							<td>
+								<label for='movable_property'>movable</label>
+							</td>
 
-						<td>
-							<select id='movable_property'>
-								<option></option>
-								<option>false</option>
-								<option>true</option>
-							</select>
-						</td>
-					</tr>
+							<td>
+								<select id='movable_property'>
+									<option></option>
+									<option>false</option>
+									<option>true</option>
+								</select>
+							</td>
+						</tr>
 
-					<tr class='js-additional-button-property hidden'>
-						<td class='vertical-align-top'>
-							<label for='raw-button-properties'>Raw data:</label>
-						</td>
+						<tr class='js-additional-button-property hidden'>
+							<td class='vertical-align-top'>
+								<label for='raw-button-properties'>Raw data:</label>
+							</td>
 
-						<td>
-							<textarea id='raw-button-properties'></textarea>
-						</td>
-					</tr>
+							<td>
+								<textarea id='raw-button-properties'></textarea>
+							</td>
+						</tr>
 
-				</table>
+					</table>
 
-				<br class='wide'>
-				<button class='important' id='button-create-button' onclick='addButton()'>Create
-					button</button>
-				<button class='important' id='button-edit-button' onclick='editButton()'>Edit
-					button</button>
-				<button onclick='hideButtonEditor()'>Cancel</button>
+					<br class='wide'>
+					<button class='important' id='button-create-button' onclick='addButton()'>Create
+						button</button>
+					<button class='important' id='button-edit-button' onclick='editButton()'>Edit
+						button</button>
+					<button onclick='hideButtonEditor()'>Cancel</button>
+				</div>
 			</div>
 		</div>
 
 
 		<div id='overlay-create-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
-				<label for='overlay-name'>Name</label>
-				<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
-				<br class='wide'>
-				<input type='checkbox' id='duplicate-overlay' onchange='updateRawOverlayParamsBox(event)'>
-				<label for='duplicate-overlay'>Duplicate current overlay</label>
-				<br class='wide'>
-				<button class='empty expander button--normal-size'
-					onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
-				<div id='overlay-properties-container' class='hidden'>
-					<br class='narrow'>
-					<label for='raw-overlay-properties'>Raw data:</label>
-					<br>
-					<textarea id='raw-overlay-properties'></textarea>
+				<div class='modal-dialog__header-box'>
+					<span>New overlay</span>
 				</div>
-				<br class='wide'>
-				<button class='important' onclick='addOverlay()'>Create overlay</button>
-				<button onclick='hideOverlayEditor()'>Cancel</button>
+				<div class='modal-dialog__content-box'>
+					<label for='overlay-name'>Name</label>
+					<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
+					<br class='wide'>
+					<input type='checkbox' id='duplicate-overlay' onchange='updateRawOverlayParamsBox(event)'>
+					<label for='duplicate-overlay'>Duplicate current overlay</label>
+					<br class='wide'>
+					<button class='empty expander button--normal-size'
+						onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
+					<div id='overlay-properties-container' class='hidden'>
+						<br class='narrow'>
+						<label for='raw-overlay-properties'>Raw data:</label>
+						<br>
+						<textarea id='raw-overlay-properties'></textarea>
+					</div>
+					<br class='wide'>
+					<button class='important' onclick='addOverlay()'>Create overlay</button>
+					<button onclick='hideOverlayEditor()'>Cancel</button>
+				</div>
 			</div>
 		</div>
 
 
 		<div id='aspect-fixer-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
-				<div>
-					<span class='group-header'>Initial aspect ratio</span>
-					<br class='wide'>
-					<input type='number' step=0.00001 id='initial-aspect-width' value=16>
-					<span>:</span>
-					<input type='number' step=0.00001 id='initial-aspect-height' value=9>
-					<br class='wide'>
+				<div class='modal-dialog__header-box'>
+					<span>Fix aspect ratio</span>
 				</div>
-				<br class='wide'>
-				<div>
-					<span class='group-header'>Target screen dimensions</span>
+				<div class='modal-dialog__content-box'>
+					<div>
+						<span class='group-header'>Initial aspect ratio</span>
+						<br class='wide'>
+						<input type='number' step=0.00001 id='initial-aspect-width' value=16>
+						<span>:</span>
+						<input type='number' step=0.00001 id='initial-aspect-height' value=9>
+						<br class='wide'>
+					</div>
 					<br class='wide'>
-					<input type='number' id='target-display-width'>
-					<span>:</span>
-					<input type='number' id='target-display-height'>
+					<div>
+						<span class='group-header'>Target screen dimensions</span>
+						<br class='wide'>
+						<input type='number' id='target-display-width'>
+						<span>:</span>
+						<input type='number' id='target-display-height'>
+						<br class='wide'>
+						<input type='checkbox' id='keep-relative'>
+						<label for='keep-relative'>Keep relative positions</label>
+					</div>
 					<br class='wide'>
-					<input type='checkbox' id='keep-relative'>
-					<label for='keep-relative'>Keep relative positions</label>
-				</div>
-				<br class='wide'>
 
-				<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
-				<button onclick='hideAspectFixer()'>Close</button>
+					<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
+					<button onclick='hideAspectFixer()'>Close</button>
+				</div>
 			</div>
 		</div>
 
 
 		<div id='screen-size-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
-				<div>
-					<span class='group-header'>Screen dimensions</span>
-					<br class='wide'>
-					<input type='number' id='display-width' class='js-dialog__focus'>
-					<span>x</span>
-					<input type='number' id='display-height'>
+				<div class='modal-dialog__header-box'>
+					<span>Set screen size</span>
 				</div>
-				<br class='narrow'>
+				<div class='modal-dialog__content-box'>
+					<div>
+						<span class='group-header'>Screen dimensions</span>
+						<br class='wide'>
+						<input type='number' id='display-width' class='js-dialog__focus'>
+						<span>x</span>
+						<input type='number' id='display-height'>
+					</div>
+					<br class='narrow'>
 
-				<button class='empty expander button--normal-size' onclick='toggleScreenshotSettings(event)'>Screenshot
-					area</button>
-				<br class='wide'>
-				<div id='screenshot-area-settings' class='hidden'>
-					<input type='number' id='screenshot-width'>
-					<span>x</span>
-					<input type='number' id='screenshot-height'>
+					<button class='empty expander button--normal-size'
+						onclick='toggleScreenshotSettings(event)'>Screenshot
+						area</button>
 					<br class='wide'>
-					<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
-					<label for='int-fit'>Fit screen</label>
-					<br>
-					<input type='radio' id='radio-screenshot-match' name='screenshot-mode'>
-					<label for='int-match'>Exact screenshot size</label>
-					<br>
-					<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
-					<label for='int-set'>Set size</label>
-				</div>
-				<br class='narrow'>
+					<div id='screenshot-area-settings' class='hidden'>
+						<input type='number' id='screenshot-width'>
+						<span>x</span>
+						<input type='number' id='screenshot-height'>
+						<br class='wide'>
+						<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
+						<label for='radio-screenshot-fit'>Fit screen</label>
+						<br>
+						<input type='radio' id='radio-screenshot-match' name='screenshot-mode'>
+						<label for='radio-screenshot-match'>Exact screenshot size</label>
+						<br>
+						<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
+						<label for='radio-screenshot-set'>Set size</label>
+					</div>
+					<br class='narrow'>
 
-				<button class='important' onclick='applyScreenDimensions()'>Set size</button>
-				<button onclick='hideScreenSizeDialog()'>Close</button>
+					<button class='important' onclick='applyScreenDimensions()'>Set size</button>
+					<button onclick='hideScreenSizeDialog()'>Close</button>
+				</div>
 			</div>
 		</div>
 
 
 		<div id='import-export-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
-				<table>
-					<tr>
-						<td>
-							<span>Import config</span>
-						</td>
-						<td>
-							<span class='input_file'>
-								<input type='file' accept='.cfg' id='load-config' class='js-dialog__focus'
-									onchange='loadConfigFromFile(event)'>
-								<label id='load-config-filename' for='load-config'></label>
-							</span>
-						</td>
-					</tr>
+				<div class='modal-dialog__header-box'>
+					<span>Files</span>
+				</div>
+				<div class='modal-dialog__content-box'>
+					<table>
+						<tr>
+							<td>
+								<span>Import config</span>
+							</td>
+							<td>
+								<span class='input_file'>
+									<input type='file' accept='.cfg' id='load-config' class='js-dialog__focus'
+										onchange='loadConfigFromFile(event)'>
+									<label id='load-config-filename' for='load-config'></label>
+								</span>
+							</td>
+						</tr>
 
-					<tr>
-						<td>
-							<span>Import images</span>
-						</td>
-						<td>
-							<span class='input_file'>
-								<input type='file' accept='.png,.jpg' multiple id='load-button-images'
-									onchange='loadImageFiles(event)'>
-								<label id='load-button-images-filename' for='load-button-images'></label>
-							</span>
-						</td>
-					</tr>
+						<tr>
+							<td>
+								<span>Import images</span>
+							</td>
+							<td>
+								<span class='input_file'>
+									<input type='file' accept='.png,.jpg' multiple id='load-button-images'
+										onchange='loadImageFiles(event)'>
+									<label id='load-button-images-filename' for='load-button-images'></label>
+								</span>
+							</td>
+						</tr>
 
-					<tr>
-						<td>
-							<input type='checkbox' id='chk-show-screenshot' onchange='toggleScreenshot(event)'>
+						<tr>
+							<td>
+								<input type='checkbox' id='chk-show-screenshot' onchange='toggleScreenshot(event)'>
 
-							<label for='chk-show-screenshot'>Game screenshot</label>
-						</td>
-						<td>
-							<span class='input_file'>
-								<input type='file' accept='.png,.jpg' id='load-screenshot'
-									onchange='loadScreenshotFile(event)'>
-								<label id='load-screenshot-filename' for='load-screenshot'></label>
-							</span>
-						</td>
-					</tr>
+								<label for='chk-show-screenshot'>Game screenshot</label>
+							</td>
+							<td>
+								<span class='input_file'>
+									<input type='file' accept='.png,.jpg' id='load-screenshot'
+										onchange='loadScreenshotFile(event)'>
+									<label id='load-screenshot-filename' for='load-screenshot'></label>
+								</span>
+							</td>
+						</tr>
 
-					<tr>
-						<td colspan='2'>
-							<span id='download-help'>Config file and image files must be stored in same folder.</span>
-						</td>
-					</tr>
+						<tr>
+							<td colspan='2'>
+								<span id='download-help'>Config file and image files must be stored in same
+									folder.</span>
+							</td>
+						</tr>
 
-					<tr>
-						<td>
-							<button class='empty' id='export-button' onclick='createDownloadLink()'><a id='export-link'
-									download='new-retropad.cfg' href=''>Export config</a></button>
+						<tr>
+							<td>
+								<button class='empty' id='export-button' onclick='createDownloadLink()'><a
+										id='export-link' download='new-retropad.cfg' href=''>Export config</a></button>
 
-						</td>
-						<td>
-							<a
-								href='https://github.com/Valent-in/retropad-editor/releases/download/v0.6/overlay-images.zip'>Image
-								pack</a>
+							</td>
+							<td>
+								<a
+									href='https://github.com/Valent-in/retropad-editor/releases/download/v0.6/overlay-images.zip'>Image
+									pack</a>
 
-						</td>
-					</tr>
+							</td>
+						</tr>
 
-					<tr>
-						<td>
-							<button onclick='hideFileDialog()'>Close</button>
-						</td>
-					</tr>
+						<tr>
+							<td>
+								<button onclick='hideFileDialog()'>Close</button>
+							</td>
+						</tr>
 
-				</table>
+					</table>
 
-
+				</div>
 			</div>
 		</div>
 

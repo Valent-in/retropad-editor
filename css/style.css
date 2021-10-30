@@ -232,11 +232,21 @@ input[type='number'] {
 .modal-dialog {
 	background-color: white;
 	border: 2px solid #06b;
-	padding: 3%;
 	border-radius: 4px;
 	max-height: 100vh;
 	overflow-y: auto;
 	box-sizing: border-box;
+}
+
+.modal-dialog__header-box {
+	padding: 2vh 3vw 2vh 3vw;
+	background-color: #f7f7f7;
+	color: #06b;
+	font-weight: bold;
+}
+
+.modal-dialog__content-box {
+	padding: 3vh 3vw 3vh 3vw;
 }
 
 .modal-dialog table {
