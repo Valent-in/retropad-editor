@@ -169,7 +169,7 @@
 					<tr>
 						<td>
 							<button class='empty button--normal-size'
-								onclick='toggleAdditionalProperties()'>Additional</button>
+								onclick='toggleAdditionalButtonProperties()'>Additional</button>
 						</td>
 					</tr>
 
@@ -229,11 +229,11 @@
 
 					<tr class='js-additional-button-property hidden'>
 						<td class='vertical-align-top'>
-							<span>Raw data:</span>
+							<label for='raw-button-properties'>Raw data:</label>
 						</td>
 
 						<td>
-							<textarea id='addLines'></textarea>
+							<textarea id='raw-button-properties'></textarea>
 						</td>
 					</tr>
 
@@ -254,8 +254,17 @@
 				<label for='overlay-name'>Name</label>
 				<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
 				<br class='wide'>
-				<input type="checkbox" id="duplicate-overlay">
-				<label for="duplicate-overlay">Duplicate current overlay</label>
+				<input type='checkbox' id='duplicate-overlay' onchange='updateRawOverlayParamsBox(event)'>
+				<label for='duplicate-overlay'>Duplicate current overlay</label>
+				<br class='wide'>
+				<button class='empty button--normal-size'
+					onclick='toggleAdditionalOverlayProperties()'>Additional</button>
+				<div id='overlay-properties-container' class='hidden'>
+					<br class='narrow'>
+					<label for='raw-overlay-properties'>Raw data:</label>
+					<br>
+					<textarea id='raw-overlay-properties'></textarea>
+				</div>
 				<br class='wide'>
 				<button class='important' onclick='addOverlay()'>Create overlay</button>
 				<button onclick='hideOverlayEditor()'>Cancel</button>

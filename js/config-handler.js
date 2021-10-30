@@ -83,7 +83,7 @@ function ConfigHandler() {
 	}
 
 
-	this.createOverlay = function (name) {
+	this.createOverlay = function (name, params) {
 		if (this.isOverlayNameExist(name))
 			return;
 
@@ -91,30 +91,12 @@ function ConfigHandler() {
 		if (!name)
 			name = 'overlay' + (count + 1);
 
-		let last = _getParamIndex('overlay' + (count - 1) + '_alpha_mod');
-		if (last == -1)
-			last = 0;
+		_strings.push('overlay' + count + '_name = "' + name + '"');
 
-		let arr = [];
-		arr.push('overlay' + count + '_full_screen = true');
-		arr.push('overlay' + count + '_normalized = true');
-		arr.push('overlay' + count + '_name = "' + name + '"');
-		arr.push('overlay' + count + '_range_mod = 1.5');
-		arr.push('overlay' + count + '_alpha_mod = 2.0');
+		if (Array.isArray(params))
+			params.forEach(line => _strings.push('overlay' + count + '_' + line));
 
-		_strings.splice(last + 1, 0, ...arr);
-
-		let tail = _strings.length - 1;
-		let reg = new RegExp('overlay' + (count - 1) + '_desc');
-
-		for (let i = _strings.length - 1; i >= 0; i--) {
-			if (_strings[i].split('=')[0].trim().search(reg) != -1) {
-				tail = i;
-				break
-			}
-		}
-
-		_strings.splice(tail + 1, 0, 'overlay' + count + '_descs = 0');
+		_strings.push('overlay' + count + '_descs = 0');
 		_setParamValue('overlays', count + 1);
 	}
 
@@ -156,25 +138,55 @@ function ConfigHandler() {
 	}
 
 
-	this.duplicateCurrentOverlay = function (name) {
+	// copy only overlayXX_desc*
+	this.duplicateCurrentOverlay = function (name, params) {
 		if (this.isOverlayNameExist(name))
 			return;
 
 		let overlayXX = 'overlay' + _currentOverlay;
 		let current = _getParamStrings(overlayXX);
-		let reg = new RegExp('^' + overlayXX + '([^0-9]|$)');
 
 		// last overlay index is count-1
 		let count = Number(_getParamValue('overlays'));
 		_setParamValue('overlays', count + 1);
 
+		let result = ['overlay' + count + '_name = "' + name + '"'];
+
+		if (params)
+			for (let i = 0; i < params.length; i++) {
+				result.push('overlay' + count + '_' + params[i]);
+			}
+
 		for (let i = 0; i < current.length; i++) {
-			current[i] = current[i].replace(overlayXX, 'overlay' + count)
-			if (current[i].search('overlay' + count + '_name') == 0)
-				current[i] = 'overlay' + count + '_name = "' + name + '"';
+			if (current[i].search('^' + overlayXX + '_desc') == -1)
+				continue;
+
+			result.push(current[i].replace(overlayXX, 'overlay' + count));
 		}
 
-		_strings = _strings.concat(current);
+		_strings = _strings.concat(result);
+	}
+
+
+	// without overlayXX_desc* and overlayXX_name
+	this.getCurrentOverlayParams = function () {
+		let overlayXX = 'overlay' + _currentOverlay;
+		let current = _getParamStrings(overlayXX);
+		let params = [];
+
+		for (let i = 0; i < current.length; i++) {
+			if (current[i].search('^' + overlayXX + '_desc') == 0)
+				continue;
+
+			if (current[i].search('^' + overlayXX + '_name') == 0) {
+				continue;
+			}
+
+			params.push(current[i].substr(overlayXX.length + 1));
+		}
+
+		console.log(params);
+		return params;
 	}
 
 

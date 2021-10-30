@@ -3,6 +3,7 @@ const DEF_WIDTH = 854;
 const DEF_HEIGHT = 480;
 const DEF_SCR_WIDTH = 640;
 const DEF_SCR_HEIGHT = 480;
+const defaultParamsForNewOverlay = 'full_screen = true\nnormalized = true\nrange_mod = 1.5\nalpha_mod = 2.0';
 
 let currentRect;
 
@@ -503,7 +504,7 @@ function fillAdditionalPropsFields(data) {
 	if (!Array.isArray(data) || data.length == 0 || data[0] == '')
 		return;
 
-	let others = document.getElementById('addLines');
+	let others = document.getElementById('raw-button-properties');
 	let othData = '';
 
 	data.forEach(e => {
@@ -537,7 +538,7 @@ function clearAdditionalPropsFields() {
 	let v = document.querySelectorAll('.js-additional-button-property input, .js-additional-button-property select');
 
 	v.forEach(e => e.value = '');
-	document.getElementById('addLines').value = '';
+	document.getElementById('raw-button-properties').value = '';
 }
 
 
@@ -552,7 +553,7 @@ function readAdditionalPropsFields() {
 		}
 	});
 
-	result = result + document.getElementById('addLines').value.trim();
+	result = result + document.getElementById('raw-button-properties').value.trim();
 	console.log('add', result.trim());
 
 	let ret = result.trim().split('\n');
@@ -705,6 +706,7 @@ function editButton() {
 
 function addOverlay() {
 	let name = document.getElementById('overlay-name').value;
+	let props = document.getElementById('raw-overlay-properties').value;
 
 	if (conf.isOverlayNameExist(name)) {
 		alert('Overlay with this name already exist.');
@@ -712,9 +714,11 @@ function addOverlay() {
 	}
 
 	if (document.getElementById('duplicate-overlay').checked)
-		conf.duplicateCurrentOverlay(name);
+		conf.duplicateCurrentOverlay(name, props.trim().split('\n'));
 	else
-		conf.createOverlay(name);
+		conf.createOverlay(name, props.trim().split('\n'));
+
+	conf.getCurrentOverlayParams();
 
 	hideOverlayEditor();
 	buildOverlaySelectors();
@@ -769,6 +773,8 @@ function hideButtonEditor() {
 function showOverlayEditor() {
 	document.getElementById('duplicate-overlay').checked = false;
 	document.getElementById('overlay-name').value = '';
+	document.getElementById('raw-overlay-properties').value = defaultParamsForNewOverlay;
+
 	showDialog('overlay-create-dialog', true);
 }
 
@@ -843,7 +849,7 @@ function fillCommandField(event) {
 	let lines = showAdditionalParametersForCommand(command);
 	if (lines) {
 		fillAdditionalPropsFields(lines.split('\n'));
-		toggleAdditionalProperties(true);
+		toggleAdditionalButtonProperties(true);
 	}
 }
 
@@ -876,7 +882,7 @@ function toggleOffscreen(event) {
 }
 
 
-function toggleAdditionalProperties(show) {
+function toggleAdditionalButtonProperties(show) {
 	let adds = document.getElementsByClassName('js-additional-button-property');
 
 	if (show || adds[0].classList.contains('hidden')) {
@@ -889,6 +895,17 @@ function toggleAdditionalProperties(show) {
 }
 
 
+function toggleAdditionalOverlayProperties() {
+	let add = document.getElementById('overlay-properties-container');
+
+	if (add.classList.contains('hidden')) {
+		add.classList.remove('hidden');
+	} else {
+		add.classList.add('hidden');
+	}
+}
+
+
 function toggleScreenshotSettings() {
 	let settings = document.getElementById('screenshot-area-settings');
 
@@ -896,4 +913,14 @@ function toggleScreenshotSettings() {
 		settings.classList.remove('hidden');
 	else
 		settings.classList.add('hidden');
+}
+
+
+function updateRawOverlayParamsBox(event) {
+	let box = document.getElementById('raw-overlay-properties');
+
+	if (event.target.checked)
+		box.value = conf.getCurrentOverlayParams().join('\n');
+	else
+		box.value = defaultParamsForNewOverlay;
 }
