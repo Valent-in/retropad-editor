@@ -56,6 +56,19 @@ button.empty:active {
 	background-color: rgba(0, 0, 255, 0.2);
 }
 
+button.empty.expander {
+	padding-right: 1.5em;
+	position: relative;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='70' width='120'><path d='M 10,10 60,60 110,10' style='fill:none;stroke:rgb(0,102,187);stroke-width:20;stroke-linecap:round; stroke-linejoin:round'/></svg>");
+	background-position: center right 0.5em;
+	background-repeat: no-repeat;
+	background-size: auto 25%;
+}
+
+button.empty.expander.expanded {
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='70' width='120'><path d='M 10,60 60,10 110,60' style='fill:none;stroke:rgb(0,102,187);stroke-width:20;stroke-linecap:round; stroke-linejoin:round'/></svg>");
+}
+
 button:focus {
 	box-shadow: 0 0 0 2px #bce;
 	outline: none;

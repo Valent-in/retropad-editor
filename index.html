@@ -168,7 +168,7 @@
 
 					<tr>
 						<td>
-							<button class='empty button--normal-size'
+							<button class='empty expander button--normal-size'
 								onclick='toggleAdditionalButtonProperties()'>Additional</button>
 						</td>
 					</tr>
@@ -257,8 +257,8 @@
 				<input type='checkbox' id='duplicate-overlay' onchange='updateRawOverlayParamsBox(event)'>
 				<label for='duplicate-overlay'>Duplicate current overlay</label>
 				<br class='wide'>
-				<button class='empty button--normal-size'
-					onclick='toggleAdditionalOverlayProperties()'>Additional</button>
+				<button class='empty expander button--normal-size'
+					onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
 				<div id='overlay-properties-container' class='hidden'>
 					<br class='narrow'>
 					<label for='raw-overlay-properties'>Raw data:</label>
@@ -312,7 +312,7 @@
 				</div>
 				<br class='narrow'>
 
-				<button class='empty button--normal-size' onclick='toggleScreenshotSettings()'>Screenshot
+				<button class='empty expander button--normal-size' onclick='toggleScreenshotSettings(event)'>Screenshot
 					area</button>
 				<br class='wide'>
 				<div id='screenshot-area-settings' class='hidden'>

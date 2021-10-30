@@ -888,31 +888,40 @@ function toggleAdditionalButtonProperties(show) {
 	if (show || adds[0].classList.contains('hidden')) {
 		for (let i = 0; i < adds.length; i++)
 			adds[i].classList.remove('hidden');
+		if (event)
+			event.target.classList.add('expanded');
 	} else {
 		for (let i = 0; i < adds.length; i++)
 			adds[i].classList.add('hidden');
+		if (event)
+			event.target.classList.remove('expanded');
 	}
 }
 
 
-function toggleAdditionalOverlayProperties() {
+function toggleAdditionalOverlayProperties(event) {
 	let add = document.getElementById('overlay-properties-container');
 
 	if (add.classList.contains('hidden')) {
 		add.classList.remove('hidden');
+		event.target.classList.add('expanded');
 	} else {
 		add.classList.add('hidden');
+		event.target.classList.remove('expanded');
 	}
 }
 
 
-function toggleScreenshotSettings() {
+function toggleScreenshotSettings(event) {
 	let settings = document.getElementById('screenshot-area-settings');
 
-	if (settings.classList.contains('hidden'))
+	if (settings.classList.contains('hidden')) {
 		settings.classList.remove('hidden');
-	else
+		event.target.classList.add('expanded');
+	} else {
 		settings.classList.add('hidden');
+		event.target.classList.remove('expanded');
+	}
 }
 
 
