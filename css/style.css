@@ -222,7 +222,7 @@ input[type='number'] {
 	top: 0;
 	left: 0;
 	width: 100vw;
-	height: 100vh;
+	height: 100%;
 	background-color: rgba(0, 0, 0, 0.5);
 	display: flex;
 	justify-content: center;
@@ -246,11 +246,16 @@ input[type='number'] {
 }
 
 .modal-dialog__content-box {
-	padding: 3vh 3vw 3vh 3vw;
+	padding: 2vh 3vw 3vh 3vw;
+}
+
+.dialog-content-box__section {
+	padding-bottom: 3vh;
 }
 
 .modal-dialog table {
 	margin: -1vw;
+	padding-bottom: 3vh;
 }
 
 #button-properties-table td {
@@ -317,6 +322,11 @@ input[type='number'] {
 #footer a {
 	font-size: 0.9em;
 	padding: 1vw;
+}
+
+.small-warning {
+	font-size: 0.7em;
+	color: #f75;
 }
 
 .hidden {

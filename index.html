@@ -177,6 +177,7 @@
 								<button class='empty expander button--normal-size'
 									onclick='toggleAdditionalButtonProperties()'>Additional</button>
 							</td>
+							<td></td>
 						</tr>
 
 						<tr class='js-additional-button-property hidden'>
@@ -236,21 +237,23 @@
 						<tr class='js-additional-button-property hidden'>
 							<td class='vertical-align-top'>
 								<label for='raw-button-properties'>Raw data:</label>
+								<br>
+								<span class='small-warning'>Edit carefully!</span>
 							</td>
 
 							<td>
 								<textarea id='raw-button-properties'></textarea>
 							</td>
 						</tr>
-
 					</table>
 
-					<br class='wide'>
-					<button class='important' id='button-create-button' onclick='addButton()'>Create
-						button</button>
-					<button class='important' id='button-edit-button' onclick='editButton()'>Edit
-						button</button>
-					<button onclick='hideButtonEditor()'>Cancel</button>
+					<div>
+						<button class='important' id='button-create-button' onclick='addButton()'>Create
+							button</button>
+						<button class='important' id='button-edit-button' onclick='editButton()'>Edit
+							button</button>
+						<button onclick='hideButtonEditor()'>Cancel</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -262,23 +265,30 @@
 					<span>New overlay</span>
 				</div>
 				<div class='modal-dialog__content-box'>
-					<label for='overlay-name'>Name</label>
-					<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
-					<br class='wide'>
-					<input type='checkbox' id='duplicate-overlay' onchange='updateRawOverlayParamsBox(event)'>
-					<label for='duplicate-overlay'>Duplicate current overlay</label>
-					<br class='wide'>
-					<button class='empty expander button--normal-size'
-						onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
-					<div id='overlay-properties-container' class='hidden'>
+					<div class='dialog-content-box__section'>
+						<span class='group-header'>Overlay name</span>
 						<br class='narrow'>
-						<label for='raw-overlay-properties'>Raw data:</label>
+						<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
+					</div>
+					<div class='dialog-content-box__section'>
+						<input type='checkbox' id='duplicate-overlay' onchange='updateRawOverlayParamsBox(event)'>
+						<label for='duplicate-overlay'>Duplicate current overlay</label>
+					</div>
+					<div class='dialog-content-box__section'>
+						<button class='empty expander button--normal-size'
+							onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
+					</div>
+					<div id='overlay-properties-container' class='dialog-content-box__section hidden'>
+						<span class='group-header'>Raw data</span>
+						<br>
+						<span class='small-warning'>WARNING! Edit carefully!</span>
 						<br>
 						<textarea id='raw-overlay-properties'></textarea>
 					</div>
-					<br class='wide'>
-					<button class='important' onclick='addOverlay()'>Create overlay</button>
-					<button onclick='hideOverlayEditor()'>Cancel</button>
+					<div>
+						<button class='important' onclick='addOverlay()'>Create overlay</button>
+						<button onclick='hideOverlayEditor()'>Cancel</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -290,29 +300,31 @@
 					<span>Fix aspect ratio</span>
 				</div>
 				<div class='modal-dialog__content-box'>
-					<div>
+					<div class='dialog-content-box__section'>
 						<span class='group-header'>Initial aspect ratio</span>
-						<br class='wide'>
+						<br class='narrow'>
 						<input type='number' step=0.00001 id='initial-aspect-width' value=16>
 						<span>:</span>
 						<input type='number' step=0.00001 id='initial-aspect-height' value=9>
-						<br class='wide'>
 					</div>
-					<br class='wide'>
-					<div>
+
+					<div class='dialog-content-box__section'>
 						<span class='group-header'>Target screen dimensions</span>
-						<br class='wide'>
+						<br class='narrow'>
 						<input type='number' id='target-display-width'>
 						<span>:</span>
 						<input type='number' id='target-display-height'>
-						<br class='wide'>
+					</div>
+
+					<div class='dialog-content-box__section'>
 						<input type='checkbox' id='keep-relative'>
 						<label for='keep-relative'>Keep relative positions</label>
 					</div>
-					<br class='wide'>
 
-					<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
-					<button onclick='hideAspectFixer()'>Close</button>
+					<div>
+						<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
+						<button onclick='hideAspectFixer()'>Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -324,20 +336,20 @@
 					<span>Set screen size</span>
 				</div>
 				<div class='modal-dialog__content-box'>
-					<div>
+					<div class='dialog-content-box__section'>
 						<span class='group-header'>Screen dimensions</span>
-						<br class='wide'>
+						<br class='narrow'>
 						<input type='number' id='display-width' class='js-dialog__focus'>
 						<span>x</span>
 						<input type='number' id='display-height'>
 					</div>
-					<br class='narrow'>
 
-					<button class='empty expander button--normal-size'
-						onclick='toggleScreenshotSettings(event)'>Screenshot
-						area</button>
-					<br class='wide'>
-					<div id='screenshot-area-settings' class='hidden'>
+					<div class='dialog-content-box__section'>
+						<button class='empty expander button--normal-size'
+							onclick='toggleScreenshotSettings(event)'>Screenshot
+							area</button>
+					</div>
+					<div id='screenshot-area-settings' class='dialog-content-box__section hidden'>
 						<input type='number' id='screenshot-width'>
 						<span>x</span>
 						<input type='number' id='screenshot-height'>
@@ -351,10 +363,11 @@
 						<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
 						<label for='radio-screenshot-set'>Set size</label>
 					</div>
-					<br class='narrow'>
 
-					<button class='important' onclick='applyScreenDimensions()'>Set size</button>
-					<button onclick='hideScreenSizeDialog()'>Close</button>
+					<div>
+						<button class='important' onclick='applyScreenDimensions()'>Set size</button>
+						<button onclick='hideScreenSizeDialog()'>Close</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -419,23 +432,18 @@
 							<td>
 								<button class='empty' id='export-button' onclick='createDownloadLink()'><a
 										id='export-link' download='new-retropad.cfg' href=''>Export config</a></button>
-
 							</td>
 							<td>
 								<a
 									href='https://github.com/Valent-in/retropad-editor/releases/download/v0.6/overlay-images.zip'>Image
 									pack</a>
-
 							</td>
 						</tr>
-
-						<tr>
-							<td>
-								<button onclick='hideFileDialog()'>Close</button>
-							</td>
-						</tr>
-
 					</table>
+
+					<div>
+						<button onclick='hideFileDialog()'>Close</button>
+					</div>
 
 				</div>
 			</div>
