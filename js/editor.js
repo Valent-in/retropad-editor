@@ -1,8 +1,8 @@
 //Default screen dimensions (16:9 - compatible with built-in overlays) 
-const DEF_WIDTH = 854;
-const DEF_HEIGHT = 480;
-const DEF_SCR_WIDTH = 640;
-const DEF_SCR_HEIGHT = 480;
+const DEF_WIDTH = 800;
+const DEF_HEIGHT = 450;
+const DEF_SCR_WIDTH = 600;
+const DEF_SCR_HEIGHT = 450;
 const defaultParamsForNewOverlay = 'full_screen = true\nnormalized = true\nrange_mod = 1.5\nalpha_mod = 2.0';
 
 let currentRect;
