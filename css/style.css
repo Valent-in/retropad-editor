@@ -322,6 +322,7 @@ input[type='number'] {
 }
 
 #footer {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	border-radius: 4px;
@@ -332,6 +333,15 @@ input[type='number'] {
 #footer a {
 	font-size: 0.9em;
 	padding: 1vw;
+}
+
+#version {
+	position: absolute;
+	top: 0;
+	right: 0;
+	font-size: 0.9em;
+	padding: 1vw;
+	color: #bbb;
 }
 
 #aspect-hint {
