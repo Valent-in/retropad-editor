@@ -132,15 +132,11 @@
 
 	window.defaultConfigString = `overlays = 2
 		overlay0_full_screen = true
+		overlay0_aspect_ratio = 1.7777778
 		overlay0_normalized = true
 		overlay0_name = "landscape"
 		overlay0_range_mod = 1.5
 		overlay0_alpha_mod = 2.0
-		overlay1_full_screen = true
-		overlay1_normalized = true
-		overlay1_name = "portrait"
-		overlay1_range_mod = 1.5
-		overlay1_alpha_mod = 2.0
 		overlay0_descs = 20
 		overlay0_desc0 = "left,0.07188,0.77778,radial,0.04479,0.06852"
 		overlay0_desc0_overlay = dpad-left.png
@@ -162,9 +158,9 @@
 		overlay0_desc10_overlay = X.png
 		overlay0_desc11 = "y,0.81250,0.77778,radial,0.04167,0.07407"
 		overlay0_desc11_overlay = Y.png
-		overlay0_desc12 = "start,0.6,0.91852,rect,0.03958,0.04444"
+		overlay0_desc12 = "start,0.60000,0.91852,rect,0.03958,0.04444"
 		overlay0_desc12_overlay = start_psx.png
-		overlay0_desc13 = "select,0.4,0.91852,rect,0.040625,0.04259"
+		overlay0_desc13 = "select,0.40000,0.91852,rect,0.04063,0.04259"
 		overlay0_desc13_overlay = select_psx.png
 		overlay0_desc14 = "l,0.02917,0.50000,rect,0.05208,0.09259"
 		overlay0_desc14_overlay = L1.png
@@ -174,11 +170,17 @@
 		overlay0_desc16_overlay = R1.png
 		overlay0_desc17 = "r2,0.97083,0.30000,rect,0.05208,0.09259"
 		overlay0_desc17_overlay = R2.png
-		overlay0_desc18 = "menu_toggle,0.078,0.08889,radial,0.02604,0.046296"
+		overlay0_desc18 = "menu_toggle,0.07800,0.08889,radial,0.02604,0.04629"
 		overlay0_desc18_overlay = rgui.png
-		overlay0_desc19 = "overlay_next,0.922,0.08889,radial,0.02604,0.046296"
+		overlay0_desc19 = "overlay_next,0.92200,0.08889,radial,0.02604,0.04629"
 		overlay0_desc19_overlay = rotate.png
 		overlay0_desc19_next_target = "portrait"
+		overlay1_full_screen = true
+		overlay1_aspect_ratio = 0.5625
+		overlay1_normalized = true
+		overlay1_name = "portrait"
+		overlay1_range_mod = 1.5
+		overlay1_alpha_mod = 2.0
 		overlay1_descs = 20
 		overlay1_desc0 = "left,0.12037,0.85417,radial,0.07963,0.03854"
 		overlay1_desc0_overlay = dpad-left.png
@@ -200,9 +202,9 @@
 		overlay1_desc10_overlay = X.png
 		overlay1_desc11 = "y,0.66667,0.85417,radial,0.07407,0.04167"
 		overlay1_desc11_overlay = Y.png
-		overlay1_desc12 = "start,0.65,0.65,rect,0.07037,0.02500"
+		overlay1_desc12 = "start,0.65000,0.65000,rect,0.07037,0.02500"
 		overlay1_desc12_overlay = start_psx.png
-		overlay1_desc13 = "select,0.35,0.65,rect,0.07222,0.02396"
+		overlay1_desc13 = "select,0.35000,0.65000,rect,0.07222,0.02396"
 		overlay1_desc13_overlay = select_psx.png
 		overlay1_desc14 = "l,0.04815,0.68021,rect,0.09259,0.05208"
 		overlay1_desc14_overlay = L1.png
@@ -212,9 +214,9 @@
 		overlay1_desc16_overlay = R1.png
 		overlay1_desc17 = "r2,0.95185,0.56771,rect,0.09259,0.05208"
 		overlay1_desc17_overlay = R2.png
-		overlay1_desc18 = "menu_toggle,0.35,0.55,radial,0.04633,0.02604"
+		overlay1_desc18 = "menu_toggle,0.35000,0.55000,radial,0.04633,0.02604"
 		overlay1_desc18_overlay = rgui.png
-		overlay1_desc19 = "overlay_next,0.65,0.55,radial,0.04633,0.02604"
+		overlay1_desc19 = "overlay_next,0.65000,0.55000,radial,0.04633,0.02604"
 		overlay1_desc19_overlay = rotate.png
 		overlay1_desc19_next_target = "landscape"`.replace(/(\n)\s+/g, "$1");
 }
