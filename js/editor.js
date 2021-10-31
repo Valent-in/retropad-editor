@@ -3,8 +3,12 @@ const DEF_WIDTH = 800;
 const DEF_HEIGHT = 450;
 const DEF_SCR_WIDTH = 600;
 const DEF_SCR_HEIGHT = 450;
-const defaultParamsForNewOverlay = 'full_screen = true\nnormalized = true\nrange_mod = 1.5\nalpha_mod = 2.0';
 
+const defaultParamsForNewOverlay = 'full_screen = true\nnormalized = true\nrange_mod = 1.5\nalpha_mod = 2.0';
+const buttonCommandList = 'up,down,left,right,a,b,x,y,l,l1,l3,l2,r,r1,r2,r3,select,start,overlay_next,menu_toggle,analog_left,analog_right';
+fillCommandSelector(buttonCommandList);
+
+let importedFilename = 'retropad.cfg';
 let currentRect;
 
 let screen = {
@@ -38,15 +42,11 @@ let images = {};
 if (defaultImagesObj) // defaults.js
 	images = defaultImagesObj;
 
-let conf = new ConfigHandler();
-
 fillImageSelector();
-fillCommandSelector();
 
+let conf = new ConfigHandler();
 let configStr = defaultConfigString; // defaults.js
 renderConfig(configStr);
-
-let importedFilename = 'retropad.cfg';
 
 'xywh'.split('').forEach(elem => {
 	let range = document.getElementById(elem + '-range');
@@ -439,8 +439,8 @@ function setImageSelectorOption(value) {
 }
 
 
-function fillCommandSelector() {
-	let commands = 'up,down,left,right,a,b,x,y,l,l1,l3,l2,r,r1,r2,r3,select,start,overlay_next,menu_toggle,analog_left,analog_right'.split(',');
+function fillCommandSelector(commands) {
+	commands = commands.split(',');
 	commands.unshift('');
 	let s = document.getElementById('command-select');
 
