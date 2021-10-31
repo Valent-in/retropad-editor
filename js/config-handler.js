@@ -87,9 +87,10 @@ function ConfigHandler() {
 		if (this.isOverlayNameExist(name))
 			return;
 
+		if (name.trim() == '')
+			return;
+
 		let count = Number(_getParamValue('overlays'));
-		if (!name)
-			name = 'overlay' + (count + 1);
 
 		_strings.push('overlay' + count + '_name = "' + name + '"');
 
@@ -141,6 +142,9 @@ function ConfigHandler() {
 	// copy only overlayXX_desc*
 	this.duplicateCurrentOverlay = function (name, params) {
 		if (this.isOverlayNameExist(name))
+			return;
+
+		if (name.trim() == '')
 			return;
 
 		let overlayXX = 'overlay' + _currentOverlay;

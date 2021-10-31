@@ -713,6 +713,11 @@ function addOverlay() {
 		return;
 	}
 
+	if (name.trim() == '') {
+		alert('Enter overlay name.');
+		return;
+	}
+
 	if (document.getElementById('duplicate-overlay').checked)
 		conf.duplicateCurrentOverlay(name, props.trim().split('\n'));
 	else
@@ -772,7 +777,13 @@ function hideButtonEditor() {
 
 function showOverlayEditor() {
 	document.getElementById('duplicate-overlay').checked = false;
-	document.getElementById('overlay-name').value = '';
+
+	let index = conf.getOverlayList().length + 1;
+	while (conf.isOverlayNameExist('overlay' + index)) {
+		index++;
+	}
+
+	document.getElementById('overlay-name').value = 'overlay' + index;
 	document.getElementById('raw-overlay-properties').value = defaultParamsForNewOverlay;
 
 	showDialog('overlay-create-dialog', true);
