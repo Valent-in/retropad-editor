@@ -797,17 +797,22 @@ function hideOverlayEditor() {
 
 function showAspectFixer() {
 	let aspect = conf.getOverlayAspectRatio();
-
 	if (aspect) {
-		document.getElementById('initial-aspect-width').value = Math.max(aspect.w, aspect.h);
-		document.getElementById('initial-aspect-height').value = Math.min(aspect.w, aspect.h);
+		document.getElementById('initial-aspect-width').value = aspect.w;
+		document.getElementById('initial-aspect-height').value = aspect.h;
 	} else {
-		document.getElementById('initial-aspect-width').value = 16;
-		document.getElementById('initial-aspect-height').value = 9;
+		document.getElementById('initial-aspect-width').value = screen.isPortrait ? 9 : 16;
+		document.getElementById('initial-aspect-height').value = screen.isPortrait ? 16 : 9;
 	}
 
-	document.getElementById('target-display-width').value = screen.longSide;
-	document.getElementById('target-display-height').value = screen.shortSide;
+	let hint = document.getElementById('aspect-hint');
+	if (screen.isPortrait)
+		hint.classList.remove('hidden');
+	else
+		hint.classList.add('hidden');
+
+	document.getElementById('target-display-width').value = screen.width;
+	document.getElementById('target-display-height').value = screen.height;
 	showDialog('aspect-fixer-dialog', true);
 }
 

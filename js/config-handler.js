@@ -275,6 +275,8 @@ function ConfigHandler() {
 		let axis = portrait ? 'y' : 'x';
 
 		let coef = initial / target;
+		if (portrait)
+			coef = 1 / coef;
 
 		for (let i = 0; i < _strings.length; i++) {
 			let parameter = _isOverlayXX_descYY(_strings[i]);
@@ -286,7 +288,7 @@ function ConfigHandler() {
 			}
 		}
 
-		this.setOverlayAspectRatio(portrait ? 1 / target : target);
+		this.setOverlayAspectRatio(target);
 
 
 		function __scaleSnapped(index, coef, ax) {
@@ -417,8 +419,6 @@ function ConfigHandler() {
 
 		if (ratio)
 			return calculateAspect(ratio);
-		else
-			return;
 	}
 
 

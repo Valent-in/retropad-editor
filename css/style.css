@@ -334,6 +334,10 @@ input[type='number'] {
 	padding: 1vw;
 }
 
+#aspect-hint {
+	color: #bbb;
+}
+
 .small-warning {
 	font-size: 0.7em;
 	color: #f75;
