@@ -400,7 +400,12 @@ function ConfigHandler() {
 				arr.push(`${overlayXX_descYY}_overlay = "${image}"`);
 
 		if (Array.isArray(addLines))
-			addLines.forEach(line => arr.push(`${overlayXX_descYY}_${line}`));
+			addLines.forEach(line => {
+				if (command.search('analog_') == 0 || line.search(/^movable/) == -1)
+					arr.push(`${overlayXX_descYY}_${line}`)
+				else
+					alert('Only analog sticks can be "movable".\nProperty removed.');
+			});
 
 		_strings.splice(_currentLine + 1, 0, ...arr);
 	}
