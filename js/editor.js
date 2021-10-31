@@ -328,7 +328,7 @@ function applyScreenDimensions() {
 
 
 function createDownloadLink() {
-	let file = new Blob([conf.getConfigString()], { type: 'text/plain' });
+	let file = new Blob([conf.getConfigString()], { type: 'text/cfg' });
 	let a = document.getElementById('export-link');
 	a.href = URL.createObjectURL(file);
 	a.download = 'new-' + importedFilename;
