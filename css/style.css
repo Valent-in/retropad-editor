@@ -17,10 +17,10 @@ button.button--normal-size {
 button.close-button {
 	min-width: 0;
 	position: absolute;
-	top: 0;
-	right: 0;
-	margin: 2vh;
+	top: 3px;
+	right: 3px;
 	font-size: 0.8em;
+	padding: 1px 4px 1px 4px;
 }
 
 button a {
@@ -242,7 +242,8 @@ input[type='number'] {
 	background-color: white;
 	border: 2px solid #06b;
 	border-radius: 4px;
-	max-height: 100vh;
+	max-height: 100%;
+	min-width: 250px;
 	overflow-y: auto;
 	box-sizing: border-box;
 }
@@ -261,6 +262,10 @@ input[type='number'] {
 
 .dialog-content-box__section {
 	padding-bottom: 3vh;
+}
+
+.modal-dialog__content-box button, .modal-dialog__content-box input[type=number] {
+	min-width: 90px;
 }
 
 .modal-dialog table {
@@ -337,10 +342,9 @@ input[type='number'] {
 
 #version {
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 1vw;
+	right: 1vw;
 	font-size: 0.9em;
-	padding: 1vw;
 	color: #bbb;
 }
 
