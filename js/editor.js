@@ -127,7 +127,7 @@ function loadConfigFromFile(e) {
 
 function renderConfig(str) {
 	conf.convertCfgToArray(str);
-	buildOverlaySelectors();
+	buildAndSetOverlaySelectors();
 
 	screen.isPortrait = -1 != conf.getOverlayList()[0].search('portrait');
 	document.getElementById('chk-show-portrait').checked = screen.isPortrait;
@@ -354,7 +354,7 @@ function updateCurrentLine(section, value) {
 }
 
 
-function buildOverlaySelectors() {
+function buildAndSetOverlaySelectors(selectLast) {
 	conf.setCurrentOverlay(0);
 	let list = conf.getOverlayList();
 
@@ -368,15 +368,14 @@ function buildOverlaySelectors() {
 		select.appendChild(o);
 	}
 
-	select.addEventListener('change', (e) => {
-		conf.setCurrentOverlay(e.target.selectedIndex);
-		conf.setCurrentLine(-1);
-		screen.isPortrait = e.target.value.search('portrait') != -1
-		document.getElementById('chk-show-portrait').checked = screen.isPortrait;
-
-		setScreenDimensions();
-		redrawPad();
-	});
+	if (selectLast) {
+		select.selectedIndex = list.length - 1;
+		conf.setCurrentOverlay(list.length - 1);
+		screen.isPortrait = list[list.length - 1].search('portrait') != -1;
+	} else {
+		screen.isPortrait = list[0].search('portrait') != -1;
+	}
+	document.getElementById('chk-show-portrait').checked = screen.isPortrait;
 
 	let selectNext = document.getElementById('next_target_property');
 	selectNext.innerHTML = '';
@@ -726,7 +725,8 @@ function addOverlay() {
 	conf.getCurrentOverlayParams();
 
 	hideOverlayEditor();
-	buildOverlaySelectors();
+	buildAndSetOverlaySelectors(true);
+	setScreenDimensions();
 	redrawPad();
 }
 
@@ -746,7 +746,8 @@ function delCurrentOverlay() {
 		return;
 
 	conf.deleteCurrentOverlay();
-	buildOverlaySelectors();
+	buildAndSetOverlaySelectors();
+	setScreenDimensions();
 	redrawPad();
 }
 
@@ -948,4 +949,15 @@ function updateRawOverlayParamsBox(event) {
 		box.value = conf.getCurrentOverlayParams().join('\n');
 	else
 		box.value = defaultParamsForNewOverlay;
+}
+
+
+function selectOverlay(event) {
+	conf.setCurrentOverlay(event.target.selectedIndex);
+	conf.setCurrentLine(-1);
+	screen.isPortrait = event.target.value.search('portrait') != -1
+	document.getElementById('chk-show-portrait').checked = screen.isPortrait;
+
+	setScreenDimensions();
+	redrawPad();
 }
