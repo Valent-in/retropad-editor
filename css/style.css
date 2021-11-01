@@ -28,12 +28,8 @@ button a {
 	width: 100%;
 }
 
-br.narrow+* {
-	margin-top: 1vh;
-}
-
 br.wide+* {
-	margin-top: 2vh;
+	margin-top: 1vh;
 }
 
 input[type='number'] {
