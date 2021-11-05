@@ -131,12 +131,12 @@
 	imageNames.forEach((el) => { defaultImagesObj[el] = "img/" + el });
 
 	window.defaultConfigString = `overlays = 2
-		overlay0_full_screen = true
-		overlay0_aspect_ratio = 1.7777778
-		overlay0_normalized = true
 		overlay0_name = "landscape"
+		overlay0_full_screen = true
+		overlay0_normalized = true
 		overlay0_range_mod = 1.5
 		overlay0_alpha_mod = 2.0
+		overlay0_aspect_ratio = 1.7777778
 		overlay0_descs = 20
 		overlay0_desc0 = "left,0.07188,0.77778,radial,0.04479,0.06852"
 		overlay0_desc0_overlay = dpad-left.png
@@ -175,12 +175,12 @@
 		overlay0_desc19 = "overlay_next,0.92200,0.08889,radial,0.02604,0.04629"
 		overlay0_desc19_overlay = rotate.png
 		overlay0_desc19_next_target = "portrait"
-		overlay1_full_screen = true
-		overlay1_aspect_ratio = 0.5625
-		overlay1_normalized = true
 		overlay1_name = "portrait"
+		overlay1_full_screen = true
+		overlay1_normalized = true
 		overlay1_range_mod = 1.5
 		overlay1_alpha_mod = 2.0
+		overlay1_aspect_ratio = 0.5625
 		overlay1_descs = 20
 		overlay1_desc0 = "left,0.12037,0.85417,radial,0.07963,0.03854"
 		overlay1_desc0_overlay = dpad-left.png

@@ -606,6 +606,18 @@ function showImagePreview(imgName) {
 }
 
 
+function generateOverlayName(isPortrait) {
+	let prefix = isPortrait ? 'portrait' : 'landscape';
+	let index = conf.getOverlayList().length + 1;
+
+	while (conf.isOverlayNameExist(prefix + '-' + index)) {
+		index++;
+	}
+
+	document.getElementById('overlay-name').value = prefix + '-' + index;
+}
+
+
 // Inline event listeners
 
 function resetPad() {
@@ -717,7 +729,7 @@ function addOverlay() {
 		return;
 	}
 
-	if (document.getElementById('duplicate-overlay').checked)
+	if (document.getElementById('chk-duplicate-overlay').checked)
 		conf.duplicateCurrentOverlay(name, props.trim().split('\n'));
 	else
 		conf.createOverlay(name, props.trim().split('\n'));
@@ -777,16 +789,9 @@ function hideButtonEditor() {
 
 
 function showOverlayEditor() {
-	document.getElementById('duplicate-overlay').checked = false;
-
-	let index = conf.getOverlayList().length + 1;
-	while (conf.isOverlayNameExist('overlay' + index)) {
-		index++;
-	}
-
-	document.getElementById('overlay-name').value = 'overlay' + index;
-	document.getElementById('raw-overlay-properties').value = defaultParamsForNewOverlay;
-
+	document.getElementById('chk-duplicate-overlay').checked = false;
+	document.getElementById('chk-portrait-overlay').checked = false;
+	updateNewOverlayFields();
 	showDialog('overlay-create-dialog', true);
 }
 
@@ -942,13 +947,25 @@ function toggleScreenshotSettings(event) {
 }
 
 
-function updateRawOverlayParamsBox(event) {
+function updateNewOverlayFields() {
 	let box = document.getElementById('raw-overlay-properties');
+	let isDuplicate = document.getElementById('chk-duplicate-overlay').checked;
+	let portraitChk = document.getElementById('chk-portrait-overlay');
+	let isPortrait = portraitChk.checked;
+	let aspect = screen.width / screen.height;
 
-	if (event.target.checked)
+	if (isDuplicate) {
 		box.value = conf.getCurrentOverlayParams().join('\n');
-	else
-		box.value = defaultParamsForNewOverlay;
+		isPortrait = document.getElementById('overlay-selector').value.search('portrait') != -1;
+		portraitChk.checked = isPortrait;
+		portraitChk.disabled = true;
+	} else {
+		portraitChk.disabled = false;
+		let ratio = 'aspect_ratio = ' + +(isPortrait ? 1 / aspect : aspect).toFixed(7);
+		box.value = defaultParamsForNewOverlay + '\n' + ratio;
+	}
+
+	generateOverlayName(isPortrait);
 }
 
 

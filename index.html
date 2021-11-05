@@ -269,21 +269,20 @@
 				</div>
 				<div class='modal-dialog__content-box'>
 					<div class='dialog-content-box__section'>
-						<span class='group-header'>Overlay name</span>
-						<br class='wide'>
+						<label>Overlay name</label>
 						<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
-					</div>
-					<div class='dialog-content-box__section'>
-						<input type='checkbox' id='duplicate-overlay' onchange='updateRawOverlayParamsBox(event)'>
-						<label for='duplicate-overlay'>Duplicate current overlay</label>
+						<br class='wide'>
+						<input type='checkbox' id='chk-duplicate-overlay' onchange='updateNewOverlayFields()'>
+						<label for='chk-duplicate-overlay'>Duplicate current overlay</label>
+						<br class='wide'>
+						<input type='checkbox' id='chk-portrait-overlay' onchange='updateNewOverlayFields()'>
+						<label for='chk-portrait-overlay'>Portrait</label>
 					</div>
 					<div class='dialog-content-box__section'>
 						<button class='empty expander button--normal-size'
 							onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
 					</div>
 					<div id='overlay-properties-container' class='dialog-content-box__section hidden'>
-						<span class='group-header'>Raw data</span>
-						<br>
 						<span class='small-warning'>WARNING! Edit carefully!</span>
 						<br>
 						<textarea id='raw-overlay-properties'></textarea>
