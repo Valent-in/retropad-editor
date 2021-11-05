@@ -671,7 +671,7 @@ function fixAspect() {
 	let ow = document.getElementById('target-display-width').value;
 	let oh = document.getElementById('target-display-height').value;
 
-	let mode = document.getElementById('keep-relative').checked;
+	let mode = document.getElementById('chk-keep-relative').checked;
 
 	conf.fixAspect(iw, ih, ow, oh, screen.isPortrait, mode);
 
