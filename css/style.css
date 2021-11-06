@@ -1,5 +1,5 @@
 body {
-	background-color: lightgray;
+	background-color: #d5d5d5;
 }
 
 table {
@@ -19,12 +19,18 @@ button.button--normal-size {
 }
 
 button.close-button {
+	box-sizing: content-box;
 	min-width: 0;
 	position: absolute;
-	top: 3px;
-	right: 3px;
-	font-size: 0.8em;
-	padding: 1px 4px 1px 4px;
+	top: 4px;
+	right: 4px;
+	height: 1em;
+	width: 1em;
+	padding: 1px;
+	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='100' width='100'><path d='M 30,30 70,70 M 70,30 30,70' style='fill:none;stroke:rgb(255,255,255);stroke-width:8;stroke-linecap:round; stroke-linejoin:round'/></svg>");
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 
 button a {
@@ -36,7 +42,7 @@ br.wide+* {
 	margin-top: 1vh;
 }
 
-input[type='number'] {
+input[type=number] {
 	width: 15vw;
 }
 
@@ -50,6 +56,7 @@ input[type='number'] {
 	margin: 0.5vw;
 	padding: 1vw 1.5vw 1vw 1.5vw;
 	overflow: hidden;
+	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
 #header__caption {
@@ -81,6 +88,7 @@ input[type='number'] {
 	background-color: white;
 	border-radius: 4px;
 	margin: 0.5vw;
+	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
 .toolbar-group {
@@ -90,6 +98,7 @@ input[type='number'] {
 	border: 1px solid #ccd;
 	background-color: #f7f7f7;
 	border-radius: 3px;
+	box-shadow: inset -0.3vw -0.3vw 0.3vw #eef;
 }
 
 .toolbar-group__section {
@@ -126,6 +135,7 @@ input[type='number'] {
 	margin: 0.5vw;
 	text-align: center;
 	overflow-x: auto;
+	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
 #gamepad-container__scroll-frame {
@@ -148,7 +158,7 @@ input[type='number'] {
 
 .show-offscreen {
 	overflow: visible;
-	margin: 5vw;
+	margin: 100px;
 }
 
 .rect {
@@ -197,6 +207,7 @@ input[type='number'] {
 	margin: 0.5vw;
 	white-space: nowrap;
 	overflow: hidden;
+	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
 #editor * {
@@ -220,11 +231,11 @@ input[type='number'] {
 	margin: 0;
 }
 
-#editor input[type='range'] {
+#editor input[type=range] {
 	width: 70%;
 }
 
-#editor input[type='number'] {
+#editor input[type=number] {
 	width: 16%;
 	margin-left: 1%;
 	margin-right: 1%;
@@ -257,6 +268,7 @@ input[type='number'] {
 	min-width: 250px;
 	overflow-y: auto;
 	box-sizing: border-box;
+	box-shadow: 0.5vw 0.5vw 0.5vw #444;
 }
 
 .modal-dialog__header-box {
@@ -265,13 +277,15 @@ input[type='number'] {
 	background-color: #f7f7f7;
 	color: #06b;
 	font-weight: bold;
+	box-shadow: inset -0.3vw -0.3vw 0.3vw #eef;
+	border-bottom: 1px solid #ccd;
 }
 
 .modal-dialog__content-box {
-	padding: 2vh 3vw 3vh 3vw;
+	padding: 2vh 3vw 2vh 3vw;
 }
 
-.dialog-content-box__section {
+.dialog-content-box__section:not(:last-child) {
 	padding-bottom: 3vh;
 }
 
@@ -279,13 +293,27 @@ input[type='number'] {
 	padding-top: 1vh;
 }
 
-.modal-dialog__content-box button, .modal-dialog__content-box input[type=number] {
+.modal-dialog__content-box input[type=number] {
 	min-width: 90px;
+}
+
+.modal-dialog__footer-box {
+	padding: 1vh 3vw 1vh 3vw;
+	background-color: #f7f7f7;
+	overflow: hidden;
+	box-shadow: inset 0 0.3vw 0.3vw #ddd;
+}
+
+.modal-dialog__footer-box button {
+	float: right;
+	min-width: 30%;
+	padding-left: 6px;
+	padding-right: 6px;
+	margin: 2px 2px 2px 6px;
 }
 
 .modal-dialog table {
 	margin: -1vw;
-	padding-bottom: 3vh;
 }
 
 #button-properties-table td {
@@ -338,7 +366,7 @@ input[type='number'] {
 }
 
 #image-name:focus {
-	box-shadow: 0 0 0 2px #bce;
+	box-shadow: inset 0 0 0 1px #f7f7fa, 0 0 0 2px rgba(180, 200, 220, 0.3);
 }
 
 #footer {
@@ -348,6 +376,7 @@ input[type='number'] {
 	border-radius: 4px;
 	background-color: white;
 	margin: 0.5vw;
+	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
 #footer a {

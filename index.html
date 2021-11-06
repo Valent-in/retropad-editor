@@ -3,7 +3,7 @@
 
 <head>
 	<title>RetroPad Editor</title>
-	<link rel="shortcut icon" type="image/svg" href="img/retroarch-icon.svg">
+	<link rel='shortcut icon' type='image/svg' href='img/retroarch-icon.svg'>
 	<meta charset='UTF-8'>
 	<meta name='viewport' content='width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1'>
 	<meta name='description' content='Edit onscreen gamepads for RetroArch'>
@@ -133,7 +133,7 @@
 			<div class='modal-dialog'>
 				<div class='modal-dialog__header-box'>
 					<span>Button properties</span>
-					<button class='close-button danger' onclick='hideButtonEditor()'>×</button>
+					<button class='close-button danger' onclick='hideButtonEditor()'></button>
 				</div>
 				<div class='modal-dialog__content-box'>
 					<table id='button-properties-table'>
@@ -248,14 +248,13 @@
 							</td>
 						</tr>
 					</table>
-
-					<div>
-						<button class='important' id='button-create-button' onclick='addButton()'>Create
-							button</button>
-						<button class='important' id='button-edit-button' onclick='editButton()'>Edit
-							button</button>
-						<button onclick='hideButtonEditor()'>Cancel</button>
-					</div>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='important' id='button-create-button' onclick='addButton()'>Create
+						button</button>
+					<button class='important' id='button-edit-button' onclick='editButton()'>Edit
+						button</button>
+					<button onclick='hideButtonEditor()'>Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -265,7 +264,7 @@
 			<div class='modal-dialog'>
 				<div class='modal-dialog__header-box'>
 					<span>New overlay</span>
-					<button class='close-button danger' onclick='hideOverlayEditor()'>×</button>
+					<button class='close-button danger' onclick='hideOverlayEditor()'></button>
 				</div>
 				<div class='modal-dialog__content-box'>
 					<div class='dialog-content-box__section'>
@@ -287,10 +286,10 @@
 							<textarea id='raw-overlay-properties'></textarea>
 						</div>
 					</div>
-					<div>
-						<button class='important' onclick='addOverlay()'>Create overlay</button>
-						<button onclick='hideOverlayEditor()'>Cancel</button>
-					</div>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='important' onclick='addOverlay()'>Create overlay</button>
+					<button onclick='hideOverlayEditor()'>Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -301,7 +300,7 @@
 				<div class='modal-dialog__header-box'>
 					<span>Fix aspect ratio</span>
 					<span id='aspect-hint' class='hidden'>portrait</span>
-					<button class='close-button danger' onclick='hideAspectFixer()'>×</button>
+					<button class='close-button danger' onclick='hideAspectFixer()'></button>
 				</div>
 				<div class='modal-dialog__content-box'>
 					<div class='dialog-content-box__section'>
@@ -324,11 +323,10 @@
 						<input type='checkbox' id='chk-keep-relative' autocomplete='off'>
 						<label for='chk-keep-relative'>Keep relative positions</label>
 					</div>
-
-					<div>
-						<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
-						<button onclick='hideAspectFixer()'>Close</button>
-					</div>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
+					<button onclick='hideAspectFixer()'>Close</button>
 				</div>
 			</div>
 		</div>
@@ -338,7 +336,7 @@
 			<div class='modal-dialog'>
 				<div class='modal-dialog__header-box'>
 					<span>Set screen size</span>
-					<button class='close-button danger' onclick='hideScreenSizeDialog()'>×</button>
+					<button class='close-button danger' onclick='hideScreenSizeDialog()'></button>
 				</div>
 				<div class='modal-dialog__content-box'>
 					<div class='dialog-content-box__section'>
@@ -368,10 +366,10 @@
 							<label for='radio-screenshot-set'>Set size</label>
 						</div>
 					</div>
-					<div>
-						<button class='important' onclick='applyScreenDimensions()'>Set size</button>
-						<button onclick='hideScreenSizeDialog()'>Close</button>
-					</div>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='important' onclick='applyScreenDimensions()'>Set size</button>
+					<button onclick='hideScreenSizeDialog()'>Close</button>
 				</div>
 			</div>
 		</div>
@@ -381,7 +379,7 @@
 			<div class='modal-dialog'>
 				<div class='modal-dialog__header-box'>
 					<span>Files</span>
-					<button class='close-button danger' onclick='hideFileDialog()'>×</button>
+					<button class='close-button danger' onclick='hideFileDialog()'></button>
 				</div>
 				<div class='modal-dialog__content-box'>
 					<table>
@@ -445,11 +443,9 @@
 							</td>
 						</tr>
 					</table>
-
-					<div>
-						<button onclick='hideFileDialog()'>Close</button>
-					</div>
-
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button onclick='hideFileDialog()'>Close</button>
 				</div>
 			</div>
 		</div>
