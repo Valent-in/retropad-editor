@@ -4,7 +4,6 @@ button {
 	border-radius: 3px;
 	color: white;
 	padding: 2px 4px 2px 4px;
-	margin: 1px;
 	display: inline-block;
 	cursor: pointer;
 }
@@ -113,7 +112,9 @@ input[type=checkbox] {
 	box-shadow: none;
 	width: 1em;
 	height: 1em;
-	margin-bottom: -2px;
+	vertical-align: text-bottom;
+	margin-bottom: 1px;
+	margin-top: -1px;
 	box-sizing: content-box;
 	cursor: pointer;
 }
@@ -135,7 +136,9 @@ input[type=radio] {
 	box-shadow: none;
 	width: 1em;
 	height: 1em;
-	margin-bottom: -2px;
+	vertical-align: text-bottom;
+	margin-bottom: 1px;
+	margin-top: -1px;
 	box-sizing: content-box;
 	cursor: pointer;
 }

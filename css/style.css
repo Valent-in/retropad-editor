@@ -10,6 +10,10 @@ button {
 	min-width: 13vw;
 }
 
+#header button, #toolbar button {
+	margin: 1px;
+}
+
 button.button--normal-size {
 	min-width: initial;
 }
@@ -77,26 +81,27 @@ input[type='number'] {
 	background-color: white;
 	border-radius: 4px;
 	margin: 0.5vw;
-	padding-top: 0.5vw;
-	padding-bottom: 0.5vw;
 }
 
 .toolbar-group {
 	display: inline-block;
 	margin: 0.5vw;
 	padding: 0.5vh 1vw 0.5vw 1vw;
-	border-bottom: 1px solid #ccd;
+	border: 1px solid #ccd;
+	background-color: #f7f7f7;
+	border-radius: 3px;
 }
 
 .toolbar-group__section {
 	display: inline-block;
 	min-width: 10vw;
-	margin: 0.5vw 0.5vw 4px 0.5vw;
+	margin: 4px 1vw 4px 1px;
 }
 
 .toolbar-group select {
 	min-width: 13vw;
 	max-width: 10em;
+	margin: 1px;
 	text-overflow: ellipsis;
 }
 
@@ -104,6 +109,10 @@ input[type='number'] {
 	display: inline-block;
 	min-width: 9vw;
 	color: #06b;
+}
+
+.toolbar-group .group-header {
+	padding: 8px 0 8px 0;
 }
 
 #editor-container {
