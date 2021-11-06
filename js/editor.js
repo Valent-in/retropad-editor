@@ -75,7 +75,8 @@ function createPadView() {
 		let r = rects[i];
 		let b = createRect(r.command, r.x, r.y, r.w, r.h);
 
-		b.style['background-image'] = 'url(' + images[r.img] + ')';
+		if (r.img)
+			b.style['background-image'] = 'url(' + images[r.img] + ')';
 
 		if (r.s == 'radial')
 			b.classList.add('radial');
