@@ -281,11 +281,11 @@
 					<div class='dialog-content-box__section'>
 						<button class='empty expander button--normal-size'
 							onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
-					</div>
-					<div id='overlay-properties-container' class='dialog-content-box__section hidden'>
-						<span class='small-warning'>WARNING! Edit carefully!</span>
-						<br>
-						<textarea id='raw-overlay-properties'></textarea>
+						<div id='overlay-properties-container' class='dialog-content-box__expandable hidden'>
+							<span class='small-warning'>WARNING! Edit carefully!</span>
+							<br>
+							<textarea id='raw-overlay-properties'></textarea>
+						</div>
 					</div>
 					<div>
 						<button class='important' onclick='addOverlay()'>Create overlay</button>
@@ -353,22 +353,21 @@
 						<button class='empty expander button--normal-size'
 							onclick='toggleScreenshotSettings(event)'>Screenshot
 							area</button>
+						<div id='screenshot-area-settings' class='dialog-content-box__expandable hidden'>
+							<input type='number' id='screenshot-width'>
+							<span>x</span>
+							<input type='number' id='screenshot-height'>
+							<br class='wide'>
+							<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
+							<label for='radio-screenshot-fit'>Fit screen</label>
+							<br>
+							<input type='radio' id='radio-screenshot-match' name='screenshot-mode'>
+							<label for='radio-screenshot-match'>Exact screenshot size</label>
+							<br>
+							<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
+							<label for='radio-screenshot-set'>Set size</label>
+						</div>
 					</div>
-					<div id='screenshot-area-settings' class='dialog-content-box__section hidden'>
-						<input type='number' id='screenshot-width'>
-						<span>x</span>
-						<input type='number' id='screenshot-height'>
-						<br class='wide'>
-						<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
-						<label for='radio-screenshot-fit'>Fit screen</label>
-						<br>
-						<input type='radio' id='radio-screenshot-match' name='screenshot-mode'>
-						<label for='radio-screenshot-match'>Exact screenshot size</label>
-						<br>
-						<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
-						<label for='radio-screenshot-set'>Set size</label>
-					</div>
-
 					<div>
 						<button class='important' onclick='applyScreenDimensions()'>Set size</button>
 						<button onclick='hideScreenSizeDialog()'>Close</button>

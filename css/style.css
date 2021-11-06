@@ -100,6 +100,12 @@ input[type='number'] {
 	text-overflow: ellipsis;
 }
 
+.group-header {
+	display: inline-block;
+	min-width: 9vw;
+	color: #06b;
+}
+
 #editor-container {
 	flex-grow: 7;
 	overflow-x: hidden;
@@ -260,6 +266,10 @@ input[type='number'] {
 	padding-bottom: 3vh;
 }
 
+.dialog-content-box__expandable {
+	padding-top: 1vh;
+}
+
 .modal-dialog__content-box button, .modal-dialog__content-box input[type=number] {
 	min-width: 90px;
 }
@@ -355,10 +365,4 @@ input[type='number'] {
 
 .hidden {
 	display: none;
-}
-
-.group-header {
-	display: inline-block;
-	min-width: 9vw;
-	color: #06b;
 }
