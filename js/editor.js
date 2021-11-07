@@ -323,7 +323,14 @@ function applyScreenDimensions() {
 	screen.shotMode = fit ? 'fit' : match ? 'match' : setSize ? 'set' : 'fit';
 
 	hideScreenSizeDialog();
-	setScreenDimensions(w, h, sw, sh);
+
+	if (document.getElementById('chk-rescale-to-fit').checked) {
+		let size = calculateScreenSizeToFit(w, h);
+		setScreenDimensions(size.width, size.height, sw, sh);
+	} else {
+		setScreenDimensions(w, h, sw, sh);
+	}
+
 	redrawPad();
 }
 
@@ -616,6 +623,28 @@ function generateOverlayName(isPortrait) {
 	}
 
 	document.getElementById('overlay-name').value = prefix + '-' + index;
+}
+
+
+function calculateScreenSizeToFit(width, height) {
+	let vw = window.innerWidth;
+	let _width = Math.max(width, height);
+	let _height = Math.min(width, height);
+	let aspect = _width / _height;
+
+	let ret = {};
+
+	if (vw < 600) {
+		let scaler = 0.8;
+		ret.height = +(vw * scaler).toFixed(5);
+		ret.width = +(ret.height * aspect).toFixed(5);
+	} else {
+		let scaler = vw < 1100 ? 0.7 : 0.55;
+		ret.width = +(vw * scaler).toFixed(5);
+		ret.height = +(ret.width / aspect).toFixed(5);
+	}
+
+	return ret;
 }
 
 

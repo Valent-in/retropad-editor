@@ -343,9 +343,12 @@
 					<div class='dialog-content-box__section'>
 						<span class='group-header'>Screen dimensions</span>
 						<br class='wide'>
-						<input type='number' id='display-width' class='js-dialog__focus'>
+						<input type='number' id='display-width' step=0.00001 class='js-dialog__focus'>
 						<span>x</span>
-						<input type='number' id='display-height'>
+						<input type='number' id='display-height' step=0.00001>
+						<br class='wide'>
+						<input type='checkbox' id='chk-rescale-to-fit' autocomplete='off'>
+						<label for='chk-viewport-fit'>Rescale to fit editor window</label>
 					</div>
 
 					<div class='dialog-content-box__section'>
@@ -353,9 +356,9 @@
 							onclick='toggleScreenshotSettings(event)'>Screenshot
 							area</button>
 						<div id='screenshot-area-settings' class='dialog-content-box__expandable hidden'>
-							<input type='number' id='screenshot-width'>
+							<input type='number' id='screenshot-width' step=0.00001>
 							<span>x</span>
-							<input type='number' id='screenshot-height'>
+							<input type='number' id='screenshot-height' step=0.00001>
 							<br class='wide'>
 							<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
 							<label for='radio-screenshot-fit'>Fit screen</label>
