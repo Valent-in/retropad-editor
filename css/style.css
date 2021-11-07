@@ -88,17 +88,15 @@ input[type=number] {
 	background-color: white;
 	border-radius: 4px;
 	margin: 0.5vw;
+	padding-top: 0.5vw;
 	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
 .toolbar-group {
 	display: inline-block;
 	margin: 0.5vw;
-	padding: 0.5vh 1vw 0.5vw 1vw;
-	border: 1px solid #ccd;
-	background-color: #f7f7f7;
-	border-radius: 3px;
-	box-shadow: inset -0.3vw -0.3vw 0.3vw #eef;
+	padding: 0 1vw 0.5vw 1vw;
+	border-bottom: 1px solid #ccd;
 }
 
 .toolbar-group__section {
@@ -262,10 +260,10 @@ input[type=number] {
 
 .modal-dialog {
 	background-color: white;
-	border: 2px solid #06b;
 	border-radius: 4px;
 	max-height: 100%;
 	min-width: 250px;
+	overflow-x: hidden;
 	overflow-y: auto;
 	box-sizing: border-box;
 	box-shadow: 0.5vw 0.5vw 0.5vw #444;
@@ -274,11 +272,10 @@ input[type=number] {
 .modal-dialog__header-box {
 	position: relative;
 	padding: 2vh 3vw 2vh 3vw;
-	background-color: #f7f7f7;
+	background-color: #f7f7fa;
 	color: #06b;
 	font-weight: bold;
-	box-shadow: inset -0.3vw -0.3vw 0.3vw #eef;
-	border-bottom: 1px solid #ccd;
+	border-bottom: 2px solid #06b;
 }
 
 .modal-dialog__content-box {
@@ -299,9 +296,8 @@ input[type=number] {
 
 .modal-dialog__footer-box {
 	padding: 1vh 3vw 1vh 3vw;
-	background-color: #f7f7f7;
 	overflow: hidden;
-	box-shadow: inset 0 0.3vw 0.3vw #ddd;
+	border-top: 1px solid #ccd;
 }
 
 .modal-dialog__footer-box button {
@@ -346,6 +342,7 @@ input[type=number] {
 }
 
 #overlay-create-dialog textarea {
+	box-sizing: border-box;
 	width: 100%;
 	height: 9em;
 }
