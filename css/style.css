@@ -99,10 +99,16 @@ input[type=number] {
 	border-bottom: 1px solid #ccd;
 }
 
-.toolbar-group__section {
+.toolbar-group__checkboxes {
+	display: inline-block;
+	letter-spacing: 1vw;
+}
+
+.checkbox-wrapper {
 	display: inline-block;
 	min-width: 10vw;
-	margin: 4px 1vw 4px 1px;
+	margin: 4px 1px 4px 1px;
+	letter-spacing: initial;
 }
 
 .toolbar-group select {

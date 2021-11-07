@@ -35,29 +35,30 @@
 					<button onclick='showScreenSizeDialog()'>Set screen size</button>
 					<br>
 
-					<div class='toolbar-group__section'>
-						<input type='checkbox' id='chk-show-shapes' onchange='toggleShapes(event)' autocomplete='off'>
-						<label for='chk-show-shapes'>Show shapes</label>
-					</div>
+					<div class='toolbar-group__checkboxes'>
+						<div class='checkbox-wrapper'>
+							<input type='checkbox' id='chk-show-shapes' onchange='toggleShapes(event)'
+								autocomplete='off'>
+							<label for='chk-show-shapes'>Show shapes</label>
+						</div>
 
-					<div class='toolbar-group__section'>
-						<input type='checkbox' id='chk-show-names' onchange='toggleNames(event)' autocomplete='off'
-							checked>
-						<label for='chk-show-names'>Show names</label>
-					</div>
+						<div class='checkbox-wrapper'>
+							<input type='checkbox' id='chk-show-names' onchange='toggleNames(event)' autocomplete='off'
+								checked>
+							<label for='chk-show-names'>Show names</label>
+						</div>
 
-					<div class='toolbar-group__section'>
+						<div class='checkbox-wrapper'>
+							<input type='checkbox' id='chk-show-portrait' onchange='toggleOrientation(event)'
+								autocomplete='off'>
+							<label for='chk-show-portrait'>Portrait</label>
+						</div>
 
-						<input type='checkbox' id='chk-show-portrait' onchange='toggleOrientation(event)'
-							autocomplete='off'>
-						<label for='chk-show-portrait'>Portrait</label>
-					</div>
-
-					<div class='toolbar-group__section'>
-
-						<input type='checkbox' id='chk-show-offscreen' onchange='toggleOffscreen(event)'
-							autocomplete='off'>
-						<label for='chk-show-offscreen'>Show offscreen</label>
+						<div class='checkbox-wrapper'>
+							<input type='checkbox' id='chk-show-offscreen' onchange='toggleOffscreen(event)'
+								autocomplete='off'>
+							<label for='chk-show-offscreen'>Show offscreen</label>
+						</div>
 					</div>
 				</div>
 
