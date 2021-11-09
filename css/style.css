@@ -84,11 +84,12 @@ input[type=number] {
 
 #toolbar {
 	flex-grow: 1;
-	flex-basis: 10%;
+	flex-basis: 9%;
 	background-color: white;
 	border-radius: 4px;
 	margin: 0.5vw;
 	padding-top: 0.5vw;
+	padding-bottom: 1px;
 	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
@@ -111,6 +112,16 @@ input[type=number] {
 	letter-spacing: initial;
 }
 
+.toolbar-group__buttons {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 4px;
+}
+
+.toolbar-group__buttons button {
+	flex-grow: 1;
+}
+
 .toolbar-group select {
 	min-width: 13vw;
 	max-width: 10em;
@@ -131,15 +142,16 @@ input[type=number] {
 #editor-container {
 	flex-grow: 7;
 	overflow-x: hidden;
+	background-color: white;
+	border-radius: 4px;
+	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
+	margin: 0.5vw;
 }
 
 #gamepad-container {
-	background-color: white;
-	border-radius: 4px;
-	margin: 0.5vw;
 	text-align: center;
 	overflow-x: auto;
-	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
+	border-bottom: 2px solid #ccd;
 }
 
 #gamepad-container__scroll-frame {
@@ -208,10 +220,8 @@ input[type=number] {
 	background-color: white;
 	border-radius: 4px;
 	padding: 1vw;
-	margin: 0.5vw;
 	white-space: nowrap;
 	overflow: hidden;
-	box-shadow: 0.3vw 0.3vw 0.3vw #bbb;
 }
 
 #editor * {
