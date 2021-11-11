@@ -474,7 +474,7 @@ function setCommandSelectorOption(value) {
 
 function showAdditionalParametersForCommand(command) {
 	let parameters = {
-		analog_left: 'movable = true\npct = 0.75\nrange_mod = 4.0',
+		analog_left: 'movable = true',
 		get analog_right() { return this.analog_left },
 		get overlay_next() {
 			let list = conf.getOverlayList();
