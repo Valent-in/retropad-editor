@@ -17,14 +17,18 @@ let screen = {
 
 	isPortrait: false,
 
+	scale: 1,
+
 	get longSide() { return Math.max(this._height, this._width) },
 	get shortSide() { return Math.min(this._height, this._width) },
 
 	set width(value) { this._width = Number(value || screen._width || DEF_WIDTH) },
-	get width() { return this.isPortrait ? this.shortSide : this.longSide },
+	get enteredWidth() { return this.isPortrait ? this.shortSide : this.longSide },
+	get width() { return this.enteredWidth * this.scale },
 
 	set height(value) { this._height = Number(value || screen._height || DEF_HEIGHT) },
-	get height() { return this.isPortrait ? this.longSide : this.shortSide },
+	get enteredHeight() { return this.isPortrait ? this.longSide : this.shortSide },
+	get height() { return this.enteredHeight * this.scale },
 
 	shotFrameWidth: DEF_SCR_WIDTH,
 	shotFrameHeight: DEF_SCR_HEIGHT,
@@ -258,15 +262,18 @@ function resetScreen() {
 	d.classList.add('inner');
 	d.id = 'game-screenshot'
 
-	d.style.width = screen.shotFrameWidth + 'px';
-	d.style.height = screen.shotFrameHeight + 'px';
+	let shotWidth = screen.shotFrameWidth * screen.scale;
+	let shotHeight = screen.shotFrameHeight * screen.scale;
 
-	d.style.left = (screen.width - screen.shotFrameWidth) / 2 + 'px';
+	d.style.width = shotWidth + 'px';
+	d.style.height = shotHeight + 'px';
+
+	d.style.left = (screen.width - shotWidth) / 2 + 'px';
 
 	if (screen.isPortrait)
 		d.style.top = 0;
 	else
-		d.style.top = (screen.height - screen.shotFrameHeight) / 2 + 'px';
+		d.style.top = (screen.height - shotHeight) / 2 + 'px';
 
 	s.appendChild(d);
 }
@@ -275,6 +282,9 @@ function resetScreen() {
 function setScreenDimensions(width, height, screenshotWidth, screenshotHeight) {
 	screen.width = width;
 	screen.height = height;
+
+	let ewidth = screen.longSide;
+	let eheight = screen.shortSide;
 
 	let sw = Number(screenshotWidth || screen.shotFrameWidth || DEF_SCR_WIDTH);
 	let sh = Number(screenshotHeight || screen.shotFrameHeight || DEF_SCR_HEIGHT);
@@ -287,21 +297,21 @@ function setScreenDimensions(width, height, screenshotWidth, screenshotHeight) {
 				break;
 
 			case 'fit':
-				if (screen.width / screen.height > screen.shotWidth / screen.shotHeight) {
-					sw = screen.height * (screen.shotWidth / screen.shotHeight);
-					sh = screen.height;
+				if (ewidth / eheight > screen.shotWidth / screen.shotHeight) {
+					sw = eheight * (screen.shotWidth / screen.shotHeight);
+					sh = eheight;
 				} else {
-					sw = screen.width;
-					sh = screen.width / (screen.shotWidth / screen.shotHeight);
+					sw = ewidth;
+					sh = ewidth / (screen.shotWidth / screen.shotHeight);
 				}
 		}
-	} else if (screen.shotMode == 'match' || screen.shotMode == 'fit') {
-		if (screen.width / screen.height > sw / sh) {
-			sw = screen.height * (sw / sh);
-			sh = screen.height;
+	} else if (screen.shotMode == 'fit') {
+		if (ewidth / eheight > sw / sh) {
+			sw = eheight * (sw / sh);
+			sh = eheight;
 		} else {
-			sh = screen.width / (sw / sh);
-			sw = screen.width;
+			sh = ewidth / (sw / sh);
+			sw = ewidth;
 		}
 	}
 
@@ -324,12 +334,12 @@ function applyScreenDimensions() {
 
 	hideScreenSizeDialog();
 
-	if (document.getElementById('chk-rescale-to-fit').checked) {
-		let size = calculateScreenSizeToFit(w, h);
-		setScreenDimensions(size.width, size.height, sw, sh);
-	} else {
-		setScreenDimensions(w, h, sw, sh);
-	}
+	if (document.getElementById('chk-rescale-to-fit').checked)
+		screen.scale = calculateScreenSizeToFit(w, h);
+	else
+		screen.scale = 1;
+
+	setScreenDimensions(w, h, sw, sh);
 
 	redrawPad();
 }
@@ -630,21 +640,25 @@ function calculateScreenSizeToFit(width, height) {
 	let vw = window.innerWidth;
 	let _width = Math.max(width, height);
 	let _height = Math.min(width, height);
-	let aspect = _width / _height;
-
-	let ret = {};
+	let scale;
 
 	if (vw < 600) {
-		let scaler = 0.8;
-		ret.height = +(vw * scaler).toFixed(5);
-		ret.width = +(ret.height * aspect).toFixed(5);
+		let coef = 0.85;
+		let theight = vw * coef;
+		scale = theight / _height;
+		console.log('[RESCALE] viewport width ' + vw + 'px - screen height ' + theight + 'px (' + coef + ')');
 	} else {
-		let scaler = vw < 1100 ? 0.7 : 0.55;
-		ret.width = +(vw * scaler).toFixed(5);
-		ret.height = +(ret.width / aspect).toFixed(5);
+		let coef = vw <= 1280 ? 0.7 : 0.55;
+		let twidth = vw * coef;
+		scale = twidth / _width;
+		console.log('[RESCALE] viewport width ' + vw + 'px - screen width ' + twidth + 'px (' + coef + ')');
 	}
 
-	return ret;
+	let swidth = +(width * scale).toFixed(2);
+	let sheight = +(height * scale).toFixed(2);
+	console.log('scale factor ' + scale + ' (from ' + width + 'x' + height + ' to ' + swidth + 'x' + sheight + ')');
+
+	return scale;
 }
 
 
@@ -847,8 +861,8 @@ function showAspectFixer() {
 	else
 		hint.classList.add('hidden');
 
-	document.getElementById('target-display-width').value = screen.width;
-	document.getElementById('target-display-height').value = screen.height;
+	document.getElementById('target-display-width').value = screen.enteredWidth;
+	document.getElementById('target-display-height').value = screen.enteredHeight;
 	showDialog('aspect-fixer-dialog', true);
 }
 
