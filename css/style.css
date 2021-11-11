@@ -151,19 +151,21 @@ input[type=number] {
 #gamepad-container {
 	text-align: center;
 	overflow-x: auto;
-	border-bottom: 2px solid #ccd;
+	border-bottom: 1px solid #ccd;
+	margin-left: 0.5vw;
+	margin-right: 0.5vw;
 }
 
 #gamepad-container__scroll-frame {
 	display: inline-block;
-	padding: 1vw;
+	padding: 1vw 0.5vw 1vw 0.5vw;
 }
 
 #screenpad {
 	background-color: #999;
 	position: relative;
-	width: 854px;
-	height: 480px;
+	width: 800px;
+	height: 450px;
 	padding: 0;
 	background-size: 100% 100%;
 }
