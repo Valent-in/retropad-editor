@@ -283,8 +283,9 @@ function setScreenDimensions(width, height, screenshotWidth, screenshotHeight) {
 	screen.width = width;
 	screen.height = height;
 
-	let ewidth = screen.longSide;
-	let eheight = screen.shortSide;
+	// Swap sides if height > width
+	let ewidth = screen.enteredWidth;
+	let eheight = screen.enteredHeight;
 
 	let sw = Number(screenshotWidth || screen.shotFrameWidth || DEF_SCR_WIDTH);
 	let sh = Number(screenshotHeight || screen.shotFrameHeight || DEF_SCR_HEIGHT);
