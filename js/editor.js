@@ -1040,7 +1040,13 @@ function updateNewOverlayFields() {
 function selectOverlay(event) {
 	conf.setCurrentOverlay(event.target.selectedIndex);
 	conf.setCurrentLine(-1);
-	screen.isPortrait = event.target.value.search('portrait') != -1
+
+	if (event.target.value.search('portrait') != -1)
+		screen.isPortrait = true;
+
+	if (event.target.value.search('landscape') != -1)
+		screen.isPortrait = false;
+
 	document.getElementById('chk-show-portrait').checked = screen.isPortrait;
 
 	setScreenDimensions();
