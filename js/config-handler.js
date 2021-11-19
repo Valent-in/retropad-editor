@@ -63,6 +63,7 @@ function ConfigHandler() {
 					h: _getParamSectionValue(_strings[i], 'h'),
 					s: _getParamSectionValue(_strings[i], 'shape'),
 					img: _getParamValue(parameter + '_overlay'),
+					pct: _getParamValue(parameter + '_saturate_pct'),
 					i: i
 				};
 

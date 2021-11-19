@@ -79,7 +79,7 @@ function createPadView() {
 
 	for (let i = 0; i < rects.length; i++) {
 		let r = rects[i];
-		let b = createRect(r.command, r.x, r.y, r.w, r.h);
+		let b = createRect(r.command, r.x, r.y, r.w, r.h, r.pct);
 
 		if (r.img)
 			b.style['background-image'] = 'url(' + images[r.img] + ')';
@@ -87,12 +87,12 @@ function createPadView() {
 		if (r.s == 'radial')
 			b.classList.add('radial');
 
-		b.addEventListener('click', (event) => {
+		b.addEventListener('click', () => {
 			if (currentRect)
 				currentRect.style['background-color'] = 'transparent';
 
 			conf.setCurrentLine(r.i);
-			currentRect = event.target;
+			currentRect = b;
 
 			b.style['background-color'] = 'rgba(200,0,0,0.3)';
 
@@ -231,13 +231,21 @@ function refreshScreenshot() {
 }
 
 
-function createRect(name, x, y, w, h) {
+function createRect(name, x, y, w, h, pct) {
 	let scr = document.getElementById('screenpad');
 
 	let rect = document.createElement('DIV');
 	let text = document.createTextNode(name);
 	rect.appendChild(text);
 	rect.classList.add('rect');
+
+	if (pct) {
+		// visualize thumbstick saturate_pct property
+		let inner = document.createElement('DIV');
+		let perc = Math.round(pct * 70);
+		inner.style['background-image'] = 'radial-gradient(transparent, rgba(100,100,200,0.4) ' + perc + '%, transparent ' + (perc + 1) + '%)';
+		rect.appendChild(inner);
+	}
 
 	let bw = screen.width * w * 2;
 	let bh = screen.height * h * 2;
@@ -500,7 +508,7 @@ function setCommandSelectorOption(value) {
 
 function showAdditionalParametersForCommand(command) {
 	let parameters = {
-		analog_left: 'movable = true\nrange_mod = 2.0',
+		analog_left: 'movable = true\nrange_mod = 2.0\nsaturate_pct = 0.65',
 		get analog_right() { return this.analog_left },
 		get overlay_next() {
 			let list = conf.getOverlayList();

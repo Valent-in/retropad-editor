@@ -211,6 +211,17 @@ input[type=number] {
 	border-radius: 50%;
 }
 
+.show-borders .rect div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	border-radius: 50%;
+	pointer-events: none;
+	background-color: none;
+}
+
 .hide-names .rect {
 	color: transparent;
 	font-size: 1px;
