@@ -334,8 +334,14 @@ function ConfigHandler() {
 
 		let list = [];
 
-		for (let i = 0; i < count; i++)
-			list.push(_getParamValue('overlay' + i + '_name'));
+		for (let i = 0; i < count; i++) {
+			let name = _getParamValue('overlay' + i + '_name');
+
+			if (name)
+				list.push(name);
+			else
+				list.push('');
+		}
 
 		return list;
 	}

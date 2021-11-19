@@ -383,7 +383,7 @@ function buildAndSetOverlaySelectors(selectLast) {
 	select.innerHTML = '';
 
 	for (let i = 0; i < list.length; i++) {
-		let name = (i + 1) + ' - ' + list[i];
+		let name = (i + 1) + ' - ' + (list[i] ? list[i] : '[unnamed]');
 		let o = document.createElement('OPTION');
 		o.appendChild(document.createTextNode(name));
 		select.appendChild(o);
@@ -404,10 +404,11 @@ function buildAndSetOverlaySelectors(selectLast) {
 	selectNext.appendChild(document.createElement('OPTION'));
 
 	for (let i = 0; i < list.length; i++) {
-		let name = list[i];
-		let o = document.createElement('OPTION');
-		o.appendChild(document.createTextNode(name));
-		selectNext.appendChild(o);
+		if (list[i]) {
+			let o = document.createElement('OPTION');
+			o.appendChild(document.createTextNode(list[i]));
+			selectNext.appendChild(o);
+		}
 	}
 }
 
