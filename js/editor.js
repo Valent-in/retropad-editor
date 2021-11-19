@@ -998,7 +998,7 @@ function updateNewOverlayFields() {
 	let isDuplicate = document.getElementById('chk-duplicate-overlay').checked;
 	let portraitChk = document.getElementById('chk-portrait-overlay');
 	let isPortrait = portraitChk.checked;
-	let aspect = screen.width / screen.height;
+	let aspect = screen.longSide / screen.shortSide;
 
 	if (isDuplicate) {
 		box.value = conf.getCurrentOverlayParams().join('\n');
