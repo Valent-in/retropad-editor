@@ -105,14 +105,26 @@ function createPadView() {
 			});
 		});
 	}
+}
 
-	let background = conf.getOverlayBackground();
-	let padFrame = document.getElementById('screenpad');
-	if (background)
-		padFrame.style['background-image'] = 'url(' + images[background] + ')';
-	else
-		padFrame.style['background-image'] = 'none';
 
+function renderOverlayBackground() {
+	let bg = conf.getCurrentOverlayBackground();
+	if (bg.image) {
+		let backgroundDiv = document.createElement('DIV');
+		backgroundDiv.classList.add('screenpad-background');
+		backgroundDiv.style['background-image'] = 'url(' + images[bg.image] + ')';
+
+		if (bg.position) {
+			backgroundDiv.style.left = (bg.position.x * 100) + '%';
+			backgroundDiv.style.top = (bg.position.y * 100) + '%';
+			backgroundDiv.style.width = (bg.position.w * 100) + '%';
+			backgroundDiv.style.height = (bg.position.h * 100) + '%';
+		}
+
+		let padFrame = document.getElementById('screenpad');
+		padFrame.appendChild(backgroundDiv);
+	}
 }
 
 
@@ -247,6 +259,7 @@ function createRect(name, x, y, w, h) {
 function redrawPad() {
 	resetScreen();
 	refreshScreenshot();
+	renderOverlayBackground();
 	createPadView();
 	enableEditor(false);
 }

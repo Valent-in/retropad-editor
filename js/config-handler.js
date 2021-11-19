@@ -78,8 +78,21 @@ function ConfigHandler() {
 	}
 
 
-	this.getOverlayBackground = function () {
-		return _getParamValue('overlay' + _currentOverlay + '_overlay');
+	this.getCurrentOverlayBackground = function () {
+		let bg = {};
+		bg.image = _getParamValue('overlay' + _currentOverlay + '_overlay');
+		let rect = _getParamValue('overlay' + _currentOverlay + '_rect');
+
+		if (rect) {
+			let coords = rect.split('"')[1].split(',');
+			bg.position = {};
+			bg.position.x = coords[0];
+			bg.position.y = coords[1];
+			bg.position.w = coords[2];
+			bg.position.h = coords[3];
+		}
+
+		return bg;
 	}
 
 
