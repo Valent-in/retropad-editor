@@ -73,13 +73,14 @@ renderConfig(configStr);
 
 
 function createPadView() {
+	let background = createPadBackground();
 	let rects = conf.buildPadFromConfig();
 	if (!rects)
 		return;
 
 	for (let i = 0; i < rects.length; i++) {
 		let r = rects[i];
-		let b = createRect(r.command, r.x, r.y, r.w, r.h, r.pct);
+		let b = createRect(background, r.command, r.x, r.y, r.w, r.h, r.pct);
 
 		if (r.img)
 			b.style['background-image'] = 'url(' + images[r.img] + ')';
@@ -108,11 +109,12 @@ function createPadView() {
 }
 
 
-function renderOverlayBackground() {
+function createPadBackground() {
+	let backgroundDiv = document.createElement('DIV');
+	backgroundDiv.classList.add('screenpad-background');
+
 	let bg = conf.getCurrentOverlayBackground();
 	if (bg.image) {
-		let backgroundDiv = document.createElement('DIV');
-		backgroundDiv.classList.add('screenpad-background');
 		backgroundDiv.style['background-image'] = 'url(' + images[bg.image] + ')';
 
 		if (bg.position) {
@@ -121,10 +123,17 @@ function renderOverlayBackground() {
 			backgroundDiv.style.width = (bg.position.w * 100) + '%';
 			backgroundDiv.style.height = (bg.position.h * 100) + '%';
 		}
-
-		let padFrame = document.getElementById('screenpad');
-		padFrame.appendChild(backgroundDiv);
 	}
+
+	let padFrame;
+	if (bg.fullscreen)
+		padFrame = document.getElementById('screenpad');
+	else
+		padFrame = document.getElementById('game-screenshot');
+
+	padFrame.appendChild(backgroundDiv);
+
+	return backgroundDiv;
 }
 
 
@@ -233,9 +242,7 @@ function refreshScreenshot() {
 }
 
 
-function createRect(name, x, y, w, h, pct) {
-	let scr = document.getElementById('screenpad');
-
+function createRect(target, name, x, y, w, h, pct) {
 	let rect = document.createElement('DIV');
 	let text = document.createTextNode(name);
 	rect.appendChild(text);
@@ -249,19 +256,19 @@ function createRect(name, x, y, w, h, pct) {
 		rect.appendChild(inner);
 	}
 
-	let bw = screen.width * w * 2;
-	let bh = screen.height * h * 2;
+	let bw = 100 * w * 2;
+	let bh = 100 * h * 2;
 
-	let bx = screen.width * x - bw / 2;
-	let by = screen.height * y - bh / 2;
+	let bx = 100 * x - bw / 2;
+	let by = 100 * y - bh / 2;
 
-	rect.style.left = bx + 'px';
-	rect.style.top = by + 'px';
+	rect.style.left = bx + '%';
+	rect.style.top = by + '%';
 
-	rect.style.width = bw + 'px';
-	rect.style.height = bh + 'px';
+	rect.style.width = bw + '%';
+	rect.style.height = bh + '%';
 
-	scr.appendChild(rect);
+	target.appendChild(rect);
 	return rect;
 }
 
@@ -269,7 +276,6 @@ function createRect(name, x, y, w, h, pct) {
 function redrawPad() {
 	resetScreen();
 	refreshScreenshot();
-	renderOverlayBackground();
 	createPadView();
 	enableEditor(false);
 }
@@ -384,17 +390,17 @@ function updateCurrentLine(section, value) {
 	if (section)
 		conf.setCurrentLineSectionValue(section, value);
 
-	let rw = screen.width * conf.getCurrentLineSectionValue('w') * 2;
-	let rh = screen.height * conf.getCurrentLineSectionValue('h') * 2;
+	let rw = 100 * conf.getCurrentLineSectionValue('w') * 2;
+	let rh = 100 * conf.getCurrentLineSectionValue('h') * 2;
 
-	let rx = screen.width * conf.getCurrentLineSectionValue('x') - rw / 2;
-	let ry = screen.height * conf.getCurrentLineSectionValue('y') - rh / 2;
+	let rx = 100 * conf.getCurrentLineSectionValue('x') - rw / 2;
+	let ry = 100 * conf.getCurrentLineSectionValue('y') - rh / 2;
 
-	currentRect.style.height = rh + 'px';
-	currentRect.style.width = rw + 'px';
+	currentRect.style.height = rh + '%';
+	currentRect.style.width = rw + '%';
 
-	currentRect.style.left = rx + 'px';
-	currentRect.style.top = ry + 'px';
+	currentRect.style.left = rx + '%';
+	currentRect.style.top = ry + '%';
 }
 
 
