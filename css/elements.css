@@ -339,7 +339,8 @@ input[type=range]:focus::-ms-fill-upper {
 }
 
 .input_file {
-	display: inline-bolock;
+	display: inline-block;
+	width: 100%;
 	position: relative;
 	white-space: nowrap;
 }
@@ -361,7 +362,7 @@ input[type=range]:focus::-ms-fill-upper {
 	border: 1px solid #06b;
 	border-radius: 3px;
 	padding: 2px 4px 2px 4px;
-	margin: 1px;
+	margin: 2px 0 2px 0;
 	width: 100%;
 	max-width: min(35vw, 35vh);
 	text-align: center;
@@ -370,6 +371,7 @@ input[type=range]:focus::-ms-fill-upper {
 	overflow-x: hidden;
 	text-overflow: ellipsis;
 	box-sizing: border-box;
+	vertical-align: middle;
 }
 
 .input_file input[type=file]:hover+label {
