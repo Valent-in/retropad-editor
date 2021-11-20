@@ -7,9 +7,11 @@ function ConfigHandler() {
 	let _currentOverlay = 0;
 
 
-	this.convertCfgToArray = function (str) {
+	this.convertCfgToArray = function (str, onFinshCallback, imagesObj) {
 		_strings = str.split('\n');
 		_cleanUp();
+
+		_normalizeOverlays(onFinshCallback, imagesObj);
 
 		_currentLine = -1;
 		_currentOverlay = 0;
@@ -438,7 +440,7 @@ function ConfigHandler() {
 		let ratio = _getParamValue('overlay' + _currentOverlay + '_aspect_ratio');
 
 		if (ratio)
-			return calculateAspect(ratio);
+			return _calculateAspect(ratio);
 	}
 
 
@@ -615,7 +617,7 @@ function ConfigHandler() {
 	}
 
 
-	function calculateAspect(coef) {
+	function _calculateAspect(coef) {
 		coef = Number(coef)
 		if (isNaN(coef)) {
 			console.log('Wrong aspect ratio in config');
@@ -630,4 +632,99 @@ function ConfigHandler() {
 		return { w: +coef.toFixed(5), h: 1 }
 	}
 
+
+	function _normalizeOverlays(onFinshCallback, imagesObj) {
+		imagesObj = imagesObj ? imagesObj : {};
+
+		let count = Number(_getParamValue('overlays'));
+		let imgSizes = {};
+		let toLoad = 0;
+		let missingImages = '';
+
+		for (let i = 0; i < count; i++) {
+			let name = _getParamValue('overlay' + i + '_overlay')
+
+			if (!__isOverlayNormalized(i)) {
+				if (imagesObj[name]) {
+					imgSizes[name] = {};
+					imgSizes[name].image = imagesObj[name];
+					toLoad++;
+				} else {
+					missingImages += name + '\n';
+				}
+			}
+		}
+
+		if (missingImages) {
+			alert('Images are requiered for loading gamepad config:\n\n' + missingImages + '\nImport these files and click "reset".')
+		}
+
+		if (toLoad == 0) {
+			__normalizeIfNeeded(imgSizes);
+			if (onFinshCallback)
+				onFinshCallback();
+
+			return;
+		}
+
+		let loaded = 0;
+		for (let key in imgSizes) {
+			let img = new Image();
+
+			img.onload = function () {
+				loaded++;
+				imgSizes[key].w = img.naturalWidth;
+				imgSizes[key].h = img.naturalHeight;
+
+				if (loaded == toLoad) {
+					__normalizeIfNeeded(imgSizes);
+					if (onFinshCallback)
+						onFinshCallback();
+				}
+			}
+			img.src = imgSizes[key].image;
+		}
+
+
+		function __isOverlayNormalized(index) {
+			let normParam = _getParamValue('overlay' + index + '_normalized');
+			return (normParam && normParam == 'true');
+		}
+
+
+		function __normalizeIfNeeded(imgSizes) {
+			let count = Number(_getParamValue('overlays'));
+			let width = 1280;
+			let height = 720;
+
+			for (let i = 0; i < count; i++) {
+				if (!__isOverlayNormalized(i)) {
+					_setParamValue('overlay' + i + '_normalized', 'true');
+
+					let name = _getParamValue('overlay' + i + '_overlay');
+					if (imgSizes[name]) {
+						width = imgSizes[name].w;
+						height = imgSizes[name].h;
+					}
+
+					descs = _getParamValue('overlay' + i + '_descs');
+					for (let j = 0; j < descs; j++) {
+						let pi = _getParamIndex('overlay' + i + '_desc' + j);
+
+						let x = Number(_getParamSectionValue(_strings[pi], 'x'));
+						let y = Number(_getParamSectionValue(_strings[pi], 'y'));
+						let w = Number(_getParamSectionValue(_strings[pi], 'w'));
+						let h = Number(_getParamSectionValue(_strings[pi], 'h'));
+
+						_strings[pi] = _editParamSection(_strings[pi], 'x', (x / width).toFixed(5));
+						_strings[pi] = _editParamSection(_strings[pi], 'y', (y / height).toFixed(5));
+						_strings[pi] = _editParamSection(_strings[pi], 'w', (w / width).toFixed(5));
+						_strings[pi] = _editParamSection(_strings[pi], 'h', (h / height).toFixed(5));
+					}
+				}
+			}
+
+		}
+
+	}
 }

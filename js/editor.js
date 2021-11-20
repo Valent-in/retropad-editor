@@ -145,14 +145,16 @@ function loadConfigFromFile(e) {
 
 
 function renderConfig(str) {
-	conf.convertCfgToArray(str);
-	buildAndSetOverlaySelectors();
+	conf.convertCfgToArray(str, () => {
+		buildAndSetOverlaySelectors();
 
-	screen.isPortrait = -1 != conf.getOverlayList()[0].search('portrait');
-	document.getElementById('chk-show-portrait').checked = screen.isPortrait;
+		screen.isPortrait = -1 != conf.getOverlayList()[0].search('portrait');
+		document.getElementById('chk-show-portrait').checked = screen.isPortrait;
 
-	setScreenDimensions();
-	redrawPad();
+		setScreenDimensions();
+		redrawPad();
+	},
+		images);
 }
 
 
