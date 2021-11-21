@@ -116,13 +116,13 @@ function createPadBackground() {
 	let bg = conf.getCurrentOverlayBackground();
 	if (bg.image) {
 		backgroundDiv.style['background-image'] = 'url(' + images[bg.image] + ')';
+	}
 
-		if (bg.position) {
-			backgroundDiv.style.left = (bg.position.x * 100) + '%';
-			backgroundDiv.style.top = (bg.position.y * 100) + '%';
-			backgroundDiv.style.width = (bg.position.w * 100) + '%';
-			backgroundDiv.style.height = (bg.position.h * 100) + '%';
-		}
+	if (bg.position) {
+		backgroundDiv.style.left = (bg.position.x * 100) + '%';
+		backgroundDiv.style.top = (bg.position.y * 100) + '%';
+		backgroundDiv.style.width = (bg.position.w * 100) + '%';
+		backgroundDiv.style.height = (bg.position.h * 100) + '%';
 	}
 
 	let padFrame;

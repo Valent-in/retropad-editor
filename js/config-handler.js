@@ -84,8 +84,7 @@ function ConfigHandler() {
 	this.getCurrentOverlayBackground = function () {
 		let bg = {};
 		let fullscreen = _getParamValue('overlay' + _currentOverlay + '_full_screen');
-		if (fullscreen == 'true')
-			bg.fullscreen = true;
+		bg.fullscreen = (fullscreen == 'true');
 
 		bg.image = _getParamValue('overlay' + _currentOverlay + '_overlay');
 		let rect = _getParamValue('overlay' + _currentOverlay + '_rect');

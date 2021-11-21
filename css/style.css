@@ -237,6 +237,14 @@ input[type=number] {
 	background-size: 100% 100%;
 }
 
+.hide-offscreen #game-screenshot {
+	overflow: hidden;
+}
+
+.show-offscreen #game-screenshot {
+	overflow: visible;
+}
+
 #editor {
 	background-color: white;
 	border-radius: 4px;
