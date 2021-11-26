@@ -155,7 +155,7 @@ function loadConfigFromFile(e) {
 
 function renderConfig(str) {
 	conf.convertCfgToArray(str, () => {
-		buildAndSetOverlaySelectors();
+		buildAndSetOverlaySelectors(0);
 
 		screen.isPortrait = -1 != conf.getOverlayList()[0].search('portrait');
 		document.getElementById('chk-show-portrait').checked = screen.isPortrait;
@@ -404,8 +404,7 @@ function updateCurrentLine(section, value) {
 }
 
 
-function buildAndSetOverlaySelectors(selectLast) {
-	conf.setCurrentOverlay(0);
+function buildAndSetOverlaySelectors(selectIndex) {
 	let list = conf.getOverlayList();
 
 	let select = document.getElementById('overlay-selector');
@@ -418,13 +417,11 @@ function buildAndSetOverlaySelectors(selectLast) {
 		select.appendChild(o);
 	}
 
-	if (selectLast) {
-		select.selectedIndex = list.length - 1;
-		conf.setCurrentOverlay(list.length - 1);
-		screen.isPortrait = list[list.length - 1].search('portrait') != -1;
-	} else {
-		screen.isPortrait = list[0].search('portrait') != -1;
-	}
+	selectIndex = Math.min(selectIndex, list.length - 1);
+	select.selectedIndex = selectIndex;
+	conf.setCurrentOverlay(selectIndex);
+	screen.isPortrait = list[selectIndex].search('portrait') != -1;
+
 	document.getElementById('chk-show-portrait').checked = screen.isPortrait;
 
 	let selectNext = document.getElementById('next_target_property');
@@ -792,28 +789,49 @@ function editButton() {
 
 
 function addOverlay() {
-	let name = document.getElementById('overlay-name').value;
-	let props = document.getElementById('raw-overlay-properties').value;
+	let name = document.getElementById('overlay-name').value.trim();
+	let props = document.getElementById('raw-overlay-properties').value.trim();
 
 	if (conf.isOverlayNameExist(name)) {
 		alert('Overlay with this name already exist.');
 		return;
 	}
 
-	if (name.trim() == '') {
+	if (name == '') {
 		alert('Enter overlay name.');
 		return;
 	}
 
 	if (document.getElementById('chk-duplicate-overlay').checked)
-		conf.duplicateCurrentOverlay(name, props.trim().split('\n'));
+		conf.duplicateCurrentOverlay(name, props.split('\n'));
 	else
-		conf.createOverlay(name, props.trim().split('\n'));
-
-	conf.getCurrentOverlayParams();
+		conf.createOverlay(name, props.split('\n'));
 
 	hideOverlayEditor();
-	buildAndSetOverlaySelectors(true);
+	buildAndSetOverlaySelectors(1000);
+	setScreenDimensions();
+	redrawPad();
+}
+
+
+function editOverlay() {
+	let name = document.getElementById('overlay-name').value.trim();
+	let props = document.getElementById('raw-overlay-properties').value.trim();
+
+	if (conf.getCurrentOverlayName() != name && conf.isOverlayNameExist(name)) {
+		alert('Overlay with this name already exist.');
+		return;
+	}
+
+	if (name == '') {
+		alert('Enter overlay name.');
+		return;
+	}
+
+	conf.editCurrentOverlay(name, props.split('\n'));
+
+	hideOverlayEditor();
+	buildAndSetOverlaySelectors(conf.getCurrentOverlay());
 	setScreenDimensions();
 	redrawPad();
 }
@@ -834,7 +852,7 @@ function delCurrentOverlay() {
 		return;
 
 	conf.deleteCurrentOverlay();
-	buildAndSetOverlaySelectors();
+	buildAndSetOverlaySelectors(0);
 	setScreenDimensions();
 	redrawPad();
 }
@@ -865,8 +883,6 @@ function hideButtonEditor() {
 
 
 function showOverlayEditor() {
-	document.getElementById('chk-duplicate-overlay').checked = false;
-	document.getElementById('chk-portrait-overlay').checked = false;
 	updateNewOverlayFields();
 	showDialog('overlay-create-dialog', true);
 }
@@ -1025,16 +1041,34 @@ function toggleScreenshotSettings(event) {
 
 function updateNewOverlayFields() {
 	let box = document.getElementById('raw-overlay-properties');
-	let isDuplicate = document.getElementById('chk-duplicate-overlay').checked;
+	let duplicateChk = document.getElementById('chk-duplicate-overlay');
 	let portraitChk = document.getElementById('chk-portrait-overlay');
+	let editChk = document.getElementById('chk-edit-overlay');
+
+	let isDuplicate = duplicateChk.checked;
 	let isPortrait = portraitChk.checked;
+	let isEdit = editChk.checked;
+
 	let aspect = screen.longSide / screen.shortSide;
 
+	let createBtn = document.getElementById('overlay-create-button');
+	let editBtn = document.getElementById('overlay-edit-button');
+	if (isEdit) {
+		editBtn.classList.remove('hidden')
+		createBtn.classList.add('hidden');
+		duplicateChk.disabled = true;
+		duplicateChk.checked = false;
+		document.getElementById('overlay-name').value = conf.getCurrentOverlayName();
+		_fillCurrentOverlay();
+		return;
+	} else {
+		editBtn.classList.add('hidden')
+		createBtn.classList.remove('hidden');
+		duplicateChk.disabled = false;
+	}
+
 	if (isDuplicate) {
-		box.value = conf.getCurrentOverlayParams().join('\n');
-		isPortrait = document.getElementById('overlay-selector').value.search('portrait') != -1;
-		portraitChk.checked = isPortrait;
-		portraitChk.disabled = true;
+		_fillCurrentOverlay();
 	} else {
 		portraitChk.disabled = false;
 		let ratio = 'aspect_ratio = ' + +(isPortrait ? 1 / aspect : aspect).toFixed(7);
@@ -1042,6 +1076,14 @@ function updateNewOverlayFields() {
 	}
 
 	generateOverlayName(isPortrait);
+
+
+	function _fillCurrentOverlay() {
+		box.value = conf.getCurrentOverlayParams().join('\n');
+		isPortrait = document.getElementById('overlay-selector').value.search('portrait') != -1;
+		portraitChk.checked = isPortrait;
+		portraitChk.disabled = true;
+	}
 }
 
 

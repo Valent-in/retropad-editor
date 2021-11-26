@@ -138,19 +138,7 @@ function ConfigHandler() {
 			_replaceParamNumbers('overlay', i + 1, i);
 		}
 
-		//Clear buttons linked to this overlay;
-		let reg = new RegExp('(overlay\\d+_desc\\d+_next_target)');
-
-		for (let i = _strings.length - 1; i >= 0; i--) {
-
-			if (_strings[i].search(name) == -1)
-				continue;
-
-			if (_strings[i].search(reg) == -1)
-				continue;
-
-			_strings.splice(i, 1);
-		}
+		updateLinkedButtons(name, null);
 
 		_setParamValue('overlays', count - 1);
 		_currentOverlay = 0;
@@ -188,6 +176,70 @@ function ConfigHandler() {
 		}
 
 		_strings = _strings.concat(result);
+	}
+
+
+	this.editCurrentOverlay = function (name, params) {
+		if (name.trim() == '')
+			return;
+
+		let overlayXX = 'overlay' + _currentOverlay;
+		let current = this.getCurrentOverlayParams();
+
+		let currentName = _getParamValue(overlayXX + '_name');
+		console.log('OLD NAME: ' + currentName);
+
+		_setParamValue(overlayXX + '_name', '"' + name + '"');
+		let insertAfter = _getParamIndex(overlayXX + '_name', name);
+
+		for (let i = 0; i < current.length; i++) {
+			let currentLine = overlayXX + '_' + current[i];
+			// get parameter name without '=' and value
+			let currentLineParam = currentLine.split('=')[0].trim();
+			let index = _getParamIndex(currentLineParam);
+			if (index >= 0) {
+				console.log('DELETE: ' + currentLine);
+				_strings.splice(index, 1);
+			} else {
+				console.log('NOT FOUND: ' + currentLine);
+			}
+		}
+
+		console.log('NEW NAME: ' + name);
+		let newParams = []
+		for (let i = 0; i < params.length; i++) {
+			newParams.push(overlayXX + '_' + params[i]);
+			console.log('ADD: ' + overlayXX + '_' + params[i]);
+		}
+
+		_strings.splice(insertAfter + 1, 0, ...newParams);
+
+		updateLinkedButtons(currentName, name);
+	}
+
+
+	function updateLinkedButtons(currentName, newName) {
+		// update name in overlayX_descY_next_target = currentName
+		// currentName should be surrounded by quotemarks
+		let regParam = new RegExp('(overlay\\d+_desc\\d+_next_target)');
+		let regValue = new RegExp('=\\s*' + currentName + '$');
+
+		for (let i = _strings.length - 1; i >= 0; i--) {
+
+			if (_strings[i].search(regParam) == -1)
+				continue;
+
+			if (_strings[i].search(regValue) == -1)
+				continue;
+
+			if (newName) {
+				console.log('REPLACE: ' + _strings[i]);
+				_strings[i] = _strings[i].split('=')[0].trim() + ' = "' + newName + '"';
+			} else {
+				console.log('DELETE: ' + _strings[i]);
+				_strings.splice(i, 1);
+			}
+		}
 	}
 
 
@@ -344,6 +396,19 @@ function ConfigHandler() {
 
 	this.getCurrentOverlay = function () {
 		return _currentOverlay;
+	}
+
+
+	this.getCurrentOverlayName = function () {
+		let name = _getParamValue('overlay' + _currentOverlay + '_name');
+		if (name) {
+			if (name.search(/^".+"$/) == 0)
+				return name.split('"')[1];
+			else
+				return name;
+		} else {
+			return '';
+		}
 	}
 
 

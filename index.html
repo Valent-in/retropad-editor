@@ -65,7 +65,7 @@
 					<span class='group-header'>OVERLAY</span>
 					<select id='overlay-selector' onchange='selectOverlay(event)'></select>
 					<div class='toolbar-group__buttons'>
-						<button onclick='showOverlayEditor()'>New overlay</button>
+						<button onclick='showOverlayEditor()'>Create/Edit</button>
 						<button onclick='delCurrentOverlay()'>Delete overlay</button>
 						<button onclick='showAspectFixer()'>Fix aspect ratio</button>
 					</div>
@@ -265,7 +265,7 @@
 		<div id='overlay-create-dialog' class='dialog-container hidden'>
 			<div class='modal-dialog'>
 				<div class='modal-dialog__header-box'>
-					<span>New overlay</span>
+					<span>Create/Edit overlay</span>
 					<button class='close-button danger' onclick='hideOverlayEditor()'></button>
 				</div>
 				<div class='modal-dialog__content-box'>
@@ -273,10 +273,16 @@
 						<label>Overlay name</label>
 						<input type='text' id='overlay-name' class='js-dialog__focus' autocomplete='off'>
 						<br class='wide'>
-						<input type='checkbox' id='chk-duplicate-overlay' onchange='updateNewOverlayFields()'>
+						<input type='checkbox' autocomplete='off' id='chk-edit-overlay'
+							onchange='updateNewOverlayFields()'>
+						<label for='chk-edit-overlay' class='group-header'>Edit current overlay</label>
+						<br class='wide'>
+						<input type='checkbox' autocomplete='off' id='chk-duplicate-overlay'
+							onchange='updateNewOverlayFields()'>
 						<label for='chk-duplicate-overlay'>Duplicate current overlay</label>
 						<br class='wide'>
-						<input type='checkbox' id='chk-portrait-overlay' onchange='updateNewOverlayFields()'>
+						<input type='checkbox' autocomplete='off' id='chk-portrait-overlay'
+							onchange='updateNewOverlayFields()'>
 						<label for='chk-portrait-overlay'>Portrait</label>
 					</div>
 					<div class='dialog-content-box__section'>
@@ -290,7 +296,8 @@
 					</div>
 				</div>
 				<div class='modal-dialog__footer-box'>
-					<button class='important' onclick='addOverlay()'>Create overlay</button>
+					<button id='overlay-create-button' class='important' onclick='addOverlay()'>Create overlay</button>
+					<button id='overlay-edit-button' class='danger hidden' onclick='editOverlay()'>Edit overlay</button>
 					<button onclick='hideOverlayEditor()'>Cancel</button>
 				</div>
 			</div>
