@@ -523,6 +523,7 @@ function ConfigHandler() {
 	function _cleanUp() {
 		for (let i = _strings.length - 1; i >= 0; i--) {
 			let str = _strings[i].trim();
+			_strings[i] = str;
 
 			// remove comments
 			if (str[0] == '/' || str[0] == '#' || str == '') {
@@ -530,11 +531,18 @@ function ConfigHandler() {
 				continue;
 			}
 
+			// remove inline comments
+			{
+				let uncommentReg = /(^[^#]*".*")|(^[^#]+)/;
+				let result = uncommentReg.exec(_strings[i]);
+				_strings[i] = result ? result[0].trim() : '';
+			}
+
 			// remove path and inline comment from image filenames
 			// search 'x_overlay ='
-			if (str.search(/._overlay\s+=/) != -1) {
-				let param = str.split('=')[0].trim();
-				let value = str.split('=')[1].trim();
+			if (_strings[i].search(/.\d_overlay\s*=/) != -1) {
+				let param = _strings[i].split('=')[0].trim();
+				let value = _strings[i].split('=')[1].trim();
 
 				// search value part that in quotes
 				let inQuotes = new RegExp(/^"(.+?)"/);
@@ -552,6 +560,20 @@ function ConfigHandler() {
 					_strings[i] = param + ' = ' + value;
 				else
 					_strings[i] = param + ' = "' + value + '"';
+			}
+
+			// surround overlay name with quotemarks
+			if (_strings[i].search(/^overlay\d+_name\s*=/) == 0 ||
+				_strings[i].search(/^overlay\d+_desc\d+_next_target\s*=/) == 0) {
+
+				let param = _strings[i].split('=')[0].trim();
+				let value = _strings[i].split('=')[1].trim();
+
+				let valueBlocks = value.split('"')
+				if (valueBlocks.length == 1)
+					_strings[i] = param + ' = "' + valueBlocks[0] + '"';
+				else
+					_strings[i] = param + ' = "' + valueBlocks[0] + valueBlocks[1] + '"';
 			}
 		}
 	}
