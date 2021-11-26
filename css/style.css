@@ -225,6 +225,7 @@ input[type=number] {
 .hide-names .rect {
 	color: transparent;
 	font-size: 1px;
+	text-shadow: none;
 }
 
 #game-screenshot {
