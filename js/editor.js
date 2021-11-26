@@ -929,6 +929,8 @@ function showScreenSizeDialog() {
 
 	document.getElementById('radio-screenshot-' + screen.shotMode).checked = true;
 
+	document.getElementById('chk-rescale-to-fit').checked = screen.scale != 1;
+
 	showDialog('screen-size-dialog', true);
 }
 
