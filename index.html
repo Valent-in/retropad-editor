@@ -23,7 +23,7 @@
 
 		<div id='header'>
 			<button class='important' onclick='showFileDialog()'>Import • Export</button>
-			<button class='danger button--normal-size' onclick='resetPad()'>Reset</button>
+			<button class='danger button--normal-size' onclick='showDialog("reset-dialog", true)'>Reset</button>
 			<span id='header__caption'><img src='img/retroarch-icon.svg'>RetroPad Editor</span>
 		</div>
 
@@ -66,7 +66,7 @@
 					<select id='overlay-selector' onchange='selectOverlay(event)'></select>
 					<div class='toolbar-group__buttons'>
 						<button onclick='showOverlayEditor()'>Create • Edit</button>
-						<button onclick='delCurrentOverlay()'>Delete overlay</button>
+						<button onclick='showDialog("overlay-delete-dialog", true)'>Delete overlay</button>
 						<button onclick='showAspectFixer()'>Fix aspect ratio</button>
 					</div>
 				</div>
@@ -75,7 +75,7 @@
 					<span class='group-header'>BUTTON</span>
 					<div class='toolbar-group__buttons'>
 						<button onclick='showButtonCreator()'>New button</button>
-						<button id='del-current-button' onclick='delCurrentButton()'>Delete
+						<button id='del-current-button' onclick='showDialog("button-delete-dialog", true)'>Delete
 							button</button>
 						<button id='show-button-editor' onclick='showButtonEditor()'>Edit
 							button</button>
@@ -335,7 +335,7 @@
 				</div>
 				<div class='modal-dialog__footer-box'>
 					<button class='important js-dialog__focus' onclick='fixAspect()'>Fix</button>
-					<button onclick='hideAspectFixer()'>Close</button>
+					<button onclick='hideAspectFixer()'>Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -381,7 +381,7 @@
 				</div>
 				<div class='modal-dialog__footer-box'>
 					<button class='important' onclick='applyScreenDimensions()'>Set size</button>
-					<button onclick='hideScreenSizeDialog()'>Close</button>
+					<button onclick='hideScreenSizeDialog()'>Cancel</button>
 				</div>
 			</div>
 		</div>
@@ -458,6 +458,64 @@
 				</div>
 				<div class='modal-dialog__footer-box'>
 					<button onclick='hideFileDialog()'>Close</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='reset-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__content-box'>
+					<span>Do you want to reset?<br>All unsaved editions will be lost!</span>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='danger js-dialog__focus' onclick='resetPad()'>Reset</button>
+					<button onclick='showDialog("reset-dialog", false)'>Cancel</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='overlay-delete-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__content-box'>
+					<span>Delete current overlay?</span>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='danger js-dialog__focus' onclick='delCurrentOverlay()'>Delete</button>
+					<button onclick='showDialog("overlay-delete-dialog", false)'>Cancel</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='button-delete-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__content-box'>
+					<span>Delete selected button?</span>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='danger js-dialog__focus' onclick='delCurrentButton()'>Delete</button>
+					<button onclick='showDialog("button-delete-dialog", false)'>Cancel</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='name-exist-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__content-box'>
+					<span>Overlay with this name already exist.</span>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='js-dialog__focus' onclick='showDialog("name-exist-dialog", false)'>Close</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='name-empty-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__content-box'>
+					<span>Enter overlay name.</span>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='js-dialog__focus' onclick='showDialog("name-empty-dialog", false)'>Close</button>
 				</div>
 			</div>
 		</div>

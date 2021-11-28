@@ -694,9 +694,7 @@ function calculateScreenSizeToFit(width, height) {
 // Inline event listeners
 
 function resetPad() {
-	if (!confirm('Do you want to reset? All unsaved editions will be lost!'))
-		return;
-
+	showDialog('reset-dialog', false);
 	renderConfig(configStr);
 }
 
@@ -793,12 +791,12 @@ function addOverlay() {
 	let props = document.getElementById('raw-overlay-properties').value.trim();
 
 	if (conf.isOverlayNameExist(name)) {
-		alert('Overlay with this name already exist.');
+		showDialog('name-exist-dialog', true);
 		return;
 	}
 
 	if (name == '') {
-		alert('Enter overlay name.');
+		showDialog('name-empty-dialog', true);
 		return;
 	}
 
@@ -819,12 +817,12 @@ function editOverlay() {
 	let props = document.getElementById('raw-overlay-properties').value.trim();
 
 	if (conf.getCurrentOverlayName() != name && conf.isOverlayNameExist(name)) {
-		alert('Overlay with this name already exist.');
+		showDialog('name-exist-dialog', true);
 		return;
 	}
 
 	if (name == '') {
-		alert('Enter overlay name.');
+		showDialog('name-empty-dialog', true);
 		return;
 	}
 
@@ -838,8 +836,7 @@ function editOverlay() {
 
 
 function delCurrentButton() {
-	if (!confirm('Delete selected button?'))
-		return;
+	showDialog('button-delete-dialog', false);
 
 	if (!conf.deleteCurrentButton())
 		alert('No selection!');
@@ -848,8 +845,7 @@ function delCurrentButton() {
 
 
 function delCurrentOverlay() {
-	if (!confirm('Delete current overlay?'))
-		return;
+	showDialog('overlay-delete-dialog', false);
 
 	conf.deleteCurrentOverlay();
 	buildAndSetOverlaySelectors(0);
