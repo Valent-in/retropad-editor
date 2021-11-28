@@ -5,9 +5,9 @@ const DEF_SCR_WIDTH = 600;
 const DEF_SCR_HEIGHT = 450;
 
 const defaultParamsForNewOverlay = 'full_screen = true\nnormalized = true\nrange_mod = 1.5\nalpha_mod = 2.0';
-const buttonCommandList = 'up,down,left,right,a,b,x,y,l,l2,l3,r,r2,r3,select,start,analog_left,analog_right' +
+const buttonCommandList = 'up,down,left,right,a,b,x,y,l,l2,l3,r,r2,r3,select,start,analog_left,analog_right,l_x_minus,l_x_plus,l_y_minus,l_y_plus' +
 	',,' +
-	'menu_toggle,overlay_next,load_state,save_state,state_slot_increase,state_slot_decrease,shader_prev,shader_next,rewind,toggle_fast_forward,toggle_slowmotion,reset';
+	'menu_toggle,overlay_next,load_state,save_state,state_slot_increase,state_slot_decrease,shader_prev,shader_next,rewind,toggle_fast_forward,hold_fast_forward,toggle_slowmotion,reset,exit_emulator';
 fillCommandSelector(buttonCommandList);
 
 let importedFilename = 'retropad.cfg';
