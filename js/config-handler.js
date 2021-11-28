@@ -221,7 +221,7 @@ function ConfigHandler() {
 	function updateLinkedButtons(currentName, newName) {
 		// update name in overlayX_descY_next_target = currentName
 		// currentName should be surrounded by quotemarks
-		let regParam = new RegExp('(overlay\\d+_desc\\d+_next_target)');
+		let regParam = new RegExp('^overlay\\d+_desc\\d+_next_target');
 		let regValue = new RegExp('=\\s*' + currentName + '$');
 
 		for (let i = _strings.length - 1; i >= 0; i--) {
