@@ -19,18 +19,10 @@ button.button--normal-size {
 }
 
 button.close-button {
-	box-sizing: content-box;
-	min-width: 0;
+	min-width: initial;
 	position: absolute;
 	top: 4px;
 	right: 4px;
-	height: 1em;
-	width: 1em;
-	padding: 1px;
-	background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' height='100' width='100'><path d='M 30,30 70,70 M 70,30 30,70' style='fill:none;stroke:rgb(255,255,255);stroke-width:8;stroke-linecap:round; stroke-linejoin:round'/></svg>");
-	background-position: center center;
-	background-repeat: no-repeat;
-	background-size: 100% 100%;
 }
 
 button a {
@@ -40,6 +32,10 @@ button a {
 
 br.wide+* {
 	margin-top: 1vh;
+}
+
+br.narrow+* {
+	margin-top: 0.5vh;
 }
 
 input[type=number] {
