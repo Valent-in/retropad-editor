@@ -386,7 +386,6 @@ function createDownloadLink() {
 
 
 function updateCurrentLine(section, value) {
-
 	if (section)
 		conf.setCurrentLineSectionValue(section, value);
 

@@ -3,7 +3,6 @@ function ConfigHandler() {
 
 	// Array index of line overlayXX_descYY = "..."
 	let _currentLine = -1;
-
 	let _currentOverlay = 0;
 
 
@@ -138,7 +137,7 @@ function ConfigHandler() {
 			_replaceParamNumbers('overlay', i + 1, i);
 		}
 
-		updateLinkedButtons(name, null);
+		_updateLinkedButtons(name, null);
 
 		_setParamValue('overlays', count - 1);
 		_currentOverlay = 0;
@@ -214,32 +213,7 @@ function ConfigHandler() {
 
 		_strings.splice(insertAfter + 1, 0, ...newParams);
 
-		updateLinkedButtons(currentName, name);
-	}
-
-
-	function updateLinkedButtons(currentName, newName) {
-		// update name in overlayX_descY_next_target = currentName
-		// currentName should be surrounded by quotemarks
-		let regParam = new RegExp('^overlay\\d+_desc\\d+_next_target');
-		let regValue = new RegExp('=\\s*' + currentName + '$');
-
-		for (let i = _strings.length - 1; i >= 0; i--) {
-
-			if (_strings[i].search(regParam) == -1)
-				continue;
-
-			if (_strings[i].search(regValue) == -1)
-				continue;
-
-			if (newName) {
-				console.log('REPLACE: ' + _strings[i]);
-				_strings[i] = _strings[i].split('=')[0].trim() + ' = "' + newName + '"';
-			} else {
-				console.log('DELETE: ' + _strings[i]);
-				_strings.splice(i, 1);
-			}
-		}
+		_updateLinkedButtons(currentName, name);
 	}
 
 
@@ -340,7 +314,6 @@ function ConfigHandler() {
 
 
 	this.fixAspect = function (iw, ih, ow, oh, portrait, keepRelativePositions) {
-
 		let initial = iw / ih;
 		let target = ow / oh;
 		let axis = portrait ? 'y' : 'x';
@@ -472,7 +445,6 @@ function ConfigHandler() {
 
 
 	this.updateCurrentButton = function (command, shape, image, addLines) {
-
 		// Analog sticks with 'rect' shape are not valid
 		if (command.search('analog_') == 0)
 			shape = 'radial';
@@ -644,7 +616,6 @@ function ConfigHandler() {
 
 	function _replaceParamNumbers(searchStr, oldNum, newNum) {
 		console.log(searchStr);
-
 		let reg = new RegExp('^' + searchStr + oldNum + '(?!\\d)');
 
 		for (let i = 0; i < _strings.length; i++)
@@ -663,7 +634,6 @@ function ConfigHandler() {
 
 	function _editParamSection(str, section, value) {
 		let position = _getParamSectionValuePos(section);
-
 		let blocks = str.split('"');
 		let data = blocks[1].split(',');
 		data[position] = value;
@@ -675,9 +645,9 @@ function ConfigHandler() {
 
 	function _getParamSectionValue(str, section) {
 		let position = _getParamSectionValuePos(section);
-
 		let blocks = str.split('"');
 		let data = blocks[1].split(',');
+
 		return data[position];
 	}
 
@@ -703,6 +673,31 @@ function ConfigHandler() {
 
 			case 'h':
 				return 5;
+		}
+	}
+
+
+	function _updateLinkedButtons(currentName, newName) {
+		// update name in overlayX_descY_next_target = currentName
+		// currentName should be surrounded by quotemarks
+		let regParam = new RegExp('^overlay\\d+_desc\\d+_next_target');
+		let regValue = new RegExp('=\\s*' + currentName + '$');
+
+		for (let i = _strings.length - 1; i >= 0; i--) {
+
+			if (_strings[i].search(regParam) == -1)
+				continue;
+
+			if (_strings[i].search(regValue) == -1)
+				continue;
+
+			if (newName) {
+				console.log('REPLACE: ' + _strings[i]);
+				_strings[i] = _strings[i].split('=')[0].trim() + ' = "' + newName + '"';
+			} else {
+				console.log('DELETE: ' + _strings[i]);
+				_strings.splice(i, 1);
+			}
 		}
 	}
 
