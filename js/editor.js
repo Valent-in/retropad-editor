@@ -90,12 +90,12 @@ function createPadView() {
 
 		b.addEventListener('click', () => {
 			if (currentRect)
-				currentRect.style['background-color'] = 'transparent';
+				currentRect.classList.remove('selected');
 
 			conf.setCurrentLine(r.i);
 			currentRect = b;
 
-			b.style['background-color'] = 'rgba(200,0,0,0.3)';
+			b.classList.add('selected');
 
 			'xywh'.split('').forEach(elem => {
 				let range = document.getElementById(elem + '-range');

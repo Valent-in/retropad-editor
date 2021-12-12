@@ -191,6 +191,11 @@ input[type=number] {
 	text-shadow: 1px 1px #aac;
 }
 
+.rect.selected {
+	background-color: rgba(200, 0, 0, 0.3);
+	box-shadow: 0 0 0 2px rgba(200, 0, 0, 0.15);
+}
+
 .show-borders .rect:after {
 	content: '';
 	border: 1px solid black;
