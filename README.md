@@ -20,3 +20,7 @@ On most Android devices RetroArch will open config only from internal memory eve
 Libretro Docs: https://docs.libretro.com/development/retroarch/input/overlay/
 
 Used media resources from https://github.com/libretro/common-overlays (button images) and https://github.com/libretro/RetroArch (icon).
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 3.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY.
