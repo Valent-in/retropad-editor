@@ -331,6 +331,8 @@
 					<div class='dialog-content-box__section'>
 						<input type='checkbox' id='chk-keep-relative' autocomplete='off'>
 						<label for='chk-keep-relative'>Keep relative positions</label>
+						<button class='empty button--normal-size'
+							onclick='showDialog("aspect-hint-dialog", true)'>?</button>
 					</div>
 				</div>
 				<div class='modal-dialog__footer-box'>
@@ -516,6 +518,19 @@
 				</div>
 				<div class='modal-dialog__footer-box'>
 					<button class='js-dialog__focus' onclick='showDialog("name-empty-dialog", false)'>Close</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='aspect-hint-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__header-box'>
+					<span>Aspect ratio hint</span>
+					<button class='close-button danger' onclick='showDialog("aspect-hint-dialog", false)'></button>
+				</div>
+				<img src='aspect-ratio-hint.svg'>
+				<div class='modal-dialog__footer-box'>
+					<button class='js-dialog__focus' onclick='showDialog("aspect-hint-dialog", false)'>Close</button>
 				</div>
 			</div>
 		</div>
