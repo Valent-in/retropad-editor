@@ -63,7 +63,8 @@
 
 				<div class='toolbar-group'>
 					<span class='group-header'>OVERLAY</span>
-					<select id='overlay-selector' onchange='selectOverlay(event)'></select>
+					<select id='overlay-selector' onchange='selectOverlay(event)' class='notranslate'
+						translate='no'></select>
 					<div class='toolbar-group__buttons'>
 						<button onclick='showOverlayEditor()'>Create • Edit</button>
 						<button onclick='showDialog("overlay-delete-dialog", true)'>Delete overlay</button>
@@ -83,7 +84,7 @@
 				</div>
 			</div>
 
-			<div id='editor-container'>
+			<div id='editor-container' class='notranslate' translate='no'>
 				<div id='gamepad-container'>
 					<div id='gamepad-container__scroll-frame'>
 						<div id='screenpad' class='hide-offscreen'>
@@ -146,7 +147,7 @@
 
 							<td>
 								<input type='text' id='command-name' class='js-dialog__focus'>
-								<select class='miniselect' id='command-select'
+								<select class='miniselect notranslate' translate='no' id='command-select'
 									onchange='fillCommandField(event)'></select>
 							</td>
 						</tr>
@@ -158,7 +159,7 @@
 
 							<td>
 								<input type='text' id='image-name' oninput='showImagePreview(event.target.value)'>
-								<select class='miniselect' id='image-select'
+								<select class='miniselect notranslate' translate='no' id='image-select'
 									onchange='fillImageNameField(event)'></select>
 							</td>
 						</tr>
@@ -169,7 +170,7 @@
 							</td>
 
 							<td>
-								<select id='button-shape'>
+								<select id='button-shape' class='notranslate' translate='no'>
 									<option>rect</option>
 									<option>radial</option>
 								</select>
@@ -186,17 +187,17 @@
 
 						<tr class='js-additional-button-property hidden'>
 							<td>
-								<label for='next_target_property'>next_target</label>
+								<label for='next_target_property' class='notranslate' translate='no'>next_target</label>
 							</td>
 
 							<td>
-								<select id='next_target_property'></select>
+								<select id='next_target_property' class='notranslate' translate='no'></select>
 							</td>
 						</tr>
 
 						<tr class='js-additional-button-property hidden'>
 							<td>
-								<label for='range_mod_property'>range_mod</label>
+								<label for='range_mod_property' class='notranslate' translate='no'>range_mod</label>
 							</td>
 
 							<td>
@@ -206,7 +207,7 @@
 
 						<tr class='js-additional-button-property hidden'>
 							<td>
-								<label for='alpha_mod_property'>alpha_mod</label>
+								<label for='alpha_mod_property' class='notranslate' translate='no'>alpha_mod</label>
 							</td>
 
 							<td>
@@ -216,7 +217,8 @@
 
 						<tr class='js-additional-button-property hidden'>
 							<td>
-								<label for='saturate_pct_property'>saturate_pct</label>
+								<label for='saturate_pct_property' class='notranslate'
+									translate='no'>saturate_pct</label>
 							</td>
 
 							<td>
@@ -226,11 +228,11 @@
 
 						<tr class='js-additional-button-property hidden'>
 							<td>
-								<label for='movable_property'>movable</label>
+								<label for='movable_property' class='notranslate' translate='no'>movable</label>
 							</td>
 
 							<td>
-								<select id='movable_property'>
+								<select id='movable_property' class='notranslate' translate='no'>
 									<option></option>
 									<option>false</option>
 									<option>true</option>
