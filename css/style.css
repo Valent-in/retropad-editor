@@ -316,11 +316,6 @@ input[type=number] {
 	box-shadow: 0.5vw 0.5vw 0.5vw #444;
 }
 
-.modal-dialog>img {
-	max-width: 100%;
-	max-height: 65vh;
-}
-
 .modal-dialog__header-box {
 	position: relative;
 	padding: 2vh 3vw 2vh 3vw;
@@ -443,6 +438,21 @@ input[type=number] {
 
 #aspect-hint {
 	color: #bbb;
+}
+
+#aspect-hint-image {
+	max-width: 100%;
+	max-height: 50vh;
+}
+
+.aspect-hint-text-container {
+	overflow: hidden;
+}
+
+.aspect-hint-text-container span {
+	min-width: 36%;
+	text-align: center;
+	float: right;
 }
 
 .small-warning {

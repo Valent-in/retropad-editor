@@ -530,7 +530,15 @@
 					<span>Aspect ratio hint</span>
 					<button class='close-button danger' onclick='showDialog("aspect-hint-dialog", false)'></button>
 				</div>
-				<img src='aspect-ratio-hint.svg'>
+				<div class='modal-dialog__content-box'>
+					<div class='aspect-hint-text-container'>
+						<span>Default aspect ratio fix</span>
+					</div>
+					<img id='aspect-hint-image' src='aspect-ratio-hint.svg'>
+					<div class='aspect-hint-text-container'>
+						<span>Keep relative positions</span>
+					</div>
+				</div>
 				<div class='modal-dialog__footer-box'>
 					<button class='js-dialog__focus' onclick='showDialog("aspect-hint-dialog", false)'>Close</button>
 				</div>
