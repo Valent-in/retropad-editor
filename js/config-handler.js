@@ -89,7 +89,7 @@ function ConfigHandler() {
 		let rect = _getParamValue('overlay' + _currentOverlay + '_rect');
 
 		if (rect) {
-			let coords = rect.split('"')[1].split(',');
+			let coords = rect.split(',');
 			bg.position = {};
 			bg.position.x = coords[0];
 			bg.position.y = coords[1];
@@ -373,15 +373,7 @@ function ConfigHandler() {
 
 
 	this.getCurrentOverlayName = function () {
-		let name = _getParamValue('overlay' + _currentOverlay + '_name');
-		if (name) {
-			if (name.search(/^".+"$/) == 0)
-				return name.split('"')[1];
-			else
-				return name;
-		} else {
-			return '';
-		}
+		return _getParamValue('overlay' + _currentOverlay + '_name') || '';
 	}
 
 
@@ -395,7 +387,7 @@ function ConfigHandler() {
 			let name = _getParamValue('overlay' + i + '_name');
 
 			if (name)
-				list.push(name);
+				list.push('"' + name + '"');
 			else
 				list.push('');
 		}
@@ -590,8 +582,14 @@ function ConfigHandler() {
 
 	function _getParamValue(param) {
 		for (let i = 0; i < _strings.length; i++)
-			if (_strings[i].split('=')[0].trim() == param)
-				return _strings[i].split('=')[1].trim();
+			if (_strings[i].split('=')[0].trim() == param) {
+				let value = _strings[i].split('=')[1].trim();
+
+				if (value[0] == '"')
+					return value.split('"')[1];
+				else
+					return value;
+			}
 	}
 
 
@@ -679,9 +677,8 @@ function ConfigHandler() {
 
 	function _updateLinkedButtons(currentName, newName) {
 		// update name in overlayX_descY_next_target = currentName
-		// currentName should be surrounded by quotemarks
 		let regParam = new RegExp('^overlay\\d+_desc\\d+_next_target');
-		let regValue = new RegExp('=\\s*' + currentName + '$');
+		let regValue = new RegExp('=\\s*\\"' + currentName + '\\"$');
 
 		for (let i = _strings.length - 1; i >= 0; i--) {
 
