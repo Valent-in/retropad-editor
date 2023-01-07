@@ -179,7 +179,7 @@
 
 						<tr>
 							<td>
-								<button class='empty expander button--normal-size'
+								<button class='empty expander button--normal-size' id='btn-additional-button'
 									onclick='toggleAdditionalButtonProperties()'>Additional</button>
 							</td>
 							<td></td>
@@ -288,8 +288,8 @@
 						<label for='chk-portrait-overlay'>Portrait</label>
 					</div>
 					<div class='dialog-content-box__section'>
-						<button class='empty expander button--normal-size'
-							onclick='toggleAdditionalOverlayProperties(event)'>Additional</button>
+						<button class='empty expander button--normal-size' onclick='toggleAdditionalOverlayProperties()'
+							id='overlay-additional-button'>Additional</button>
 						<div id='overlay-properties-container' class='dialog-content-box__expandable hidden'>
 							<span class='small-warning'>WARNING! Edit carefully!</span>
 							<br>

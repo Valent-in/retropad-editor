@@ -1033,30 +1033,32 @@ function toggleOffscreen(event) {
 
 function toggleAdditionalButtonProperties(show) {
 	let adds = document.getElementsByClassName('js-additional-button-property');
+	let addBtn = document.getElementById('btn-additional-button');
 
 	if (show || adds[0].classList.contains('hidden')) {
 		for (let i = 0; i < adds.length; i++)
 			adds[i].classList.remove('hidden');
 		if (event)
-			event.target.classList.add('expanded');
+			addBtn.classList.add('expanded');
 	} else {
 		for (let i = 0; i < adds.length; i++)
 			adds[i].classList.add('hidden');
 		if (event)
-			event.target.classList.remove('expanded');
+			addBtn.classList.remove('expanded');
 	}
 }
 
 
-function toggleAdditionalOverlayProperties(event) {
+function toggleAdditionalOverlayProperties(show) {
 	let add = document.getElementById('overlay-properties-container');
+	let addBtn = document.getElementById('overlay-additional-button');
 
-	if (add.classList.contains('hidden')) {
+	if (show || add.classList.contains('hidden')) {
 		add.classList.remove('hidden');
-		event.target.classList.add('expanded');
+		addBtn.classList.add('expanded');
 	} else {
 		add.classList.add('hidden');
-		event.target.classList.remove('expanded');
+		addBtn.classList.remove('expanded');
 	}
 }
 
@@ -1083,6 +1085,9 @@ function updateNewOverlayFields() {
 	let isDuplicate = duplicateChk.checked;
 	let isPortrait = portraitChk.checked;
 	let isEdit = editChk.checked;
+
+	if (isEdit)
+		toggleAdditionalOverlayProperties(true);
 
 	let aspect = screen.longSide / screen.shortSide;
 
