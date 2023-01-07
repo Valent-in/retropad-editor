@@ -17,6 +17,7 @@ let screen = {
 	_width: DEF_WIDTH,
 	_height: DEF_HEIGHT,
 
+	isSetByUser: false,
 	isPortrait: false,
 
 	scale: 1,
@@ -322,6 +323,25 @@ function setScreenDimensions(width, height, screenshotWidth, screenshotHeight) {
 	screen.width = width;
 	screen.height = height;
 
+	let ratio = 16 / 9;
+	let aspect = conf.getOverlayAspectRatio();
+	if (aspect)
+		ratio = aspect.w / aspect.h
+
+	// Reverse ratio if it does not match overlay name or orientation checkbox
+	if ((screen.isPortrait && ratio > 1) ||
+		(!screen.isPortrait && ratio < 1))
+		ratio = 1 / ratio;
+
+	if (!screen.isSetByUser)
+		if (screen.isPortrait) {
+			screen.width = DEF_HEIGHT;
+			screen.height = Math.round(DEF_HEIGHT / ratio);
+		} else {
+			screen.height = DEF_HEIGHT;
+			screen.width = Math.round(DEF_HEIGHT * ratio);
+		}
+
 	// Swap sides if height > width
 	let ewidth = screen.enteredWidth;
 	let eheight = screen.enteredHeight;
@@ -370,6 +390,7 @@ function applyScreenDimensions() {
 	let match = document.getElementById('radio-screenshot-match').checked;
 	let setSize = document.getElementById('radio-screenshot-set').checked;
 
+	screen.isSetByUser = true;
 	screen.shotMode = fit ? 'fit' : match ? 'match' : setSize ? 'set' : 'fit';
 
 	hideScreenSizeDialog();
