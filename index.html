@@ -32,7 +32,10 @@
 
 				<div class='toolbar-group'>
 					<span class='group-header'>TOOLS</span>
-					<button onclick='showScreenSizeDialog()'>Set screen size</button>
+					<div class='join-buttons-div'>
+						<button onclick='showScreenSizeDialog()'>Set screen size</button>
+						<button id='show-colors-button' onclick='showColorsDialog()'>C</button>
+					</div>
 					<br>
 					<div class='toolbar-group__checkboxes'>
 						<div class='checkbox-wrapper'>
@@ -541,6 +544,34 @@
 				</div>
 				<div class='modal-dialog__footer-box'>
 					<button class='js-dialog__focus' onclick='showDialog("aspect-hint-dialog", false)'>Close</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='colors-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__header-box'>
+					<span>Color theme</span>
+					<button class='close-button danger' onclick='showDialog("colors-dialog", false)'></button>
+				</div>
+				<div class='modal-dialog__content-box'>
+					<input type=radio name='color-scheme-radio' id='color-scheme-0' autocomplete='off' checked
+						onchange='setColorScheme(0)'>
+					<label for='color-scheme-0' id='color-scheme-0-label'>Color theme 0</label>
+					<br class='wide'>
+
+					<input type=radio name='color-scheme-radio' id='color-scheme-1' autocomplete='off'
+						onchange='setColorScheme(1)'>
+					<label for='color-scheme-1' id='color-scheme-1-label'>Color theme 1</label>
+					<br class='wide'>
+
+					<input type=radio name='color-scheme-radio' id='color-scheme-2' autocomplete='off'
+						onchange='setColorScheme(2)'>
+					<label for='color-scheme-2' id='color-scheme-2-label'>Color theme 2</label>
+
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='js-dialog__focus' onclick='showDialog("colors-dialog", false)'>Close</button>
 				</div>
 			</div>
 		</div>

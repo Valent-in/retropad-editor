@@ -1142,3 +1142,18 @@ function selectOverlay(event) {
 	setScreenDimensions();
 	redrawPad();
 }
+
+
+function showColorsDialog() {
+	showDialog('colors-dialog', true);
+}
+
+
+function setColorScheme(index) {
+	let screenpad = document.getElementById('screenpad');
+	screenpad.classList.remove('scheme-1');
+	screenpad.classList.remove('scheme-2');
+
+	if (index > 0)
+		screenpad.classList.add('scheme-' + index);
+}

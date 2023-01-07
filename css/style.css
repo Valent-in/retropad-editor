@@ -118,6 +118,20 @@ input[type=number] {
 	flex-grow: 1;
 }
 
+#show-colors-button {
+	min-width: 0;
+	background-image: linear-gradient(#d03 0%, #d03 15%, #0a1 40%, #0a1 60%, #08d 80%, #08d 100%);
+}
+
+#show-colors-button:active, #show-colors-button:hover {
+	background-image: none;
+}
+
+.join-buttons-div {
+	display: inline-block;
+	white-space: nowrap;
+}
+
 .toolbar-group select {
 	min-width: 13vw;
 	max-width: 10em;
@@ -165,6 +179,10 @@ input[type=number] {
 	padding: 0;
 }
 
+#screenpad.scheme-1, #screenpad.scheme-2 {
+	background-color: #000;
+}
+
 .screenpad-background {
 	position: absolute;
 	top: 0;
@@ -191,9 +209,24 @@ input[type=number] {
 	text-shadow: 1px 1px #aac;
 }
 
+#screenpad.scheme-1 .rect {
+	color: #69e;
+	text-shadow: 1px 1px #034;
+}
+
+#screenpad.scheme-2 .rect {
+	color: #6e9;
+	text-shadow: 1px 1px #043;
+}
+
 .rect.selected {
 	background-color: rgba(200, 0, 0, 0.3);
 	box-shadow: 0 0 0 2px rgba(200, 0, 0, 0.15);
+}
+
+#screenpad.scheme-1 .rect.selected, #screenpad.scheme-2 .rect.selected {
+	background-color: rgba(200, 100, 50, 0.4);
+	box-shadow: 0 0 0 2px rgba(200, 100, 50, 0.25);
 }
 
 .show-borders .rect:after {
@@ -206,6 +239,14 @@ input[type=number] {
 	left: 0;
 	box-sizing: border-box;
 	background-color: rgba(1, 0, 0, 0.1);
+}
+
+#screenpad.scheme-1.show-borders .rect:after {
+	border-color: #89b;
+}
+
+#screenpad.scheme-2.show-borders .rect:after {
+	border-color: #8b9;
 }
 
 .show-borders .rect.radial:after {
@@ -223,7 +264,7 @@ input[type=number] {
 	background-color: none;
 }
 
-.hide-names .rect {
+.hide-names .rect, #screenpad.scheme-1.hide-names .rect, #screenpad.scheme-2.hide-names .rect {
 	color: transparent;
 	font-size: 1px;
 	text-shadow: none;
@@ -237,6 +278,10 @@ input[type=number] {
 	top: 0;
 	left: 107px;
 	background-size: 100% 100%;
+}
+
+#screenpad.scheme-1 #game-screenshot, #screenpad.scheme-2 #game-screenshot {
+	background-color: #667;
 }
 
 .hide-offscreen #game-screenshot {
@@ -453,6 +498,30 @@ input[type=number] {
 	min-width: 36%;
 	text-align: center;
 	float: right;
+}
+
+#color-scheme-0-label {
+	color: #000;
+	text-shadow: 1px 1px #aac;
+	background-color: #999;
+	padding: 1px 6px;
+	border-radius: 3px;
+}
+
+#color-scheme-1-label {
+	color: #69e;
+	text-shadow: 1px 1px #034;
+	background-color: black;
+	padding: 1px 6px;
+	border-radius: 3px;
+}
+
+#color-scheme-2-label {
+	color: #6e9;
+	text-shadow: 1px 1px #043;
+	background-color: black;
+	padding: 1px 6px;
+	border-radius: 3px;
 }
 
 .small-warning {
