@@ -48,6 +48,8 @@ let images = {};
 if (defaultImagesObj) // defaults.js
 	images = defaultImagesObj;
 
+let userImages = [];
+
 fillImageSelector();
 
 let conf = new ConfigHandler();
@@ -187,6 +189,12 @@ function loadImageFiles(e) {
 
 		reader.onload = function (ev) {
 			images[name] = ev.target.result;
+
+			if (!userImages.includes(name)) {
+				userImages.push(name);
+				console.log(name);
+			}
+
 			// onload is async function so loop ends BEFORE it's first launch
 			if (++loadCounter == imgCounter) {
 				redrawPad();
@@ -460,13 +468,22 @@ function fillImageSelector() {
 	let selector = document.getElementById('image-select');
 	selector.innerHTML = '';
 
-	let o = document.createElement('OPTION');
-	o.appendChild(document.createTextNode(''));
-	selector.appendChild(o);
+	userImages.sort();
 
-	for (let f in images) {
+	let listAll = [];
+	if (userImages.length > 0)
+		listAll = listAll.concat(userImages);
+
+	let defImages = [''];
+	for (let f in images)
+		if (!userImages.includes(f))
+			defImages.push(f);
+
+	listAll = listAll.concat(defImages);
+
+	for (name of listAll) {
 		o = document.createElement('OPTION');
-		o.appendChild(document.createTextNode(f));
+		o.appendChild(document.createTextNode(name));
 		selector.appendChild(o);
 	}
 }
@@ -474,7 +491,7 @@ function fillImageSelector() {
 
 function setImageSelectorOption(value) {
 	let s = document.getElementById('image-select');
-	s.selectedIndex = 0;
+	s.value = '';
 
 	for (let i = 0; i < s.options.length; i++) {
 		if (s.options[i].text == value) {
