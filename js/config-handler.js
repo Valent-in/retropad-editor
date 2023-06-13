@@ -396,6 +396,13 @@ function ConfigHandler() {
 	}
 
 
+	this.flipXcoord = function () {
+		let x = (1 - _getParamSectionValue(_strings[_currentLine], 'x')).toFixed(5)
+		this.setCurrentLineSectionValue('x', x);
+		return x;
+	}
+
+
 	this.normalizeWidth = function (width, height) {
 		let w = (height / width * _getParamSectionValue(_strings[_currentLine], 'h')).toFixed(5)
 		this.setCurrentLineSectionValue('w', w);

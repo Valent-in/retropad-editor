@@ -756,6 +756,14 @@ function toggleNames(event) {
 }
 
 
+function flipXcoord() {
+	let x = conf.flipXcoord()
+	document.getElementById('x-range').value = x;
+	document.getElementById('x-number').value = x;
+	updateCurrentLine();
+}
+
+
 function normalizeHeight() {
 	let h = conf.normalizeHeight(screen.width, screen.height)
 	document.getElementById('h-range').value = h;
