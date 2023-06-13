@@ -242,7 +242,10 @@ function loadScreenshotFile(e) {
 
 function refreshScreenshot() {
 	let shot = document.getElementById('game-screenshot');
-	document.getElementById('chk-show-screenshot').checked = screen.shotShow;
+
+	let screenCheckbox = document.getElementById('chk-show-screenshot')
+	screenCheckbox.checked = screen.shotShow;
+	screenCheckbox.disabled = !screen.shotImage;
 
 	if (screen.shotShow && screen.shotImage)
 		shot.style['background-image'] = 'url(' + screen.shotImage + ')';
@@ -972,7 +975,25 @@ function showScreenSizeDialog() {
 
 	document.getElementById('chk-rescale-to-fit').checked = screen.scale != 1;
 
+	let screenshotMatch = document.getElementById('radio-screenshot-match');
+	screenshotMatch.disabled = (!screen.shotImage || !screen.shotShow);
+
+	onScreenshotModeChange();
+
 	showDialog('screen-size-dialog', true);
+}
+
+
+function onScreenshotModeChange() {
+	let screenshotWidth = document.getElementById('screenshot-width');
+	let screenshotHeight = document.getElementById('screenshot-height');
+
+	let screenshotFit = document.getElementById('radio-screenshot-fit');
+	let screenshotMatch = document.getElementById('radio-screenshot-match');
+
+	let disableSizeSet = (screen.shotImage && screen.shotShow) && (screenshotFit.checked || screenshotMatch.checked);
+	screenshotWidth.disabled = disableSizeSet;
+	screenshotHeight.disabled = disableSizeSet;
 }
 
 
@@ -982,6 +1003,7 @@ function hideScreenSizeDialog() {
 
 
 function showFileDialog() {
+	document.getElementById('chk-show-screenshot').disabled = !screen.shotImage;
 	showDialog('import-export-dialog', true);
 }
 

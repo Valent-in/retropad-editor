@@ -133,7 +133,7 @@
 			<a href='https://forums.libretro.com/t/retropad-editor-create-and-edit-onscreen-gamepads' target='_blank'
 				rel='noopener'>Forum</a>
 			<a href='https://www.retroarch.com' target='_blank' rel='noopener'>RetroArch</a>
-			<span id='version'>v0.9.4</span>
+			<span id='version'>v0.9.5</span>
 		</div>
 
 
@@ -366,7 +366,7 @@
 						<input type='number' id='display-height' step=0.00001>
 						<br class='wide'>
 						<input type='checkbox' id='chk-rescale-to-fit' autocomplete='off'>
-						<label for='chk-viewport-fit'>Rescale to fit editor window</label>
+						<label for='chk-rescale-to-fit'>Rescale to fit editor window</label>
 					</div>
 
 					<div class='dialog-content-box__section'>
@@ -378,14 +378,17 @@
 							<span>x</span>
 							<input type='number' id='screenshot-height' step=0.00001>
 							<br class='wide'>
-							<input type='radio' id='radio-screenshot-fit' name='screenshot-mode'>
+							<input type='radio' onchange='onScreenshotModeChange()' id='radio-screenshot-fit'
+								name='screenshot-mode'>
 							<label for='radio-screenshot-fit'>Fit screen</label>
 							<br class='narrow'>
-							<input type='radio' id='radio-screenshot-match' name='screenshot-mode'>
-							<label for='radio-screenshot-match'>Exact screenshot size</label>
-							<br class='narrow'>
-							<input type='radio' id='radio-screenshot-set' name='screenshot-mode'>
+							<input type='radio' onchange='onScreenshotModeChange()' id='radio-screenshot-set'
+								name='screenshot-mode'>
 							<label for='radio-screenshot-set'>Set size</label>
+							<br class='narrow'>
+							<input type='radio' onchange='onScreenshotModeChange()' id='radio-screenshot-match'
+								name='screenshot-mode'>
+							<label for='radio-screenshot-match'>Screenshot image size</label>
 						</div>
 					</div>
 				</div>
@@ -434,7 +437,6 @@
 						<tr>
 							<td>
 								<input type='checkbox' id='chk-show-screenshot' onchange='toggleScreenshot(event)'>
-
 								<label for='chk-show-screenshot'>Game screenshot</label>
 							</td>
 							<td>

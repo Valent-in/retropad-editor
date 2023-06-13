@@ -438,3 +438,7 @@ textarea:focus {
 select:disabled, input:disabled, button:disabled, textarea:disabled, .input_file input[type=file]:disabled+label {
 	opacity: 0.4;
 }
+
+input:disabled+label {
+	opacity: 0.4;
+}
