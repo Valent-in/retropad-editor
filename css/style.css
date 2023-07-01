@@ -201,12 +201,23 @@ input[type=number] {
 	margin: 100px;
 }
 
+.selection-box {
+	position: absolute;
+	background-color: rgba(150,100,200,0.4);
+	z-index: 1;
+	box-sizing: border-box;
+	border: 1px solid #96c;
+	display: none;
+}
+
 .rect {
 	position: absolute;
 	background-size: 100% 100%;
 	text-align: center;
 	cursor: pointer;
 	text-shadow: 1px 1px #aac;
+	-webkit-user-select: none;
+	user-select: none;
 }
 
 #screenpad.scheme-1 .rect {

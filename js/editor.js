@@ -62,17 +62,27 @@ renderConfig(configStr);
 	let text = document.getElementById(elem + '-number');
 
 	range.addEventListener('input', (e) => {
+		applyButtonParam(elem, e.target.value);
 		text.value = e.target.value;
-		updateCurrentLine(elem, e.target.value);
 	});
 
 	text.addEventListener('input', (e) => {
-		// input type='number' will not return NaN but may return empty string
-		let value = Number(e.target.value);
-		range.value = value;
-		updateCurrentLine(elem, value);
+		applyButtonParam(elem, e.target.value);
+		range.value = e.target.value;
 	});
 });
+
+
+function applyButtonParam(section, sValue) {
+	let value = Number(sValue);
+
+	if (conf.isGroupSelected()) {
+		conf.setSelectionSectionValue(section, value);
+		syncSelectedButtons();
+	} else {
+		updateCurrentLine(section, value);
+	}
+}
 
 
 function createPadView() {
@@ -90,6 +100,10 @@ function createPadView() {
 
 		if (r.s == 'radial')
 			b.classList.add('radial');
+
+		b.dataset.lineIndex = r.i;
+		if (conf.isLineInSelection(r.i))
+			b.classList.add('selected');
 
 		b.addEventListener('click', () => {
 			if (currentRect)
@@ -136,7 +150,172 @@ function createPadBackground() {
 
 	padFrame.appendChild(backgroundDiv);
 
+	let startX = 0;
+	let startY = 0;
+	let isMouseDown = false;
+
+	let select = document.createElement('DIV');
+	select.classList.add('selection-box');
+	backgroundDiv.appendChild(select);
+
+	let padContianer = document.getElementById('gamepad-container');
+	padContianer.onmouseup = cancelSelection;
+	padContianer.onpointerleave = cancelSelection;
+
+	function cancelSelection(event) {
+		select.style.display = 'none';
+		isMouseDown = false;
+
+		let indexes = conf.getSelectedIndexes();
+		if (indexes.length == 1) {
+			let index = indexes[0];
+			conf.resetGroupSelection();
+			conf.setCurrentLine(index);
+			let elem = document.querySelectorAll('.rect[data-line-index="' + index + '"]')[0];
+
+			setTimeout(() => {
+				elem.dispatchEvent(new Event('click'));
+			}, 0);
+		} else {
+			if ((event.target == backgroundDiv) && !conf.isGroupSelected())
+				enableEditor(false);
+		}
+	}
+
+	backgroundDiv.onmousedown = (event) => {
+		if (event.button != 0)
+			return;
+
+		let bgRect = backgroundDiv.getBoundingClientRect();
+		let tx = bgRect.left;
+		let ty = bgRect.top;
+		startX = event.clientX - tx;
+		startY = event.clientY - ty;
+
+		isMouseDown = true;
+		deselectAll();
+	}
+
+	backgroundDiv.onmousemove = (event) => {
+		if (event.buttons != 1 || !isMouseDown)
+			return;
+
+		select.style.display = 'block';
+
+		let bgRect = backgroundDiv.getBoundingClientRect();
+		let tx = bgRect.left;
+		let ty = bgRect.top;
+
+		let endX = event.clientX - tx;
+		let endY = event.clientY - ty;
+
+		setControls(startX, startY, endX, endY);
+	}
+
+	// empty event listener (fix for old FF)
+	document.getElementById('editor').ontouchstart = () => { };
+
+	backgroundDiv.ontouchstart = (event) => {
+		let touches = event.touches;
+		if (touches.length != 2) {
+			select.style.display = 'none';
+			return;
+		}
+
+		select.style.display = 'block';
+
+		let bgRect = backgroundDiv.getBoundingClientRect();
+		let tx = bgRect.left;
+		let ty = bgRect.top;
+
+		let startX = touches[0].clientX - tx;
+		let startY = touches[0].clientY - ty;
+
+		let endX = touches[1].clientX - tx;
+		let endY = touches[1].clientY - ty;
+
+		setControls(startX, startY, endX, endY);
+	}
+
+	function setControls(sX, sY, eX, eY) {
+		let left = Math.min(sX, eX);
+		let top = Math.min(sY, eY);
+		let right = (backgroundDiv.clientWidth - Math.max(sX, eX));
+		let bottom = (backgroundDiv.clientHeight - Math.max(sY, eY));
+
+		select.style.left = left + 'px';
+		select.style.top = top + 'px';
+		select.style.right = right + 'px';
+		select.style.bottom = bottom + 'px';
+
+		getButtonsInRect(left, top, right, bottom, backgroundDiv);
+		setEditorControls();
+	}
+
 	return backgroundDiv;
+}
+
+
+function getButtonsInRect(left, top, right, bottom, container) {
+	let bgRect = container.getBoundingClientRect();
+	let cWidth = bgRect.width;
+	let cHeight = bgRect.height;
+
+	let rectLeft = left / cWidth;
+	let rectTop = top / cHeight;
+	let rectRight = (cWidth - right) / cWidth;
+	let rectBottom = (cHeight - bottom) / cHeight;
+
+	let indexes = conf.selectButtonsInBounds(rectLeft, rectTop, rectRight, rectBottom);
+
+	let rects = document.querySelectorAll('.rect');
+	rects.forEach(e => e.classList.remove('selected'));
+
+	indexes.forEach((e) => {
+		let elem = document.querySelectorAll('.rect[data-line-index="' + e + '"]');
+		if (elem[0])
+			elem[0].classList.add('selected');
+	});
+}
+
+
+function syncSelectedButtons() {
+	let indexes = conf.getSelectedIndexes();
+
+	indexes.forEach((e) => {
+		let elem = document.querySelectorAll('.rect[data-line-index="' + e + '"]');
+		if (elem[0]) {
+			currentRect = elem[0];
+			conf.setCurrentLine(e);
+			updateCurrentLine(null);
+		} else {
+			console.log('wrong selection index', e)
+		}
+	});
+}
+
+
+function deselectAll() {
+	let rects = document.querySelectorAll('.rect');
+	rects.forEach(e => e.classList.remove('selected'));
+	conf.resetGroupSelection();
+}
+
+
+function setEditorControls() {
+	enableEditor(false);
+	let size = conf.getSelectionDimensions();
+	if (size)
+		enableEditorSliders(true);
+	else
+		return;
+
+	'xywh'.split('').forEach(elem => {
+		let range = document.getElementById(elem + '-range');
+		let text = document.getElementById(elem + '-number');
+		text.value = Number(size[elem].toFixed(10));
+		range.value = size[elem];
+	});
 }
 
 
@@ -427,11 +606,12 @@ function updateCurrentLine(section, value) {
 	let rx = 100 * conf.getCurrentLineSectionValue('x') - rw / 2;
 	let ry = 100 * conf.getCurrentLineSectionValue('y') - rh / 2;
 
-	currentRect.style.height = rh + '%';
-	currentRect.style.width = rw + '%';
-
-	currentRect.style.left = rx + '%';
-	currentRect.style.top = ry + '%';
+	if (currentRect) {
+		currentRect.style.height = rh + '%';
+		currentRect.style.width = rw + '%';
+		currentRect.style.left = rx + '%';
+		currentRect.style.top = ry + '%';
+	}
 }
 
 
@@ -574,13 +754,16 @@ function showAdditionalParametersForCommand(command) {
 
 
 function enableEditor(enable) {
-	let editor = document.getElementById('editor');
-	let inputs = editor.querySelectorAll('input,button');
-
-	inputs.forEach(e => { e.disabled = !enable })
-
+	enableEditorSliders(enable)
 	document.getElementById('show-button-editor').disabled = !enable;
 	document.getElementById('del-current-button').disabled = !enable;
+}
+
+
+function enableEditorSliders(enable) {
+	let editor = document.getElementById('editor');
+	let inputs = editor.querySelectorAll('input,button');
+	inputs.forEach(e => { e.disabled = !enable })
 }
 
 
@@ -764,6 +947,7 @@ function flipXcoord() {
 	document.getElementById('x-range').value = x;
 	document.getElementById('x-number').value = x;
 	updateCurrentLine();
+	syncSelectedButtons();
 }
 
 
@@ -772,6 +956,7 @@ function normalizeHeight() {
 	document.getElementById('h-range').value = h;
 	document.getElementById('h-number').value = h;
 	updateCurrentLine();
+	syncSelectedButtons();
 }
 
 
@@ -780,6 +965,7 @@ function normalizeWidth() {
 	document.getElementById('w-range').value = w;
 	document.getElementById('w-number').value = w;
 	updateCurrentLine();
+	syncSelectedButtons();
 }
 
 
@@ -800,6 +986,7 @@ function fixAspect() {
 	if (ow >= 96 && oh >= 64)
 		setScreenDimensions(ow, oh);
 
+	deselectAll();
 	redrawPad();
 }
 
