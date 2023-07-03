@@ -182,7 +182,7 @@ function createPadBackground() {
 		}
 	}
 
-	backgroundDiv.onmousedown = (event) => {
+	padContianer.onmousedown = (event) => {
 		if (event.button != 0)
 			return;
 
@@ -194,9 +194,10 @@ function createPadBackground() {
 
 		isMouseDown = true;
 		deselectAll();
+		event.preventDefault();
 	}
 
-	backgroundDiv.onmousemove = (event) => {
+	padContianer.onmousemove = (event) => {
 		if (event.buttons != 1 || !isMouseDown)
 			return;
 
