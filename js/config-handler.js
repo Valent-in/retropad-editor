@@ -487,7 +487,7 @@ function ConfigHandler() {
 			this.setSelectionSectionValue('h', h);
 		} else {
 			h = (width / height * _getParamSectionValue(_strings[_currentLine], 'w')).toFixed(5);
-			this.setCurrentLineSectionValue('h', h.toFixed(5));
+			this.setCurrentLineSectionValue('h', h);
 		}
 		return h;
 	}
