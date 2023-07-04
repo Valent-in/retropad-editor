@@ -162,7 +162,7 @@ function createPadBackground() {
 	padContianer.onmouseup = cancelSelection;
 	padContianer.onpointerleave = cancelSelection;
 
-	function cancelSelection(event) {
+	function cancelSelection() {
 		select.style.display = 'none';
 		isMouseDown = false;
 
@@ -176,13 +176,10 @@ function createPadBackground() {
 			setTimeout(() => {
 				elem.dispatchEvent(new Event('click'));
 			}, 0);
-		} else {
-			if ((event.target == backgroundDiv) && !conf.isGroupSelected())
-				enableEditor(false);
 		}
 	}
 
-	padContianer.onmousedown = (event) => {
+	backgroundDiv.onmousedown = (event) => {
 		if (event.button != 0)
 			return;
 
