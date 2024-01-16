@@ -873,29 +873,32 @@ function ConfigHandler() {
 
 
 	function _normalizeOverlays(onFinshCallback, imagesObj) {
-		imagesObj = imagesObj ? imagesObj : {};
+		imagesObj = imagesObj || {};
 
 		let count = Number(_getParamValue('overlays'));
 		let imgSizes = {};
 		let toLoad = 0;
-		let missingImages = '';
+		let missingImages = [];
 
 		for (let i = 0; i < count; i++) {
-			let name = _getParamValue('overlay' + i + '_overlay')
+			let name = _getParamValue('overlay' + i + '_overlay');
 
 			if (!__isOverlayNormalized(i)) {
 				if (imagesObj[name]) {
-					imgSizes[name] = {};
-					imgSizes[name].image = imagesObj[name];
-					toLoad++;
+					if (!imgSizes[name]) {
+						imgSizes[name] = {};
+						imgSizes[name].image = imagesObj[name];
+						toLoad++;
+					}
 				} else {
-					missingImages += name + '\n';
+					if (!missingImages.includes(name))
+						missingImages.push(name);
 				}
 			}
 		}
 
-		if (missingImages) {
-			alert('Images are requiered for loading gamepad config:\n\n' + missingImages + '\nImport these files and click "reset".')
+		if (missingImages.length > 0) {
+			alert('Images are requiered for loading gamepad config:\n\n' + missingImages.join("\n") + '\n\nImport these files and click "Reset".')
 		}
 
 		if (toLoad == 0) {
