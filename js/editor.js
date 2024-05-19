@@ -72,6 +72,21 @@ renderConfig(configStr);
 	});
 });
 
+document.getElementById('chk-show-shapes').addEventListener('change', toggleShapes);
+document.getElementById('chk-show-names').addEventListener('change', toggleNames);
+document.getElementById('chk-show-portrait').addEventListener('change', toggleOrientation);
+document.getElementById('chk-show-offscreen').addEventListener('change', toggleOffscreen);
+document.getElementById('overlay-selector').addEventListener('change', selectOverlay);
+
+document.getElementById('command-select').addEventListener('change', fillCommandField);
+document.getElementById('image-select').addEventListener('change', fillImageNameField);
+document.getElementById('image-name').addEventListener('input', e => showImagePreview(e.target.value));
+
+document.getElementById('load-config').addEventListener('change', loadConfigFromFile);
+document.getElementById('load-button-images').addEventListener('change', loadImageFiles);
+document.getElementById('load-screenshot').addEventListener('change', loadScreenshotFile);
+document.getElementById('chk-show-screenshot').addEventListener('change', toggleScreenshot);
+
 
 function applyButtonParam(section, sValue) {
 	let value = Number(sValue);
@@ -1251,15 +1266,13 @@ function toggleAdditionalButtonProperties(show) {
 	let addBtn = document.getElementById('btn-additional-button');
 
 	if (show || adds[0].classList.contains('hidden')) {
+		addBtn.classList.add('expanded');
 		for (let i = 0; i < adds.length; i++)
 			adds[i].classList.remove('hidden');
-		if (event)
-			addBtn.classList.add('expanded');
 	} else {
+		addBtn.classList.remove('expanded');
 		for (let i = 0; i < adds.length; i++)
 			adds[i].classList.add('hidden');
-		if (event)
-			addBtn.classList.remove('expanded');
 	}
 }
 
@@ -1278,15 +1291,16 @@ function toggleAdditionalOverlayProperties(show) {
 }
 
 
-function toggleScreenshotSettings(event) {
+function toggleScreenshotSettings() {
 	let settings = document.getElementById('screenshot-area-settings');
+	let expander = document.getElementById('screenshot-settings-expander')
 
 	if (settings.classList.contains('hidden')) {
 		settings.classList.remove('hidden');
-		event.target.classList.add('expanded');
+		expander.classList.add('expanded');
 	} else {
 		settings.classList.add('hidden');
-		event.target.classList.remove('expanded');
+		expander.classList.remove('expanded');
 	}
 }
 

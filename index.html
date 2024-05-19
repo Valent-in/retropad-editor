@@ -39,26 +39,22 @@
 					<br>
 					<div class='toolbar-group__checkboxes'>
 						<div class='checkbox-wrapper'>
-							<input type='checkbox' id='chk-show-shapes' onchange='toggleShapes(event)'
-								autocomplete='off'>
+							<input type='checkbox' id='chk-show-shapes' autocomplete='off'>
 							<label for='chk-show-shapes'>Show shapes</label>
 						</div>
 
 						<div class='checkbox-wrapper'>
-							<input type='checkbox' id='chk-show-names' onchange='toggleNames(event)' autocomplete='off'
-								checked>
+							<input type='checkbox' id='chk-show-names' autocomplete='off' checked>
 							<label for='chk-show-names'>Show names</label>
 						</div>
 
 						<div class='checkbox-wrapper'>
-							<input type='checkbox' id='chk-show-portrait' onchange='toggleOrientation(event)'
-								autocomplete='off'>
+							<input type='checkbox' id='chk-show-portrait' autocomplete='off'>
 							<label for='chk-show-portrait'>Portrait</label>
 						</div>
 
 						<div class='checkbox-wrapper'>
-							<input type='checkbox' id='chk-show-offscreen' onchange='toggleOffscreen(event)'
-								autocomplete='off'>
+							<input type='checkbox' id='chk-show-offscreen' autocomplete='off'>
 							<label for='chk-show-offscreen'>Show offscreen</label>
 						</div>
 					</div>
@@ -66,8 +62,7 @@
 
 				<div class='toolbar-group'>
 					<span class='group-header'>OVERLAY</span>
-					<select id='overlay-selector' onchange='selectOverlay(event)' class='notranslate'
-						translate='no'></select>
+					<select id='overlay-selector' class='notranslate' translate='no'></select>
 					<div class='toolbar-group__buttons'>
 						<button onclick='showOverlayEditor()'>Create • Edit</button>
 						<button onclick='showDialog("overlay-delete-dialog", true)'>Delete overlay</button>
@@ -153,8 +148,7 @@
 
 							<td>
 								<input type='text' id='command-name' class='js-dialog__focus'>
-								<select class='miniselect notranslate' translate='no' id='command-select'
-									onchange='fillCommandField(event)'></select>
+								<select class='miniselect notranslate' translate='no' id='command-select'></select>
 							</td>
 						</tr>
 
@@ -164,9 +158,8 @@
 							</td>
 
 							<td>
-								<input type='text' id='image-name' oninput='showImagePreview(event.target.value)'>
-								<select class='miniselect notranslate' translate='no' id='image-select'
-									onchange='fillImageNameField(event)'></select>
+								<input type='text' id='image-name'>
+								<select class='miniselect notranslate' translate='no' id='image-select'></select>
 							</td>
 						</tr>
 
@@ -370,9 +363,8 @@
 					</div>
 
 					<div class='dialog-content-box__section'>
-						<button class='empty expander button--normal-size'
-							onclick='toggleScreenshotSettings(event)'>Screenshot
-							area</button>
+						<button class='empty expander button--normal-size' id='screenshot-settings-expander'
+							onclick='toggleScreenshotSettings()'>Screenshot area</button>
 						<div id='screenshot-area-settings' class='dialog-content-box__expandable hidden'>
 							<input type='number' id='screenshot-width' step=0.00001>
 							<span>x</span>
@@ -414,8 +406,7 @@
 							</td>
 							<td>
 								<span class='input_file'>
-									<input type='file' accept='.cfg' id='load-config' class='js-dialog__focus'
-										onchange='loadConfigFromFile(event)'>
+									<input type='file' accept='.cfg' id='load-config' class='js-dialog__focus'>
 									<label id='load-config-filename' for='load-config'></label>
 								</span>
 							</td>
@@ -427,8 +418,7 @@
 							</td>
 							<td>
 								<span class='input_file'>
-									<input type='file' accept='.png,.jpg' multiple id='load-button-images'
-										onchange='loadImageFiles(event)'>
+									<input type='file' accept='.png,.jpg' multiple id='load-button-images'>
 									<label id='load-button-images-filename' for='load-button-images'></label>
 								</span>
 							</td>
@@ -436,13 +426,12 @@
 
 						<tr>
 							<td>
-								<input type='checkbox' id='chk-show-screenshot' onchange='toggleScreenshot(event)'>
+								<input type='checkbox' id='chk-show-screenshot'>
 								<label for='chk-show-screenshot'>Game screenshot</label>
 							</td>
 							<td>
 								<span class='input_file'>
-									<input type='file' accept='.png,.jpg' id='load-screenshot'
-										onchange='loadScreenshotFile(event)'>
+									<input type='file' accept='.png,.jpg' id='load-screenshot'>
 									<label id='load-screenshot-filename' for='load-screenshot'></label>
 								</span>
 							</td>
