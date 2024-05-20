@@ -120,6 +120,7 @@ input[type=number] {
 
 #show-colors-button {
 	min-width: 0;
+	color: transparent;
 	background-image: linear-gradient(#d03 0%, #d03 15%, #0a1 40%, #0a1 60%, #08d 80%, #08d 100%);
 }
 
@@ -455,6 +456,10 @@ input[type=number] {
 	color: #777;
 	font-size: 0.7em;
 	padding-top: 3vh;
+}
+
+#archive-hint {
+	display: none;
 }
 
 #image-name {

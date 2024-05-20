@@ -1386,3 +1386,7 @@ function setColorScheme(index) {
 	if (index > 0)
 		screenpad.classList.add('scheme-' + index);
 }
+
+function showArchiveHint() {
+	document.getElementById('archive-hint').style.display = 'initial';
+}

@@ -34,7 +34,7 @@
 					<span class='group-header'>TOOLS</span>
 					<div class='join-buttons-div'>
 						<button onclick='showScreenSizeDialog()'>Set screen size</button>
-						<button id='show-colors-button' onclick='showColorsDialog()'>C</button>
+						<button title='Color theme' id='show-colors-button' onclick='showColorsDialog()'>C</button>
 					</div>
 					<br>
 					<div class='toolbar-group__checkboxes'>
@@ -441,6 +441,9 @@
 							<td colspan='2'>
 								<span id='download-help'>Config file and image files must be stored in same
 									folder.</span>
+								<br>
+								<span id='archive-hint' class='small-warning'>Do not forget to unpack the
+									archive.</span>
 							</td>
 						</tr>
 
@@ -450,7 +453,7 @@
 										id='export-link' download='new-retropad.cfg' href=''>Export config</a></button>
 							</td>
 							<td>
-								<a
+								<a onclick='showArchiveHint()'
 									href='https://github.com/Valent-in/retropad-editor/releases/download/v0.6/overlay-images.zip'>Image
 									pack</a>
 							</td>
