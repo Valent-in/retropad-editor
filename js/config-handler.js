@@ -260,8 +260,9 @@ function ConfigHandler() {
 		console.log('NEW NAME: ' + name);
 		let newParams = []
 		for (let i = 0; i < params.length; i++) {
-			newParams.push(overlayXX + '_' + params[i]);
-			console.log('ADD: ' + overlayXX + '_' + params[i]);
+			let param = _addSpacesToEq(params[i]);
+			newParams.push(overlayXX + '_' + param);
+			console.log('ADD: ' + overlayXX + '_' + param);
 		}
 
 		_strings.splice(insertAfter + 1, 0, ...newParams);
@@ -539,7 +540,10 @@ function ConfigHandler() {
 				arr.push(`${overlayXX_descYY}_overlay = "${image}"`);
 
 		if (Array.isArray(addLines))
-			addLines.forEach(line => { arr.push(`${overlayXX_descYY}_${line}`) });
+			addLines.forEach(line => {
+				let prop = _addSpacesToEq(line);
+				arr.push(`${overlayXX_descYY}_${prop}`);
+			});
 
 		_strings.splice(_currentLine + 1, 0, ...arr);
 	}
@@ -964,4 +968,20 @@ function ConfigHandler() {
 		}
 
 	}
+
+
+	function _addSpacesToEq(str) {
+		let eqPos = str.indexOf('=');
+
+		if (eqPos <= 0) {
+			alert('WARNING!\nMissing "=" symbol in line "' + str + '"');
+			return str;
+		}
+
+		let prop = str.substr(0, eqPos).trim();
+		let value = str.substr(eqPos + 1).trim();
+
+		return prop + ' = ' + value;
+	}
+
 }
