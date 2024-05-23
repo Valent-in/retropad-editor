@@ -1004,31 +1004,43 @@ function fixAspect() {
 }
 
 
+function getButtonDataFromDialog() {
+	let d = {};
+
+	d.command = document.getElementById('command-name').value.trim() || 'null';
+	if (d.command.search(/\s/) != -1) {
+		d.warn = true;
+		alert('WARNING!\nButton command should not contain spaces.');
+	}
+
+	d.shape = ['rect', 'radial'][document.getElementById('button-shape').selectedIndex];
+	d.image = document.getElementById('image-name').value;
+
+	d.lines = readAdditionalPropsFields();
+	console.log(d.lines);
+
+	return d;
+}
+
+
 function addButton() {
+	let d = getButtonDataFromDialog();
+	if (d.warn)
+		return;
+
 	hideButtonEditor();
-	let command = document.getElementById('command-name').value || 'null';
-	let shape = ['rect', 'radial'][document.getElementById('button-shape').selectedIndex];
-	let image = document.getElementById('image-name').value;
-
-	let lines = readAdditionalPropsFields();
-	console.log(lines);
-
-	conf.createButton(command, shape, image, lines);
+	conf.createButton(d.command, d.shape, d.image, d.lines);
 	redrawPad();
 }
 
 
 function editButton() {
+	let d = getButtonDataFromDialog();
+	if (d.warn)
+		return;
+
 	hideButtonEditor();
-
-	let command = document.getElementById('command-name').value || 'null';
-	let shape = ['rect', 'radial'][document.getElementById('button-shape').selectedIndex];
-	let image = document.getElementById('image-name').value;
-
-	let lines = readAdditionalPropsFields();
-	console.log(lines);
-
-	conf.updateCurrentButton(command, shape, image, lines);
+	conf.updateCurrentButton(d.command, d.shape, d.image, d.lines);
 	conf.setCurrentLine(-1);
 	redrawPad();
 }
