@@ -793,13 +793,17 @@ function fillAdditionalPropsFields(data) {
 		let earr = e.split('=');
 		let prop = earr[0].trim();
 		let val = earr[1] ? earr[1].trim() : '';
+		let fields = [];
 
-		let v = document.querySelectorAll('.js-additional-button-property #' + prop + '_property');
-		console.log(v[0]);
+		try {
+			fields = document.querySelectorAll('.js-additional-button-property #' + prop + '_property');
+		} catch {
+			console.log('probably wrong property name', prop);
+		}
 
-		switch (v.length) {
+		switch (fields.length) {
 			case 1:
-				v[0].value = val;
+				fields[0].value = val;
 				break;
 
 			case 0:
@@ -826,21 +830,44 @@ function clearAdditionalPropsFields() {
 
 function readAdditionalPropsFields() {
 	let v = document.querySelectorAll('.js-additional-button-property input, .js-additional-button-property select');
-	let result = '';
+	let result = [];
 
 	v.forEach(e => {
 		if (e.value != '') {
 			let propName = e.id.substr(0, e.id.search(/_property$/));
-			result += propName + ' = ' + e.value + '\n';
+			result.push(propName + ' = ' + e.value);
 		}
 	});
 
-	result = result + document.getElementById('raw-button-properties').value.trim();
-	console.log('add', result.trim());
+	let raw = document.getElementById('raw-button-properties').value;
 
-	let ret = result.trim().split('\n');
-	// Do not return ['']
-	return ret[0] == '' ? [] : ret;
+	return result.concat(processRawProperties(raw));
+}
+
+
+function processRawProperties(str) {
+	let arr = str.trim().split('\n');
+	let ret = [];
+
+	arr.forEach(e => {
+		let line = e.trim();
+		if (line == '')
+			return;
+
+		let eqPos = line.indexOf('=');
+
+		if (eqPos <= 0) {
+			alert('Error in line "' + line + '"\nProperty removed');
+			return;
+		}
+
+		let prop = line.substr(0, eqPos).trim();
+		let value = line.substr(eqPos + 1).trim();
+
+		ret.push(prop + ' = ' + value);
+	});
+
+	return ret;
 }
 
 
@@ -1010,7 +1037,7 @@ function getButtonDataFromDialog() {
 	d.command = document.getElementById('command-name').value.trim() || 'null';
 	if (d.command.search(/\s/) != -1) {
 		d.warn = true;
-		alert('WARNING!\nButton command should not contain spaces.');
+		alert('Button command should not contain spaces');
 	}
 
 	d.shape = ['rect', 'radial'][document.getElementById('button-shape').selectedIndex];
@@ -1048,7 +1075,8 @@ function editButton() {
 
 function addOverlay() {
 	let name = document.getElementById('overlay-name').value.trim();
-	let props = document.getElementById('raw-overlay-properties').value.trim();
+	let raw = document.getElementById('raw-overlay-properties').value;
+	let props = processRawProperties(raw);
 
 	if (conf.isOverlayNameExist(name)) {
 		showDialog('name-exist-dialog', true);
@@ -1061,9 +1089,9 @@ function addOverlay() {
 	}
 
 	if (document.getElementById('chk-duplicate-overlay').checked)
-		conf.duplicateCurrentOverlay(name, props.split('\n'));
+		conf.duplicateCurrentOverlay(name, props);
 	else
-		conf.createOverlay(name, props.split('\n'));
+		conf.createOverlay(name, props);
 
 	hideOverlayEditor();
 	buildAndSetOverlaySelectors(1000);
@@ -1074,7 +1102,7 @@ function addOverlay() {
 
 function editOverlay() {
 	let name = document.getElementById('overlay-name').value.trim();
-	let props = document.getElementById('raw-overlay-properties').value.trim();
+	let raw = document.getElementById('raw-overlay-properties').value;
 
 	if (conf.getCurrentOverlayName() != name && conf.isOverlayNameExist(name)) {
 		showDialog('name-exist-dialog', true);
@@ -1086,7 +1114,7 @@ function editOverlay() {
 		return;
 	}
 
-	conf.editCurrentOverlay(name, props.split('\n'));
+	conf.editCurrentOverlay(name, processRawProperties(raw));
 
 	hideOverlayEditor();
 	buildAndSetOverlaySelectors(conf.getCurrentOverlay());

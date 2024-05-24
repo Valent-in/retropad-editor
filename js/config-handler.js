@@ -260,9 +260,8 @@ function ConfigHandler() {
 		console.log('NEW NAME: ' + name);
 		let newParams = []
 		for (let i = 0; i < params.length; i++) {
-			let param = _addSpacesToEq(params[i]);
-			newParams.push(overlayXX + '_' + param);
-			console.log('ADD: ' + overlayXX + '_' + param);
+			newParams.push(overlayXX + '_' + params[i]);
+			console.log('ADD: ' + overlayXX + '_' + params[i]);
 		}
 
 		_strings.splice(insertAfter + 1, 0, ...newParams);
@@ -496,7 +495,7 @@ function ConfigHandler() {
 
 	this.getCurrentButtonParams = function () {
 		let param = _isOverlayXX_descYY(_strings[_currentLine]);
-		let lines = _getParamStrings(param + '_');
+		let lines = _getParamStrings(param);
 		let ret = {};
 
 		ret.command = _getParamSectionValue(_strings[_currentLine], 'command');
@@ -510,7 +509,7 @@ function ConfigHandler() {
 		ret.addLines = [];
 
 		for (let i = 0; i < lines.length; i++) {
-			if (lines[i].search(param + '_overlay') == -1) {
+			if (lines[i].search(param + '_') == 0 && lines[i].search(param + '_overlay') == -1) {
 				ret.addLines.push(lines[i].substr(param.length + 1));
 			}
 		}
@@ -528,10 +527,10 @@ function ConfigHandler() {
 		_strings[_currentLine] = _editParamSection(_strings[_currentLine], 'command', command);
 		_strings[_currentLine] = _editParamSection(_strings[_currentLine], 'shape', shape);
 
-		let overlayXX_descYY = _isOverlayXX_descYY(_strings[_currentLine]);
-		_deleteParamStrings(overlayXX_descYY + '_');
+		let arr = [_strings[_currentLine]];
 
-		let arr = [];
+		let overlayXX_descYY = _isOverlayXX_descYY(_strings[_currentLine]);
+		_deleteParamStrings(overlayXX_descYY);
 
 		if (image)
 			if (image.search(/\s/) == -1)
@@ -540,12 +539,9 @@ function ConfigHandler() {
 				arr.push(`${overlayXX_descYY}_overlay = "${image}"`);
 
 		if (Array.isArray(addLines))
-			addLines.forEach(line => {
-				let prop = _addSpacesToEq(line);
-				arr.push(`${overlayXX_descYY}_${prop}`);
-			});
+			addLines.forEach(line => { arr.push(`${overlayXX_descYY}_${line}`) });
 
-		_strings.splice(_currentLine + 1, 0, ...arr);
+		_strings.splice(_currentLine, 0, ...arr);
 	}
 
 
@@ -968,20 +964,4 @@ function ConfigHandler() {
 		}
 
 	}
-
-
-	function _addSpacesToEq(str) {
-		let eqPos = str.indexOf('=');
-
-		if (eqPos <= 0) {
-			alert('WARNING!\nMissing "=" symbol in line "' + str + '"');
-			return str;
-		}
-
-		let prop = str.substr(0, eqPos).trim();
-		let value = str.substr(eqPos + 1).trim();
-
-		return prop + ' = ' + value;
-	}
-
 }
