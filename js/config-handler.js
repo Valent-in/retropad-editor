@@ -182,7 +182,7 @@ function ConfigHandler() {
 		}
 
 		let name = _getParamValue('overlay' + _currentOverlay + '_name');
-		console.log(name);
+		console.log("DELETE OVERLAY", name);
 
 		_deleteParamStrings('overlay' + _currentOverlay);
 
@@ -307,7 +307,6 @@ function ConfigHandler() {
 	this.createButton = function (command, shape, image, addLines) {
 		let overlayXX = 'overlay' + _currentOverlay;
 		let buttCount = Number(_getParamValue(`${overlayXX}_descs`));
-		console.log(buttCount);
 
 		let last;
 
@@ -326,6 +325,7 @@ function ConfigHandler() {
 			throw new Error('can not find position to insert new line');
 
 		let overlayXX_descYY = `${overlayXX}_desc${buttCount}`;
+		console.log("NEW BUTTON", overlayXX_descYY, command, shape, image);
 		let arr = [`${overlayXX_descYY} = "${command},0.50000,0.50000,${shape},0.05000,0.05000"`];
 		_strings.splice(last + 1, 0, ...arr);
 
@@ -342,7 +342,7 @@ function ConfigHandler() {
 		}
 
 		let parameter = _isOverlayXX_descYY(_strings[_currentLine]);
-		console.log(parameter);
+		console.log("DELETE BUTTON", parameter);
 		let buttCount = Number(_getParamValue('overlay' + _currentOverlay + '_descs'));
 
 		if (buttCount <= 1) {
@@ -351,7 +351,6 @@ function ConfigHandler() {
 		}
 
 		let delNumber = Number(parameter.substr(('overlay' + _currentOverlay + '_desc').length));
-		console.log(buttCount, delNumber);
 
 		_deleteParamStrings(parameter);
 
@@ -765,12 +764,10 @@ function ConfigHandler() {
 
 
 	function _replaceParamNumbers(searchStr, oldNum, newNum) {
-		console.log(searchStr);
 		let reg = new RegExp('^' + searchStr + oldNum + '(?!\\d)');
 
 		for (let i = 0; i < _strings.length; i++)
 			_strings[i] = _strings[i].trim().replace(reg, searchStr + newNum);
-
 	}
 
 
