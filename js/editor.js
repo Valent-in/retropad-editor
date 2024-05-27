@@ -342,7 +342,13 @@ function loadConfigFromFile(e) {
 	let reader = new FileReader();
 	reader.onload = function (ev) {
 		configStr = ev.target.result;
-		renderConfig(ev.target.result);
+		try {
+			renderConfig(ev.target.result);
+		} catch {
+			let errMsg = 'FILE PARSING ERROR!';
+			console.log(errMsg);
+			alert(errMsg + '\nReload page and try again.')
+		}
 	};
 	reader.readAsText(file);
 }
