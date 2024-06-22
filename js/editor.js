@@ -184,6 +184,9 @@ function createPadBackground() {
 		isMouseDown = false;
 
 		let indexes = conf.getSelectedIndexes();
+		if (indexes.length == 0 && conf.getCurrentLineSectionValue("shape") === null)
+			enableEditor(false);
+
 		if (indexes.length == 1) {
 			let index = indexes[0];
 			conf.resetGroupSelection();
@@ -208,6 +211,8 @@ function createPadBackground() {
 
 		isMouseDown = true;
 		deselectAll();
+		conf.setCurrentLine(-1);
+		currentRect = null;
 		event.preventDefault();
 	}
 
@@ -223,6 +228,7 @@ function createPadBackground() {
 
 		let endX = event.clientX - tx;
 		let endY = event.clientY - ty;
+
 
 		setControls(startX, startY, endX, endY);
 	}
@@ -618,6 +624,9 @@ function createDownloadLink() {
 
 
 function updateCurrentLine(section, value) {
+	if (conf.getCurrentLineSectionValue("shape") === null)
+		return;
+
 	if (section)
 		conf.setCurrentLineSectionValue(section, value);
 
