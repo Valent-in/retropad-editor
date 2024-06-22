@@ -134,8 +134,10 @@ function createPadView() {
 				let text = document.getElementById(elem + '-number');
 				text.value = conf.getCurrentLineSectionValue(elem);
 				range.value = conf.getCurrentLineSectionValue(elem);
-				enableEditor(true);
 			});
+
+			enableEditor(true);
+			document.activeElement.blur();
 		});
 	}
 }
