@@ -137,6 +137,10 @@
 		overlay0_range_mod = 1.5
 		overlay0_alpha_mod = 2.0
 		overlay0_aspect_ratio = 1.7777778
+		overlay0_auto_x_separation = true
+		overlay0_auto_y_separation = true
+		overlay0_block_x_separation = false
+		overlay0_block_y_separation = false
 		overlay0_descs = 21
 		overlay0_desc0 = "left,0.07188,0.77778,radial,0.04479,0.06852"
 		overlay0_desc0_overlay = dpad-left.png
@@ -184,6 +188,10 @@
 		overlay1_range_mod = 1.5
 		overlay1_alpha_mod = 2.0
 		overlay1_aspect_ratio = 0.5625
+		overlay1_auto_x_separation = true
+		overlay1_auto_y_separation = false
+		overlay1_block_x_separation = false
+		overlay1_block_y_separation = false
 		overlay1_descs = 21
 		overlay1_desc0 = "left,0.12037,0.85417,radial,0.07963,0.03854"
 		overlay1_desc0_overlay = dpad-left.png
@@ -231,6 +239,10 @@
 		overlay2_range_mod = 1.5
 		overlay2_alpha_mod = 2.0
 		overlay2_aspect_ratio = 1.7777778
+		overlay2_auto_x_separation = true
+		overlay2_auto_y_separation = true
+		overlay2_block_x_separation = false
+		overlay2_block_y_separation = false
 		overlay2_descs = 15
 		overlay2_desc0 = "a,0.93750,0.77778,radial,0.04167,0.07407"
 		overlay2_desc0_overlay = A.png
@@ -273,6 +285,10 @@
 		overlay3_range_mod = 1.5
 		overlay3_alpha_mod = 2.0
 		overlay3_aspect_ratio = 0.5625
+		overlay3_auto_x_separation = true
+		overlay3_auto_y_separation = false
+		overlay3_block_x_separation = false
+		overlay3_block_y_separation = false
 		overlay3_descs = 15
 		overlay3_desc0 = "a,0.88889,0.85417,radial,0.07407,0.04167"
 		overlay3_desc0_overlay = A.png
