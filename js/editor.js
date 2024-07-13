@@ -184,7 +184,7 @@ function createPadBackground() {
 		isMouseDown = false;
 
 		let indexes = conf.getSelectedIndexes();
-		if (indexes.length == 0 && conf.getCurrentLineSectionValue("shape") === null)
+		if (indexes.length == 0 && conf.getCurrentLineSectionValue('shape') === null)
 			enableEditor(false);
 
 		if (indexes.length == 1) {
@@ -628,7 +628,7 @@ function createDownloadLink() {
 
 
 function updateCurrentLine(section, value) {
-	if (conf.getCurrentLineSectionValue("shape") === null)
+	if (conf.getCurrentLineSectionValue('shape') === null)
 		return;
 
 	if (section)
