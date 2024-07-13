@@ -384,6 +384,7 @@ input[type=number] {
 
 .modal-dialog__content-box {
 	padding: 2vh 3vw 2vh 3vw;
+	position: relative;
 }
 
 .dialog-content-box__section:not(:last-child) {
@@ -458,8 +459,15 @@ input[type=number] {
 	padding-top: 3vh;
 }
 
+#download-help.red-warning {
+	color: #e14;
+}
+
 #archive-hint {
 	display: none;
+	position: absolute;
+	right: 4px;
+	bottom: 0;
 }
 
 #image-name {
