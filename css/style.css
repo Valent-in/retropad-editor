@@ -459,17 +459,6 @@ input[type=number] {
 	padding-top: 3vh;
 }
 
-#download-help.red-warning {
-	color: #e14;
-}
-
-#archive-hint {
-	display: none;
-	position: absolute;
-	right: 4px;
-	bottom: 0;
-}
-
 #image-name {
 	padding-right: 1em;
 	background-size: auto 150%;

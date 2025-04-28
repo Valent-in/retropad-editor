@@ -619,10 +619,6 @@ function createDownloadLink() {
 	let a = document.getElementById('export-link');
 	a.href = URL.createObjectURL(file);
 	a.download = 'new-' + importedFilename;
-
-	let hint = document.getElementById('download-help');
-	hint.classList.add('red-warning');
-	setTimeout(() => { hint.classList.remove('red-warning') }, 2000);
 }
 
 
@@ -1451,10 +1447,4 @@ function setColorScheme(index) {
 
 	if (index > 0)
 		screenpad.classList.add('scheme-' + index);
-}
-
-function showArchiveHint() {
-	let hint = document.getElementById('archive-hint');
-	hint.style.display = 'initial';
-	setTimeout(() => { hint.style.display = 'none' }, 7000);
 }
