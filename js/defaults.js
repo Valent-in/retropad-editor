@@ -359,12 +359,16 @@
 		save_state
 		state_slot_increase
 		state_slot_decrease
-		shader_prev
 		shader_next
+		shader_prev
 		rewind
-		toggle_fast_forward
 		hold_fast_forward
+		toggle_fast_forward
+		hold_slowmotion
 		toggle_slowmotion
+		audio_mute
+		pause_toggle
+		screenshot
 		reset
 		exit_emulator`.replace(indent, '\n').replace('#', '');
 }
