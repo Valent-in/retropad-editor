@@ -718,7 +718,7 @@ function fillImageSelector() {
 
 	listAll = listAll.concat(defImages);
 
-	for (name of listAll) {
+	for (let name of listAll) {
 		o = document.createElement('OPTION');
 		o.appendChild(document.createTextNode(name));
 		selector.appendChild(o);
