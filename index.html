@@ -128,7 +128,7 @@
 			<a href='https://forums.libretro.com/t/retropad-editor-create-and-edit-onscreen-gamepads' target='_blank'
 				rel='noopener'>Forum</a>
 			<a href='https://www.retroarch.com' target='_blank' rel='noopener'>RetroArch</a>
-			<span id='version'>v0.9.8</span>
+			<span id='version'>v0.9.9</span>
 		</div>
 
 
@@ -448,6 +448,8 @@
 							<td>
 								<button class='empty' id='export-button' onclick='createDownloadLink()'><a
 										id='export-link' download='new-retropad.cfg' href=''>Export config</a></button>
+								<button class="empty button--normal-size"
+									onclick='showDialog("export-hint-dialog", true)'>?</button>
 							</td>
 							<td>
 								<a
@@ -460,6 +462,39 @@
 				</div>
 				<div class='modal-dialog__footer-box'>
 					<button onclick='hideFileDialog()'>Close</button>
+				</div>
+			</div>
+		</div>
+
+		<div id='export-hint-dialog' class='dialog-container hidden'>
+			<div class='modal-dialog'>
+				<div class='modal-dialog__header-box'>
+					<span>Config hint</span>
+					<button class='close-button danger' onclick='showDialog("export-hint-dialog", false)'></button>
+				</div>
+				<div class='modal-dialog__content-box'>
+					<p style='padding-bottom:8px'>
+						RetroArch overlays are built from a collection of images and a text configuration file.
+					</p>
+					<p>
+						The config file (.cfg) describes:
+					</p>
+					<ul style='padding-left:2rem;padding-bottom:8px'>
+						<li>The hitbox for each input event, i.e. "size" of the button.</li>
+						<li>Which images (.png) should be shown over the input elements.</li>
+					</ul>
+					<p style='padding-bottom:8px'>More information:
+						<a href='https://docs.libretro.com/development/retroarch/input/overlay/' target='_blank'
+							rel='noopener'>Libretro docs</a>.
+					</p>
+					<p style='padding-bottom:8px'>To use default "flat" image set:
+						<a
+							href='https://github.com/Valent-in/retropad-editor/releases/download/v0.6/overlay-images.zip'>
+							download</a> and unpack archive, place config in folder with images.
+					</p>
+				</div>
+				<div class='modal-dialog__footer-box'>
+					<button class='js-dialog__focus' onclick='showDialog("export-hint-dialog", false)'>Close</button>
 				</div>
 			</div>
 		</div>
