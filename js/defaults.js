@@ -1,4 +1,6 @@
 {
+	let indent = new RegExp(/\n\s+/g);
+
 	let imageNames = `1.png
 		2-button_gba_modified.png
 		2-button_gba.png
@@ -125,10 +127,10 @@
 		Y.png
 		Z_down.png
 		Z_down_smaller.png
-		Z.png`.replace(/(\n)\s+/g, "$1").split("\n");
+		Z.png`.replace(indent, '\n').split('\n');
 
 	window.defaultImagesObj = {};
-	imageNames.forEach((el) => { defaultImagesObj[el] = "img/" + el });
+	imageNames.forEach((el) => { defaultImagesObj[el] = 'img/' + el });
 
 	window.defaultConfigString = `overlays = 4
 		overlay0_name = "landscape"
@@ -324,5 +326,45 @@
 		overlay3_desc14_overlay = thumbstick-pad_arcade.png
 		overlay3_desc14_range_mod = 2.0
 		overlay3_desc14_saturate_pct = 0.65
-		overlay3_desc14_movable = true`.replace(/(\n)\s+/g, "$1");
+		overlay3_desc14_movable = true`.replace(indent, '\n');
+
+	window.buttonCommandList = `up
+		down
+		left
+		right
+		a
+		b
+		x
+		y
+		l
+		l2
+		l3
+		r
+		r2
+		r3
+		select
+		start
+		analog_left
+		analog_right
+		l_x_minus
+		l_x_plus
+		l_y_minus
+		l_y_plus
+		abxy_area
+		dpad_area
+		#
+		menu_toggle
+		overlay_next
+		load_state
+		save_state
+		state_slot_increase
+		state_slot_decrease
+		shader_prev
+		shader_next
+		rewind
+		toggle_fast_forward
+		hold_fast_forward
+		toggle_slowmotion
+		reset
+		exit_emulator`.replace(indent, '\n').replace('#', '');
 }
